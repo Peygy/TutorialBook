@@ -6,7 +6,7 @@ namespace MainApp.Models
     {
         DbSet<User> Users { get; set; } = null!;
 
-        public UserContext()
+        public UserContext(DbContextOptions<UserContext> options) : base(options)
         {
             Database.EnsureCreated();
         }

@@ -5,9 +5,9 @@ namespace MainApp.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        public string Welcome()
         {
-            return View();
+            return "Welcome";
         }
     }
 }

@@ -9,7 +9,7 @@ namespace MainApp.Models
         DbSet<Chapter> Chapters { get; set; } = null!;
         DbSet<Subchapter> Subchapters { get; set; } = null!;
 
-        public TopicsContext()
+        public TopicsContext(DbContextOptions<TopicsContext> options) : base(options)
         {
             Database.EnsureCreated();
         }

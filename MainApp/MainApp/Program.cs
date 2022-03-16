@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using MainApp.Models;
+using MainApp.Controllers;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,30 +18,24 @@ builder.Services.AddDbContext<TopicsContext>(options => options.UseSqlServer(con
 builder.Services.AddDbContext<UserContext>(options => options.UseSqlServer(connection));
 builder.Services.AddControllersWithViews();
 
-
 var app = builder.Build();
 app.UseStaticFiles();
 app.UseRouting();
 
-app.Run(async (context) =>
+
+app.Run(async context =>
 {
-    if (context.Request.Cookies.ContainsKey("login"))
+    if (!context.Request.Cookies.ContainsKey("login"))
     {
-        app.UseMvc(routes =>
-        {
-            routes.MapRoute(
-                name: "default",
-                template: "{controller=Home}/{action=Welcome}/{id?}");
-        });
+        app.MapControllerRoute(
+            name: "default",
+            pattern: "{controller=Home}/{action=Welcome}/{id?}");
     }
     else
     {
-        app.UseMvc(routes =>
-        {
-            routes.MapRoute(
-                name: "default",
-                template: "{controller=Entry}/{action=SingIn}/{id?}");
-        });
+        app.MapControllerRoute(
+            name: "default",
+            pattern: "{controller=Entry}/{action=SignIn}/{id?}");
     }
 });
 
