@@ -25,18 +25,9 @@ app.UseRouting();
 
 app.Run(async context =>
 {
-    if (!context.Request.Cookies.ContainsKey("login"))
-    {
-        app.MapControllerRoute(
+    app.MapControllerRoute(
             name: "default",
-            pattern: "{controller=Home}/{action=Welcome}/{id?}");
-    }
-    else
-    {
-        app.MapControllerRoute(
-            name: "default",
-            pattern: "{controller=Entry}/{action=SignIn}/{id?}");
-    }
+            pattern: "{controller=Entry}/{action=CookieCheck}");
 });
 
 
