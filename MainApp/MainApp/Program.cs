@@ -5,15 +5,9 @@ using MainApp.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Подключение контекста данных для релиза приложения
-#if RELEASE 
-    string connection = builder.Configuration.GetConnectionString("DefaultConnection");
-#endif
-// Подключение контекста данных для тестирования приложения
-#if DEBUG
-    string connection = builder.Configuration.GetConnectionString("TestConnection");
-#endif
-// Добавление контекстов данных в качестве сервиса в приложение
+string connection = builder.Configuration.GetConnectionString("DefaultConnection");
+
+// Г„Г®ГЎГ ГўГ«ГҐГ­ГЁГҐ ГЄГ®Г­ГІГҐГЄГ±ГІГ®Гў Г¤Г Г­Г­Г»Гµ Гў ГЄГ Г·ГҐГ±ГІГўГҐ Г±ГҐГ°ГўГЁГ±Г  Гў ГЇГ°ГЁГ«Г®Г¦ГҐГ­ГЁГҐ
 builder.Services.AddDbContext<TopicsContext>(options => options.UseMySql(connection, new MySqlServerVersion(new Version(8,0,28))));
 builder.Services.AddDbContext<UserContext>(options => options.UseMySql(connection, new MySqlServerVersion(new Version(8,0,28))));
 builder.Services.AddControllersWithViews();
