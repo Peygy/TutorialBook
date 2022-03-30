@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "afjD4Q4Bv1Vh8Sw+SzfM2XgwxV+pleMjgDjbNIn646OSolclaKxjO2V3i8xUKFBiunAf83DkUvBGKGTc3RnwhA==",
+  "dgSpecHash": "GpGW08WNycIvz+NZpekzqhco2c/zBzD1AntJX/6sf9fQzOJGQ0tOg+FlDojPOhe6JzmN91kuUZDUafdlRVrc/Q==",
   "success": true,
   "projectFilePath": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\MainApp.csproj",
   "expectedPackageFiles": [
@@ -30,6 +30,8 @@
     "C:\\Users\\isako\\.nuget\\packages\\microsoft.netcore.platforms\\3.1.0\\microsoft.netcore.platforms.3.1.0.nupkg.sha512",
     "C:\\Users\\isako\\.nuget\\packages\\microsoft.win32.registry\\4.7.0\\microsoft.win32.registry.4.7.0.nupkg.sha512",
     "C:\\Users\\isako\\.nuget\\packages\\microsoft.win32.systemevents\\4.7.0\\microsoft.win32.systemevents.4.7.0.nupkg.sha512",
+    "C:\\Users\\isako\\.nuget\\packages\\mysqlconnector\\2.1.2\\mysqlconnector.2.1.2.nupkg.sha512",
+    "C:\\Users\\isako\\.nuget\\packages\\pomelo.entityframeworkcore.mysql\\6.0.1\\pomelo.entityframeworkcore.mysql.6.0.1.nupkg.sha512",
     "C:\\Users\\isako\\.nuget\\packages\\system.collections.immutable\\6.0.0\\system.collections.immutable.6.0.0.nupkg.sha512",
     "C:\\Users\\isako\\.nuget\\packages\\system.configuration.configurationmanager\\4.7.0\\system.configuration.configurationmanager.4.7.0.nupkg.sha512",
     "C:\\Users\\isako\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.0\\system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",

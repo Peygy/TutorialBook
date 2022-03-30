@@ -1,6 +1,6 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using MainApp.Models;
-using MainApp.Controllers;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,21 +14,29 @@ var builder = WebApplication.CreateBuilder(args);
     string connection = builder.Configuration.GetConnectionString("TestConnection");
 #endif
 // Добавление контекстов данных в качестве сервиса в приложение
-builder.Services.AddDbContext<TopicsContext>(options => options.UseSqlServer(connection));
-builder.Services.AddDbContext<UserContext>(options => options.UseSqlServer(connection));
+builder.Services.AddDbContext<TopicsContext>(options => options.UseMySql(connection, new MySqlServerVersion(new Version(8,0,28))));
+builder.Services.AddDbContext<UserContext>(options => options.UseMySql(connection, new MySqlServerVersion(new Version(8,0,28))));
 builder.Services.AddControllersWithViews();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.Cookie.Name = "Auth";
+        options.Cookie.HttpOnly = true;
+        options.LoginPath = "/login";
+        options.AccessDeniedPath = "/main";
+        options.LogoutPath = "/welcome";
+    });
+builder.Services.AddAuthorization();
+
+
 
 var app = builder.Build();
 app.UseStaticFiles();
-app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 
-app.Run(async context =>
-{
-    app.MapControllerRoute(
-            name: "default",
-            pattern: "{controller=Entry}/{action=CookieCheck}");
-});
-
+app.MapControllers();
 
 app.Run();

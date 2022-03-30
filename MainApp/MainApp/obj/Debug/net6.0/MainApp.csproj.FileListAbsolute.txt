@@ -52,3 +52,7 @@ H:\Programming\Web\Repos\TutorialBook\MainApp\MainApp\obj\Debug\net6.0\refint\Ma
 H:\Programming\Web\Repos\TutorialBook\MainApp\MainApp\obj\Debug\net6.0\MainApp.pdb
 H:\Programming\Web\Repos\TutorialBook\MainApp\MainApp\obj\Debug\net6.0\MainApp.genruntimeconfig.cache
 H:\Programming\Web\Repos\TutorialBook\MainApp\MainApp\obj\Debug\net6.0\ref\MainApp.dll
+H:\Programming\Web\Repos\TutorialBook\MainApp\MainApp\bin\Debug\net6.0\MySqlConnector.dll
+H:\Programming\Web\Repos\TutorialBook\MainApp\MainApp\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
+H:\Programming\Web\Repos\TutorialBook\MainApp\MainApp\obj\Debug\net6.0\MainApp.RazorAssemblyInfo.cache
+H:\Programming\Web\Repos\TutorialBook\MainApp\MainApp\obj\Debug\net6.0\MainApp.RazorAssemblyInfo.cs
