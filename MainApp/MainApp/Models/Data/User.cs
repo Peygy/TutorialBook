@@ -1,14 +1,19 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MainApp.Models
 {
-    public class User : IdentityUser
+    public class User
     {
         [Key]
-        public int ID { get; set; }
-        public string Login { get; set; } = null!;
-        public string Password { get; set; } = null!;
+        public int Id { get; set; }
+        [Required(ErrorMessage = "Не указан логин")]
+        public string Login { get; set; }
+        [Required(ErrorMessage = "Не указан пароль")]
+        public string Password { get; set; }
+        [NotMapped]
+        [Compare("Password", ErrorMessage = "Пароли не совпадают")]
+        public string ConfirmPassword { get; set; }
         public string Role { get; set; } = null!;
     }
 }

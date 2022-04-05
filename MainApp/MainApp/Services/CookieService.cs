@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using MainApp.Models;
 
-namespace MainApp.Services.Auth
+namespace MainApp.Services
 {
     public class CookieService
     {
@@ -20,6 +19,11 @@ namespace MainApp.Services.Auth
             var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
             await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             await context.SignInAsync(claimsPrincipal);
+        }
+
+        public async Task Logout(HttpContext context)
+        {
+            await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         }
     }
 }

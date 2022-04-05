@@ -1,6 +1,6 @@
 ﻿using System.Security.Cryptography;
 
-namespace MainApp.Services.Auth
+namespace MainApp.Services
 {
     public class HashService
     {

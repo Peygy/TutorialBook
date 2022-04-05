@@ -1,19 +1,19 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MainApp.Models
 {
-    public class Subsection
+    public class Post
     {
         [Key]
         public int Id { get; set; }
-
         [Required(ErrorMessage = "Не указано название")]
         public string Title { get; set; }
+        [Required(ErrorMessage = "Отсутвует содержание статьи")]
+        public string Content { get; set; }
         public DateTime CreatedDate { get; set; }
-        private const string TableName = "subsection";
 
-        public int SectionId { get; set; }
-        public Section Section { get; set; }
+
+        public int SubchapterId { get; set; }
+        public Subchapter subchapter { get; set; }
     }
 }

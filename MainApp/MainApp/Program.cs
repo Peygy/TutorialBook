@@ -5,15 +5,15 @@ using MainApp.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ѕодключение контекста данных дл€ релиза приложени€
-#if RELEASE 
-    string connection = builder.Configuration.GetConnectionString("DefaultConnection");
+// Connecting a Data Context for an Application Release
+#if RELEASE
+string connection = builder.Configuration.GetConnectionString("DefaultConnection");
 #endif
-// ѕодключение контекста данных дл€ тестировани€ приложени€
+// Connecting a Data Context for Application Testing
 #if DEBUG
     string connection = builder.Configuration.GetConnectionString("TestConnection");
 #endif
-// ƒобавление контекстов данных в качестве сервиса в приложение
+// Adding Data Contexts as a Service to an Application
 builder.Services.AddDbContext<TopicsContext>(options => options.UseMySql(connection, new MySqlServerVersion(new Version(8,0,28))));
 builder.Services.AddDbContext<UserContext>(options => options.UseMySql(connection, new MySqlServerVersion(new Version(8,0,28))));
 builder.Services.AddControllersWithViews();
@@ -23,8 +23,8 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.Cookie.Name = "Auth";
         options.Cookie.HttpOnly = true;
         options.LoginPath = "/login";
-        options.AccessDeniedPath = "/main";
-        options.LogoutPath = "/welcome";
+        options.AccessDeniedPath = "/study";
+        options.LogoutPath = "/main";
     });
 builder.Services.AddAuthorization();
 
