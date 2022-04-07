@@ -25,9 +25,9 @@ namespace MainApp.Controllers
                 return View(adm);
             }
 
-            if (await DbController.AdmAuthentication(adm))
+            if (await DbController.AdmAuthenticationAsync(adm))
             {
-                await DbController.AdmAuthorization(adm);
+                await DbController.AdmAuthorizationAsync(adm);
             }
             else
             {

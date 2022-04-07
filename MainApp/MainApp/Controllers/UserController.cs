@@ -25,9 +25,9 @@ namespace MainApp.Controllers
             }          
 
 
-            if (await DbController.AvailabilityCheck(user.Login))
+            if (await DbController.AvailabilityCheckAsync(user.Login))
             {
-                await DbController.AddUser(user, HttpContext);
+                await DbController.AddUserAsync(user, HttpContext);
             }
             else
             {
@@ -72,9 +72,9 @@ namespace MainApp.Controllers
                 }
             }
 
-            if (await DbController.UserAuthentication(user))
+            if (await DbController.UserAuthenticationAsync(user))
             {
-                await DbController.UserAuthorization(user, remember, HttpContext);
+                await DbController.UserAuthorizationAsync(user, remember, HttpContext);
             }
             else
             {

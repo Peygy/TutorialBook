@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MainApp.Models;
+using Microsoft.AspNetCore.Authorization;
 using MainApp.Services;
 
 namespace MainApp.Controllers
@@ -7,11 +7,12 @@ namespace MainApp.Controllers
     public class PostController : Controller
     {
         [HttpGet]
-        [Route("api/parts/get/{table:string}")]
+        [Route("/api/parts/get/{table:string}")]
+        [Authorize(Roles = "admin, creator")]
         public async Task<IActionResult> ViewParts(int id, string name, string table)
         {
             BroadcastService broadcastService = new BroadcastService();
-            var part = await broadcastService.GetPart_Db(id, name, table);
+            var part = await broadcastService.GetPartAsync_Db(id, name, table);
 
             if (part != null)
             {
@@ -24,11 +25,12 @@ namespace MainApp.Controllers
         }
 
         [HttpPost]
-        [Route("api/parts/add/{table:string}")]
-        public async Task<IActionResult> AddPart(string name, int parentPartId, string parentPartName, string table)
+        [Route("/api/parts/add/{table:string}")]
+        [Authorize(Roles = "admin, creator")]
+        public async Task<IActionResult> AddPart(string name, int parentPartId, string parentPartName, string content, string table)
         {
             BroadcastService broadcastService = new BroadcastService();
-            var part = await broadcastService.AddPart_Db(name, parentPartId, parentPartName, table);
+            var part = await broadcastService.AddPartAsync_Db(name, parentPartId, parentPartName, content, table);
 
             if (part != null)
             {
@@ -41,11 +43,12 @@ namespace MainApp.Controllers
         }
 
         [HttpPut]
-        [Route("api/parts/update/{table:string}")]
-        public async Task<IActionResult> UpdatePart(int id, string name, string newName, string table)
+        [Route("/api/parts/update/{table:string}")]
+        [Authorize(Roles = "admin, creator")]
+        public async Task<IActionResult> UpdatePart(int id, string name, string newName, string newContent, string table)
         {
             BroadcastService broadcastService = new BroadcastService();
-            var part = await broadcastService.UpdatePart_Db(id, name, newName, table);
+            var part = await broadcastService.UpdatePartAsync_Db(id, name, newName, newContent, table);
 
             if (part != null)
             {
@@ -58,11 +61,12 @@ namespace MainApp.Controllers
         }
 
         [HttpDelete]
-        [Route("api/parts/remove/{table:string}")]
+        [Route("/api/parts/remove/{table:string}")]
+        [Authorize(Roles = "admin, creator")]
         public async Task<IActionResult> DeletePart(int id, string name, string table)
         {
             BroadcastService broadcastService = new BroadcastService();
-            var part = await broadcastService.RemovePart_Db(id, name, table);
+            var part = await broadcastService.RemovePartAsync_Db(id, name, table);
 
             if (part != null)
             {

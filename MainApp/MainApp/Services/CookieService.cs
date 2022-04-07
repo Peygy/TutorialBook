@@ -7,7 +7,7 @@ namespace MainApp.Services
 {
     public class CookieService
     {
-        public async Task Authenticate(User user, HttpContext context)
+        public async Task AuthenticateAsync(User user, HttpContext context)
         {
             var claims = new List<Claim>
             {

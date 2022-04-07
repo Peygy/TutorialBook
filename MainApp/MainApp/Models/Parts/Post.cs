@@ -14,6 +14,6 @@ namespace MainApp.Models
 
 
         public int SubchapterId { get; set; }
-        public Subchapter subchapter { get; set; }
+        public Subchapter Subchapter { get; set; }
     }
 }

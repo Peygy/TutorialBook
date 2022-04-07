@@ -8,7 +8,7 @@ namespace MainApp.Services
         private UserContext userData;
 
         // User register
-        public async Task<bool> AvailabilityCheck(string userLogin)
+        public async Task<bool> AvailabilityCheckAsync(string userLogin)
         {
             try
             {
@@ -26,13 +26,13 @@ namespace MainApp.Services
             return false;
         }
 
-        public async Task<bool> AddUser(User user, HttpContext context)
+        public async Task<bool> AddUserAsync(User user, HttpContext context)
         {
             CookieService cookieService = new CookieService();
 
             string newPassword = HashService.HashPassword(user.Password);
             user = new User { Login = user.Login, Password = newPassword, Role = "user" };
-            await cookieService.Authenticate(user, context);
+            await cookieService.AuthenticateAsync(user, context);
 
             try
             {
@@ -50,7 +50,7 @@ namespace MainApp.Services
         }
 
         // User login
-        public async Task<bool> UserAuthentication(User user)
+        public async Task<bool> UserAuthenticationAsync(User user)
         {
             try
             {
@@ -70,7 +70,7 @@ namespace MainApp.Services
             return false;
         }
 
-        public async Task<bool> UserAuthorization(User user, bool remember, HttpContext context)
+        public async Task<bool> UserAuthorizationAsync(User user, bool remember, HttpContext context)
         {
             CookieService cookieService = new CookieService();
 
@@ -79,7 +79,7 @@ namespace MainApp.Services
             if (remember == true)
             {
                 user = new User { Login = user.Login, Password = newPassword, Role = "user" };
-                await cookieService.Authenticate(user, context);
+                await cookieService.AuthenticateAsync(user, context);
             }
 
             try
@@ -101,7 +101,7 @@ namespace MainApp.Services
 
 
         // Admin services
-        public async Task<bool> AdmAuthentication(Admin adm)
+        public async Task<bool> AdmAuthenticationAsync(Admin adm)
         {
             try
             {
@@ -121,7 +121,7 @@ namespace MainApp.Services
             return false;
         }
 
-        public async Task<bool> AdmAuthorization(Admin adm)
+        public async Task<bool> AdmAuthorizationAsync(Admin adm)
         {
             try
             {

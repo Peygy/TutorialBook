@@ -8,25 +8,11 @@ namespace MainApp.Services
         private UserContext userData;
         private TopicsContext topicsData;
 
-         
-        // Give
-        public List<User> GiveUsers()
-        {
-            try
-            {
-                List<User> users = userData.Users.Where(u => u.Role == "user").ToList(); 
-                return users;
-            }
-            catch (DbUpdateException ex)
-            {
-                Console.Clear();
-                Console.WriteLine(ex.Message);
-                Console.ReadLine();
-            }
-            return null;
-        }
 
-        public async Task<JsonContent> GetPart_Db(int id, string name, string table)
+
+        //Parts actions 
+        //Give
+        public async Task<JsonContent> GetPartAsync_Db(int id, string name, string table)
         {
             switch (table)
             {
@@ -67,6 +53,16 @@ namespace MainApp.Services
                     var subChapters = await topicsData.SubChapters.Where(s => s.Chapter == chapter).ToListAsync();
 
                     return JsonContent.Create(subChapters);
+
+                case "post":
+                    var subChapter = await topicsData.SubChapters.FirstOrDefaultAsync(s => s.Id == id && s.Title == name);
+                    if (subChapter == null)
+                    {
+                        return null;
+                    }
+                    var posts = await topicsData.Posts.Where(s => s.Subchapter == subChapter).ToListAsync();
+
+                    return JsonContent.Create(posts);
             }
 
             return null;
@@ -75,7 +71,7 @@ namespace MainApp.Services
 
 
         //Add
-        public async Task<JsonContent> AddPart_Db(string name, int parentPartId, string parentPartName, string table)
+        public async Task<JsonContent> AddPartAsync_Db(string name, int parentPartId, string parentPartName, string content, string table)
         {
             switch (table)
             {
@@ -133,6 +129,20 @@ namespace MainApp.Services
                     {
                         return null;
                     }
+
+                case "post":
+                    if (!await topicsData.Posts.AnyAsync(s => s.Title == name))
+                    {
+                        var subchapter = await topicsData.SubChapters.FirstOrDefaultAsync(s => s.Id == parentPartId && s.Title == parentPartName);
+                        var post = new Post { Title = name, Content = content, CreatedDate = DateTime.UtcNow, Subchapter = subchapter };
+                        await topicsData.Posts.AddAsync(post);
+                        await topicsData.SaveChangesAsync();
+                        return JsonContent.Create(post);
+                    }
+                    else
+                    {
+                        return null;
+                    }
             }
             return null;
         }
@@ -140,7 +150,7 @@ namespace MainApp.Services
 
 
         //Update
-        public async Task<JsonContent> UpdatePart_Db(int id, string name, string newName, string table)
+        public async Task<JsonContent> UpdatePartAsync_Db(int id, string name, string newName, string newContent, string table)
         {
             switch (table)
             {
@@ -149,6 +159,7 @@ namespace MainApp.Services
                     {
                         var section = await topicsData.Sections.FirstOrDefaultAsync(s => s.Id == id && s.Title == name);
                         section.Title = newName;
+                        section.CreatedDate = DateTime.UtcNow;
                         await topicsData.SaveChangesAsync();
                         return JsonContent.Create(section);
                     }
@@ -162,6 +173,7 @@ namespace MainApp.Services
                     {
                         var subsection = await topicsData.SubSections.FirstOrDefaultAsync(s => s.Id == id && s.Title == name);
                         subsection.Title = newName;
+                        subsection.CreatedDate = DateTime.UtcNow;
                         await topicsData.SaveChangesAsync();
                         return JsonContent.Create(subsection);
                     }
@@ -175,6 +187,7 @@ namespace MainApp.Services
                     {
                         var chapter = await topicsData.Chapters.FirstOrDefaultAsync(s => s.Id == id && s.Title == name);
                         chapter.Title = newName;
+                        chapter.CreatedDate = DateTime.UtcNow;
                         await topicsData.SaveChangesAsync();
                         return JsonContent.Create(chapter);
                     }
@@ -188,8 +201,24 @@ namespace MainApp.Services
                     {
                         var subchapter = await topicsData.SubChapters.FirstOrDefaultAsync(s => s.Id == id && s.Title == name);
                         subchapter.Title = newName;
+                        subchapter.CreatedDate = DateTime.UtcNow;
                         await topicsData.SaveChangesAsync();
                         return JsonContent.Create(subchapter);
+                    }
+                    else
+                    {
+                        return null;
+                    }
+
+                case "post":
+                    if (!await topicsData.Posts.AnyAsync(s => s.Id == id && s.Title == name))
+                    {
+                        var post = await topicsData.Posts.FirstOrDefaultAsync(s => s.Id == id && s.Title == name);
+                        post.Title = newName;
+                        post.Content = newContent;
+                        post.CreatedDate = DateTime.UtcNow;
+                        await topicsData.SaveChangesAsync();
+                        return JsonContent.Create(post);
                     }
                     else
                     {
@@ -202,7 +231,7 @@ namespace MainApp.Services
 
 
         //Delete
-        public async Task<JsonContent> RemovePart_Db(int id, string name, string table)
+        public async Task<JsonContent> RemovePartAsync_Db(int id, string name, string table)
         {
             switch (table)
             {
@@ -257,8 +286,58 @@ namespace MainApp.Services
                     {
                         return null;
                     }
+
+                case "post":
+                    if (!await topicsData.Posts.AnyAsync(s => s.Id == id && s.Title == name))
+                    {
+                        var post = await topicsData.Posts.FirstOrDefaultAsync(s => s.Id == id && s.Title == name);
+                        topicsData.Posts.Remove(post);
+                        await topicsData.SaveChangesAsync();
+                        return JsonContent.Create(post);
+                    }
+                    else
+                    {
+                        return null;
+                    }
             }
             return null;
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        public List<User> GiveUsers()
+        {
+            try
+            {
+                List<User> users = userData.Users.Where(u => u.Role == "user").ToList();
+                return users;
+            }
+            catch (DbUpdateException ex)
+            {
+                Console.Clear();
+                Console.WriteLine(ex.Message);
+                Console.ReadLine();
+            }
+            return null;
+        }
+
     }
 }
