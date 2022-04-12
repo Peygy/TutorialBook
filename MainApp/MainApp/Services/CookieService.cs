@@ -7,12 +7,12 @@ namespace MainApp.Services
 {
     public class CookieService
     {
-        public async Task AuthenticateAsync(User user, HttpContext context)
+        public async Task AuthenticateAsync(string login, string role, HttpContext context)
         {
             var claims = new List<Claim>
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Password),
-                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role)
+                new Claim(ClaimsIdentity.DefaultNameClaimType, login),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, role)
             };
 
             var claimsIdentity = new ClaimsIdentity(claims, "Cookies");
@@ -21,7 +21,7 @@ namespace MainApp.Services
             await context.SignInAsync(claimsPrincipal);
         }
 
-        public async Task Logout(HttpContext context)
+        public async Task LogoutAsync(HttpContext context)
         {
             await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         }

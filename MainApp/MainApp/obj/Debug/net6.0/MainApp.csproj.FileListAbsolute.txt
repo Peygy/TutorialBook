@@ -56,3 +56,4 @@ H:\Programming\Web\Repos\TutorialBook\MainApp\MainApp\bin\Debug\net6.0\MySqlConn
 H:\Programming\Web\Repos\TutorialBook\MainApp\MainApp\bin\Debug\net6.0\Pomelo.EntityFrameworkCore.MySql.dll
 H:\Programming\Web\Repos\TutorialBook\MainApp\MainApp\obj\Debug\net6.0\MainApp.RazorAssemblyInfo.cache
 H:\Programming\Web\Repos\TutorialBook\MainApp\MainApp\obj\Debug\net6.0\MainApp.RazorAssemblyInfo.cs
+H:\Programming\Web\Repos\TutorialBook\MainApp\MainApp\bin\Debug\net6.0\MainApp.staticwebassets.runtime.json

@@ -5,6 +5,7 @@ namespace MainApp.Models
     public class UserContext : DbContext
     {
         public DbSet<User> Users { get; set; } = null!;
+        public DbSet<Admin> Crew { get; set; } = null!;
 
         public UserContext(DbContextOptions options) : base(options)
         {

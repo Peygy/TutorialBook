@@ -1,11 +1,37 @@
 {
   "Version": 1,
-  "Hash": "74jHzJNVrhbTwbeQe3xkJfl3SPqDb5GR92A4K75imp8=",
+  "Hash": "4SNTEYNFDu6y+/2/qJqwbCWIK9QO7irh7aGevLNJZgU=",
   "Source": "MainApp",
   "BasePath": "_content/MainApp",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "MainApp\\wwwroot",
+      "Source": "MainApp",
+      "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "BasePath": "_content/MainApp",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\lib\\favicon.ico",
+      "SourceId": "MainApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "BasePath": "_content/MainApp",
+      "RelativePath": "lib/favicon.ico",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\favicon.ico"
+    }
+  ]
 }

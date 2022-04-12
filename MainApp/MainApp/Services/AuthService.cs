@@ -6,33 +6,32 @@ namespace MainApp.Services
     public class AuthService
     {
         private UserContext userData;
+        private ILogger<AuthService> logger;
 
         // User register
-        public async Task<bool> AvailabilityCheckAsync(string userLogin)
+        public bool AvailabilityCheck(string userLogin)
         {
             try
             {
-                if (!await userData.Users.AnyAsync(u => u.Login == userLogin))
+                if (!userData.Users.Any(u => u.Login == userLogin))
                 {
                     return true;
                 }
             }
-            catch (DbUpdateException ex)
+            catch (Exception ex)
             {
-                Console.Clear();
-                Console.WriteLine(ex.Message);
-                Console.ReadLine();
+                logger.LogError(ex.Message);
             }
             return false;
         }
 
-        public async Task<bool> AddUserAsync(User user, HttpContext context)
+        public async Task<bool> AddUserAsync(string userLogin, string userPassword, HttpContext context)
         {
             CookieService cookieService = new CookieService();
 
-            string newPassword = HashService.HashPassword(user.Password);
-            user = new User { Login = user.Login, Password = newPassword, Role = "user" };
-            await cookieService.AuthenticateAsync(user, context);
+            string newPassword = HashService.HashPassword(userPassword);
+            var user = new User { Login = userLogin, Password = newPassword, Role = "user" };
+            await cookieService.AuthenticateAsync(userLogin, "user", context);
 
             try
             {
@@ -40,103 +39,90 @@ namespace MainApp.Services
                 await userData.SaveChangesAsync();
                 return true;
             }
-            catch (DbUpdateException ex)
+            catch (Exception ex)
             {
-                Console.Clear();
-                Console.WriteLine(ex.Message);
-                Console.ReadLine();
+                logger.LogError(ex.Message);
             }
             return false;
         }
 
         // User login
-        public async Task<bool> UserAuthenticationAsync(User user)
+        public async Task<bool> UserAuthenticationAsync(string userLogin, string userPassword)
         {
             try
             {
-                if (await userData.Users.AnyAsync(u => u.Login == user.Login))
+                if (userData.Users.Any(u => u.Login == userLogin))
                 {
-                    var userDb = await userData.Users.FirstOrDefaultAsync(u => u.Login == user.Login);
-                    if (HashService.VerifyHashedPassword(userDb!.Password, user.Password)) { return true; }
+                    var userDb = await userData.Users.FirstOrDefaultAsync(u => u.Login == userLogin);
+                    if (HashService.VerifyHashedPassword(userDb!.Password, userPassword)) { return true; }
                     return false;
                 }
             }
-            catch (DbUpdateException ex)
+            catch (Exception ex)
             {
-                Console.Clear();
-                Console.WriteLine(ex.Message);
-                Console.ReadLine();
+                logger.LogError(ex.Message);
             }
             return false;
         }
 
-        public async Task<bool> UserAuthorizationAsync(User user, bool remember, HttpContext context)
+        public async Task UserAuthorizationAsync(string userLogin, bool remember, HttpContext context)
         {
             CookieService cookieService = new CookieService();
-
-            string newPassword = HashService.HashPassword(user.Password);
             
             if (remember == true)
             {
-                user = new User { Login = user.Login, Password = newPassword, Role = "user" };
-                await cookieService.AuthenticateAsync(user, context);
+                await cookieService.AuthenticateAsync(userLogin, "user", context);
             }
-
-            try
-            {
-                var userUpd = await userData.Users.FirstOrDefaultAsync(u => u.Login == user.Login);
-                userUpd!.Password = newPassword;
-
-                await userData.SaveChangesAsync();
-                return true;
-            }
-            catch (DbUpdateException ex)
-            {
-                Console.Clear();
-                Console.WriteLine(ex.Message);
-                Console.ReadLine();
-            }
-            return false;
         }
 
 
         // Admin services
-        public async Task<bool> AdmAuthenticationAsync(Admin adm)
+        public async Task<bool> AdmAuthenticationAsync(string admLogin, string admPassword, HttpContext context)
         {
             try
             {
-                if (await userData.Users.AnyAsync(u => u.Login == adm.Login))
+                CookieService cookieService = new CookieService();
+
+                if (userData.Crew.Any(u => u.Login == admLogin))
                 {
-                    var admDb = await userData.Users.FirstOrDefaultAsync(u => u.Login == adm.Login);
-                    if (HashService.VerifyHashedPassword(admDb!.Password, adm.Password)) { return true; }
-                    return false;
+                    var admDb = await userData.Crew.FirstOrDefaultAsync(u => u.Login == admLogin);
+                    if (HashService.VerifyHashedPassword(admDb!.Password, admPassword)) 
+                    {
+                        await cookieService.AuthenticateAsync(string.Empty, "admin", context);
+                        return true; 
+                    }
+                    return false;                   
                 }
             }
-            catch (DbUpdateException ex)
+            catch (Exception ex)
             {
-                Console.Clear();
-                Console.WriteLine(ex.Message);
-                Console.ReadLine();
+                logger.LogError(ex.Message);
             }
             return false;
         }
 
-        public async Task<bool> AdmAuthorizationAsync(Admin adm)
+
+        // Editor services
+        public async Task<bool> EdAuthenticationAsync(string edLogin, string edPassword, HttpContext context)
         {
             try
             {
-                string newPassword = HashService.HashPassword(adm.Password);
-                var admin = await userData.Users.FirstOrDefaultAsync(a => a.Login == adm.Login);
-                admin!.Password = newPassword;
+                CookieService cookieService = new CookieService();
 
-                await userData.SaveChangesAsync();
-                return true;
+                if (userData.Crew.Any(u => u.Login == edLogin))
+                {
+                    var edDb = await userData.Crew.FirstOrDefaultAsync(u => u.Login == edLogin);
+                    if (HashService.VerifyHashedPassword(edDb!.Password, edPassword))
+                    {
+                        await cookieService.AuthenticateAsync(string.Empty, "editor", context);
+                        return true;
+                    }
+                    return false;
+                }
             }
-            catch (DbUpdateException ex)
+            catch (Exception ex)
             {
-                Console.Clear();
-                Console.WriteLine(ex.Message);
-                Console.ReadLine();
+                logger.LogError(ex.Message);
             }
             return false;
         }

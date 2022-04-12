@@ -6,11 +6,12 @@ namespace MainApp.Models
     {
         [Key]
         public int Id { get; set; }
+
         [Required(ErrorMessage = "Не указано название")]
         public string Title { get; set; }
+        public DateTime CreatedDate { get; set; }
         [Required(ErrorMessage = "Отсутвует содержание статьи")]
         public string Content { get; set; }
-        public DateTime CreatedDate { get; set; }
 
 
         public int SubchapterId { get; set; }

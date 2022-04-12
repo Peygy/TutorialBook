@@ -2,7 +2,7 @@
 
 namespace MainApp.Models
 {
-    public class Section 
+    public class Section
     {
         [Key]
         public int Id { get; set; }
