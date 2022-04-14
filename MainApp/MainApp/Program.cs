@@ -36,6 +36,7 @@ builder.Services.AddAuthorization();
 var app = builder.Build();
 app.UseStaticFiles();
 
+// Authentication and Authorization connection for entry
 app.UseAuthentication();
 app.UseAuthorization();
 

@@ -5,10 +5,13 @@ using MainApp.Services;
 namespace MainApp.Controllers
 {
     public class PartController : Controller
-    {       
+    {
+        // При помощи AnchorTagHelper передачу параметров
+
         [HttpGet]
-        [Route("admpanel/parts/{id:int}&{table}")]
-        [Authorize(Roles = "admin, creator")]
+        [Route("adm/control/partview")]
+        [Route("ed/control/partview")]
+        [Authorize(Roles = "admin, editor")]
         public async Task<IActionResult> ViewPartsAsync(int id, string table)
         {
             PartsService broadcastService = new PartsService();
@@ -25,8 +28,9 @@ namespace MainApp.Controllers
         }
 
         [HttpGet]
-        [Route("admpanel/parts/{id:int}")]
-        [Authorize(Roles = "admin, creator")]
+        [Route("adm/control/postview")]
+        [Route("ed/control/postview")]
+        [Authorize(Roles = "admin, editor")]
         public async Task<IActionResult> ViewPostAsync(int id)
         {
             PartsService broadcastService = new PartsService();
@@ -47,8 +51,9 @@ namespace MainApp.Controllers
 
 
         [HttpGet]
-        [Route("admpanel/parts/add/{id:int}&{parentName}&{table}")]
-        [Authorize(Roles = "admin, creator")]
+        [Route("adm/control/parts/addpart")]
+        [Route("ed/control/parts/addpart")]
+        [Authorize(Roles = "admin, editor")]
         public IActionResult AddPart(int parentId, string parentName, string table)
         {
             var part = new { parentId, parentName, table };
@@ -56,8 +61,9 @@ namespace MainApp.Controllers
         }
 
         [HttpPost]
-        [Route("admpanel/parts/add")]
-        [Authorize(Roles = "admin, creator")]
+        [Route("adm/control/parts/addpart")]
+        [Route("ed/control/parts/addpart")]
+        [Authorize(Roles = "admin, editor")]
         public async Task<IActionResult> AddPartAsync(string partName)
         {
             PartsService broadcastService = new PartsService();
@@ -68,7 +74,7 @@ namespace MainApp.Controllers
 
             if (await broadcastService.AddPartAsync_Db(parentId, partName, table))
             {
-                return Redirect($"admpanel/parts/{parentId}&{table}");
+                return RedirectToAction("ViewPartsAsync", new { id = parentId, table = table });
             }
             else
             {
@@ -78,8 +84,9 @@ namespace MainApp.Controllers
 
 
         [HttpGet]
-        [Route("admpanel/parts/add/{id:int}&{parentName}")]
-        [Authorize(Roles = "admin, creator")]
+        [Route("adm/control/parts/addpost")]
+        [Route("ed/control/parts/addpost")]
+        [Authorize(Roles = "admin, editor")]
         public IActionResult AddPost(int parentId, string parentName)
         {
             var part = new { parentId, parentName };
@@ -87,8 +94,9 @@ namespace MainApp.Controllers
         }
 
         [HttpPost]
-        [Route("admpanel/parts/add")]
-        [Authorize(Roles = "admin, creator")]
+        [Route("adm/control/parts/addpost")]
+        [Route("ed/control/parts/addpost")]
+        [Authorize(Roles = "admin, editor")]
         public async Task<IActionResult> AddPostAsync(string postName, string content)
         {
             PartsService broadcastService = new PartsService();
@@ -96,9 +104,9 @@ namespace MainApp.Controllers
             var form = HttpContext.Request.Form;
             int.TryParse(form["parentId"], out int parentId);
 
-            if (await broadcastService.AddPostAsync_Db(postName, content, parentId))
+            if (await broadcastService.AddPostAsync_Db(parentId, postName, content))
             {
-                return Redirect($"admpanel/parts/{parentId}&subchapter");
+                return RedirectToAction("ViewPartsAsync", new { id = parentId, table = "subchapter" });
             }
             else
             {
@@ -111,8 +119,9 @@ namespace MainApp.Controllers
 
 
         [HttpGet]
-        [Route("admpanel/parts/update/{id:int}&{table}")]
-        [Authorize(Roles = "admin, creator")]
+        [Route("adm/control/parts/updatepart")]
+        [Route("ed/control/parts/updatepart")]
+        [Authorize(Roles = "admin, editor")]
         public async Task<IActionResult> UpdatePartAsync(int id, string table)
         {
             PartsService broadcastService = new PartsService();
@@ -128,8 +137,9 @@ namespace MainApp.Controllers
         }
 
         [HttpPut]
-        [Route("admpanel/parts/update")]
-        [Authorize(Roles = "admin, creator")]
+        [Route("adm/control/parts/updatepart")]
+        [Route("ed/control/parts/updatepart")]
+        [Authorize(Roles = "admin, editor")]
         public async Task<IActionResult> UpdatePartAsync(string newName)
         {
             PartsService broadcastService = new PartsService();
@@ -141,7 +151,7 @@ namespace MainApp.Controllers
 
             if (await broadcastService.UpdatePartAsync_Db(partId, parentId, newName, String.Empty, table))
             {
-                return Redirect($"admpanel/parts/{parentId}&{table}");
+                return RedirectToAction("ViewPartsAsync", new { id = parentId, table = table });
             }
             else
             {
@@ -150,8 +160,9 @@ namespace MainApp.Controllers
         }
 
         [HttpPut]
-        [Route("admpanel/parts/update")]
-        [Authorize(Roles = "admin, creator")]
+        [Route("adm/control/parts/updatepost")]
+        [Route("ed/control/parts/updatepost")]
+        [Authorize(Roles = "admin, editor")]
         public async Task<IActionResult> UpdatePostAsync(string newName, string content)
         {
             PartsService broadcastService = new PartsService();
@@ -163,7 +174,7 @@ namespace MainApp.Controllers
 
             if (await broadcastService.UpdatePartAsync_Db(partId, parentId, newName, content, table))
             {
-                return Redirect($"admpanel/parts/{parentId}&{table}");
+                return RedirectToAction("ViewPartsAsync", new { id = parentId, table = table });
             }
             else
             {
@@ -176,8 +187,8 @@ namespace MainApp.Controllers
 
 
         [HttpDelete]
-        [Route("api/parts/remove/{id:int}&{table}")]
-        [Authorize(Roles = "admin, creator")]
+        [Route("api/parts/remove}")]
+        [Authorize(Roles = "admin, editor")]
         public async Task<IActionResult> DeletePartAsync(int id, string table)
         {
             PartsService broadcastService = new PartsService();

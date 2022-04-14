@@ -5,10 +5,13 @@ namespace MainApp.Services
 {
     public class AuthService
     {
+        // Data context for users and crew
         private UserContext userData;
+        // Logger for exceptions
         private ILogger<AuthService> logger;
 
-        // User register
+
+        // Checking the user for uniqueness in the database
         public bool AvailabilityCheck(string userLogin)
         {
             try
@@ -25,6 +28,7 @@ namespace MainApp.Services
             return false;
         }
 
+        // Adding a user to the database during registration and storing it in cookies
         public async Task<bool> AddUserAsync(string userLogin, string userPassword, HttpContext context)
         {
             CookieService cookieService = new CookieService();
@@ -46,7 +50,8 @@ namespace MainApp.Services
             return false;
         }
 
-        // User login
+
+        // User authentication in the system
         public async Task<bool> UserAuthenticationAsync(string userLogin, string userPassword)
         {
             try
@@ -54,7 +59,7 @@ namespace MainApp.Services
                 if (userData.Users.Any(u => u.Login == userLogin))
                 {
                     var userDb = await userData.Users.FirstOrDefaultAsync(u => u.Login == userLogin);
-                    if (HashService.VerifyHashedPassword(userDb!.Password, userPassword)) { return true; }
+                    if (HashService.VerifyHashedPassword(userDb.Password, userPassword)) { return true; }
                     return false;
                 }
             }
@@ -65,6 +70,7 @@ namespace MainApp.Services
             return false;
         }
 
+        // User authorization in the system
         public async Task UserAuthorizationAsync(string userLogin, bool remember, HttpContext context)
         {
             CookieService cookieService = new CookieService();
@@ -76,7 +82,7 @@ namespace MainApp.Services
         }
 
 
-        // Admin services
+        // Admin authentication in the system
         public async Task<bool> AdmAuthenticationAsync(string admLogin, string admPassword, HttpContext context)
         {
             try
@@ -86,9 +92,9 @@ namespace MainApp.Services
                 if (userData.Crew.Any(u => u.Login == admLogin))
                 {
                     var admDb = await userData.Crew.FirstOrDefaultAsync(u => u.Login == admLogin);
-                    if (HashService.VerifyHashedPassword(admDb!.Password, admPassword)) 
+                    if (HashService.VerifyHashedPassword(admDb.Password, admPassword)) 
                     {
-                        await cookieService.AuthenticateAsync(string.Empty, "admin", context);
+                        await cookieService.AuthenticateAsync(admLogin, "admin", context);
                         return true; 
                     }
                     return false;                   
@@ -102,7 +108,7 @@ namespace MainApp.Services
         }
 
 
-        // Editor services
+        // Editor authentication in the system
         public async Task<bool> EdAuthenticationAsync(string edLogin, string edPassword, HttpContext context)
         {
             try
@@ -112,9 +118,9 @@ namespace MainApp.Services
                 if (userData.Crew.Any(u => u.Login == edLogin))
                 {
                     var edDb = await userData.Crew.FirstOrDefaultAsync(u => u.Login == edLogin);
-                    if (HashService.VerifyHashedPassword(edDb!.Password, edPassword))
+                    if (HashService.VerifyHashedPassword(edDb.Password, edPassword))
                     {
-                        await cookieService.AuthenticateAsync(string.Empty, "editor", context);
+                        await cookieService.AuthenticateAsync(edLogin, "editor", context);
                         return true;
                     }
                     return false;

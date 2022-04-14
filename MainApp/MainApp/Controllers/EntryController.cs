@@ -1,111 +1,94 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MainApp.Services;
-using Microsoft.AspNetCore.Authorization;
-using MainApp.Models;
 
 namespace MainApp.Controllers
 {
     public class EntryController : Controller
     {
-        // User entry methods
-        // Registration
+        // Methods responsible for organizing user and staff registrations and logins
+        // User registration
         [HttpGet]
-        [Route("reg")]
+        [Route("/reg")]
         public IActionResult UserRegistration()
         {
             return View();
         }
 
         [HttpPost]
-        [Route("reg")]
+        [Route("/reg")]
         public async Task<IActionResult> UserRegistration(string userLogin, string userPassword)
         {
             AuthService DbController = new AuthService();
 
-            if (userPassword.Length < 7)
+            if (ModelState.IsValid)
             {
-                ModelState.AddModelError("Password", "Пароль слишком короткий");
-                return View();
+                if (userPassword.Length < 7)
+                {
+                    ModelState.AddModelError("Password", "Пароль слишком короткий");
+                    return View();
+                }
+
+                if (DbController.AvailabilityCheck(userLogin))
+                {
+                    await DbController.AddUserAsync(userLogin, userPassword, HttpContext);
+                    return Redirect("/study");
+                }
+                else
+                {
+                    ModelState.AddModelError("Login", "Пользователь с таким логином уже существует");
+                    return View();
+                }
             }
 
-
-            if (DbController.AvailabilityCheck(userLogin))
-            {
-                await DbController.AddUserAsync(userLogin, userPassword, HttpContext);
-            }
-            else
-            {
-                ModelState.AddModelError("Login", "Пользователь с таким логином уже существует");
-                return View();
-            }
-
-            return Redirect("/study");
+            return View();
         }
 
 
-        // Login
+        // User entry (login)
         [HttpGet]
-        [Route("login")]
+        [Route("/login")]
         public IActionResult UserIdentification()
         {
             return View();
         }
 
         [HttpPost]
-        [Route("login")]
+        [Route("/login")]
         public async Task<IActionResult> UserIdentification(string userLogin, string userPassword, bool remember)
         {
             AuthService DbController = new AuthService();
 
-            /*if (user.Login == null || user.Password == null)
+            if(ModelState.IsValid)
             {
-                if (user.Login == null && user.Password == null)
+                if (await DbController.UserAuthenticationAsync(userLogin, userPassword))
                 {
-                    ViewData["LoginEmpty"] = "Поле ввода логина не может быть пустым.";
-                    ViewData["PasswordEmpty"] = "Поле ввода пароля не может быть пустым.";
+                    await DbController.UserAuthorizationAsync(userLogin, remember, HttpContext);
+                    return Redirect("/studypage");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Логин или пароль неверны!");
                     return View();
                 }
-                else if (user.Login == null)
-                {
-                    ViewData["LoginEmpty"] = "Поле ввода логина не может быть пустым.";
-                    return View();
-                }
-                else if (user.Password == null)
-                {
-                    ViewData["PasswordEmpty"] = "Поле ввода пароля не может быть пустым.";
-                    return View();
-                }
-            }*/
-
-            if (await DbController.UserAuthenticationAsync(userLogin, userPassword))
-            {
-                await DbController.UserAuthorizationAsync(userLogin, remember, HttpContext);
-            }
-            else
-            {
-                ViewBag.Message = "Логин или пароль неверны.";
-                return View();
             }
 
-            return Redirect("/study");
+            return View();
         }
 
 
-        // Logout
+        // Logout from website
         [Route("logout")]
         public async Task<IActionResult> UserLogout()
         {
             CookieService cookieService = new CookieService();
             await cookieService.LogoutAsync(HttpContext);
-            return Redirect("/main");
+            return Redirect("/welcomepage");
         }
 
 
 
 
-
-        // Admin entry methods
-        // Login
+        // Admin entry (login)
         [HttpGet]
         [Route("admlog")]
         public IActionResult AdmIdentification()
@@ -119,21 +102,19 @@ namespace MainApp.Controllers
         {
             AuthService DbController = new AuthService();
 
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return View();
+                await DbController.AdmAuthenticationAsync(admLogin, admPassword, HttpContext);
+                return Redirect("adm/control");
             }
 
-            await DbController.AdmAuthenticationAsync(admLogin, admPassword, HttpContext);
-            return Redirect("adm/control");
+            return View();
         }
 
 
 
 
-
-        // Editor entry methods
-        // Login
+        // Editor entry (login)
         [HttpGet]
         [Route("edlog")]
         public IActionResult EdIdentification()
@@ -147,13 +128,13 @@ namespace MainApp.Controllers
         {
             AuthService DbController = new AuthService();
 
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                return View();
+                await DbController.EdAuthenticationAsync(edLogin, edPassword, HttpContext);
+                return Redirect("ed/control");
             }
 
-            await DbController.EdAuthenticationAsync(edLogin, edPassword, HttpContext);
-            return Redirect("ed/control");
+            return View();
         }
     }
 }
