@@ -3,64 +3,95 @@ using MainApp.Models;
 
 namespace MainApp.Services
 {
+    // Service for fetching users or crew from the database and passing them to display
     public class CrewService
     {
-        private UserContext userContext;
+        // Data context for users and crew
+        private UserContext data;
+        // Logger for exceptions
+        private ILogger<CrewService> logger;
+        public CrewService(UserContext _db, ILogger<CrewService> _logger)
+        {
+            data = _db;
+            logger = _logger;
+        }
+
 
 
         public async Task<Array> GetCrewOrUsersAsync(string role)
         {
-            switch (role) 
+            try
             {
-                case "users":
-                    {
-                        var users = await userContext.Users.ToListAsync();
-                        return users.ToArray();
-                    }
-                case "admins":
-                    {
-                        var admins = await userContext.Users.Where(a => a.Role == "admin").ToListAsync();
-                        return admins.ToArray();
-                    }
+                switch (role)
+                {
+                    case "users":
+                        {
+                            var users = await data.Users.ToListAsync();
+                            return users.ToArray();
+                        }
+                    case "admins":
+                        {
+                            var admins = await data.Users.Where(a => a.Role == "admin").ToListAsync();
+                            return admins.ToArray();
+                        }
+                }
             }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.Message);
+            }
+
             return null;
         }
 
         public async Task<bool> AddAdminAsync(string name, string password)
         {
-            if (!userContext.Crew.Any(a => a.Login == name))
+            try
             {
-                string newPassword = HashService.HashPassword(password);
-                var admin = new Admin { Login = name, Password = newPassword, Role = "admin" };
-                await userContext.Crew.AddAsync(admin);
-                await userContext.SaveChangesAsync();
-                return true;
+                if (!data.Crew.Any(a => a.Login == name))
+                {
+                    string newPassword = HashService.HashPassword(password);
+                    var admin = new Admin { Login = name, Password = newPassword, Role = "admin" };
+                    await data.Crew.AddAsync(admin);
+                    await data.SaveChangesAsync();
+                    return true;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return false;
+                logger.LogError(ex.Message);
             }
+
+            return false;
         }
 
         public async Task<JsonContent> RemoveCrewAsync(int id, string role)
         {
-            switch (role)
+            try
             {
-                case "users":
-                    {
-                        var user = await userContext.Users.FirstOrDefaultAsync(u => u.Id == id);
-                        userContext.Users.Remove(user);
-                        await userContext.SaveChangesAsync();
-                        return JsonContent.Create(user);
-                    }
-                case "admins":
-                    {
-                        var admin = await userContext.Crew.FirstOrDefaultAsync(u => u.Id == id);
-                        userContext.Crew.Remove(admin);
-                        await userContext.SaveChangesAsync();
-                        return JsonContent.Create(admin);
-                    }
+                switch (role)
+                {
+                    case "users":
+                        {
+                            var user = await data.Users.FirstOrDefaultAsync(u => u.Id == id);
+                            data.Users.Remove(user);
+                            await data.SaveChangesAsync();
+                            return JsonContent.Create(user);
+                        }
+                    case "admins":
+                        {
+                            var admin = await data.Crew.FirstOrDefaultAsync(u => u.Id == id);
+                            data.Crew.Remove(admin);
+                            await data.SaveChangesAsync();
+                            return JsonContent.Create(admin);
+                        }
+                }
             }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.Message);
+            }
+
             return null;
         }
     }

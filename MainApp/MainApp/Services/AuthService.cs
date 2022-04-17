@@ -6,9 +6,14 @@ namespace MainApp.Services
     public class AuthService
     {
         // Data context for users and crew
-        private UserContext userData;
+        private UserContext data;
         // Logger for exceptions
         private ILogger<AuthService> logger;
+        public AuthService(UserContext _db, ILogger<AuthService> _logger)
+        {
+            data = _db;
+            logger = _logger;
+        }
 
 
         // Checking the user for uniqueness in the database
@@ -16,7 +21,7 @@ namespace MainApp.Services
         {
             try
             {
-                if (!userData.Users.Any(u => u.Login == userLogin))
+                if (!data.Users.Any(u => u.Login == userLogin))
                 {
                     return true;
                 }
@@ -24,53 +29,53 @@ namespace MainApp.Services
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
+
             }
+
             return false;
         }
 
-        // Adding a user to the database during registration and storing it in cookies
-        public async Task<bool> AddUserAsync(string userLogin, string userPassword, HttpContext context)
+
+
+        public async Task AddUserAsync(string userLogin, string userPassword, HttpContext context)
         {
-            CookieService cookieService = new CookieService();
-
-            string newPassword = HashService.HashPassword(userPassword);
-            var user = new User { Login = userLogin, Password = newPassword, Role = "user" };
-            await cookieService.AuthenticateAsync(userLogin, "user", context);
-
             try
             {
-                await userData.Users.AddAsync(user);
-                await userData.SaveChangesAsync();
-                return true;
+                CookieService cookieService = new CookieService();
+
+                string newPassword = HashService.HashPassword(userPassword);
+                var user = new User { Login = userLogin, Password = newPassword, Role = "user" };
+                await cookieService.AuthenticateAsync(userLogin, "user", context);
+
+                await data.Users.AddAsync(user);
+                await data.SaveChangesAsync();
             }
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
             }
-            return false;
         }
 
 
-        // User authentication in the system
+
         public async Task<bool> UserAuthenticationAsync(string userLogin, string userPassword)
         {
             try
             {
-                if (userData.Users.Any(u => u.Login == userLogin))
+                if (data.Users.Any(u => u.Login == userLogin))
                 {
-                    var userDb = await userData.Users.FirstOrDefaultAsync(u => u.Login == userLogin);
+                    var userDb = await data.Users.FirstOrDefaultAsync(u => u.Login == userLogin);
                     if (HashService.VerifyHashedPassword(userDb.Password, userPassword)) { return true; }
-                    return false;
                 }
             }
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
             }
+
             return false;
         }
 
-        // User authorization in the system
         public async Task UserAuthorizationAsync(string userLogin, bool remember, HttpContext context)
         {
             CookieService cookieService = new CookieService();
@@ -82,54 +87,54 @@ namespace MainApp.Services
         }
 
 
-        // Admin authentication in the system
+        
         public async Task<bool> AdmAuthenticationAsync(string admLogin, string admPassword, HttpContext context)
         {
             try
             {
                 CookieService cookieService = new CookieService();
 
-                if (userData.Crew.Any(u => u.Login == admLogin))
+                if (data.Crew.Any(u => u.Login == admLogin))
                 {
-                    var admDb = await userData.Crew.FirstOrDefaultAsync(u => u.Login == admLogin);
+                    var admDb = await data.Crew.FirstOrDefaultAsync(u => u.Login == admLogin);
                     if (HashService.VerifyHashedPassword(admDb.Password, admPassword)) 
                     {
                         await cookieService.AuthenticateAsync(admLogin, "admin", context);
                         return true; 
-                    }
-                    return false;                   
+                    }                 
                 }
             }
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
             }
+
             return false;
         }
 
 
-        // Editor authentication in the system
+
         public async Task<bool> EdAuthenticationAsync(string edLogin, string edPassword, HttpContext context)
         {
             try
             {
                 CookieService cookieService = new CookieService();
 
-                if (userData.Crew.Any(u => u.Login == edLogin))
+                if (data.Crew.Any(u => u.Login == edLogin))
                 {
-                    var edDb = await userData.Crew.FirstOrDefaultAsync(u => u.Login == edLogin);
+                    var edDb = await data.Crew.FirstOrDefaultAsync(u => u.Login == edLogin);
                     if (HashService.VerifyHashedPassword(edDb.Password, edPassword))
                     {
                         await cookieService.AuthenticateAsync(edLogin, "editor", context);
                         return true;
                     }
-                    return false;
                 }
             }
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
             }
+
             return false;
         }
     }

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "4SNTEYNFDu6y+/2/qJqwbCWIK9QO7irh7aGevLNJZgU=",
+  "Hash": "nR1SbwqGmX+EuCs8HR+CM33UAzm4ToyJc1N6rjAXNTs=",
   "Source": "MainApp",
   "BasePath": "_content/MainApp",
   "Mode": "Default",
@@ -16,6 +16,23 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\css\\entrystyle.css",
+      "SourceId": "MainApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "BasePath": "_content/MainApp",
+      "RelativePath": "css/entrystyle.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\entrystyle.css"
+    },
     {
       "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\lib\\favicon.ico",
       "SourceId": "MainApp",

@@ -1,0 +1,26 @@
+﻿@model List<MainApp.Models.GeneralPart>
+
+
+<h2>@ViewBag.Name</h2>
+<a>Добавить</a>
+
+@if(Model != null)
+{
+    <table>
+    <tr><th>Название</th><th></th><th></th><th></th></tr>
+    @foreach (var obj in Model)
+    {
+        <tr>
+            <td>@obj.Title</td>
+            <td><a>Просмотр</a></td>
+            <td><a>Изменить</a></td>
+            <td><a>Удаление</a></td>
+        </tr>
+    }
+</table>
+}
+else
+{
+    <p>Добавте новых!</p>
+}
+

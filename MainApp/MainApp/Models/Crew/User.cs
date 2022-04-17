@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MainApp.Models
 {
@@ -11,10 +10,9 @@ namespace MainApp.Models
         [Required(ErrorMessage = "Не указан логин!")]
         public string? Login { get; set; }
         [Required(ErrorMessage = "Не указан пароль!")]
+        [DataType(DataType.Password)]
         public string? Password { get; set; }
-        [NotMapped]
-        [Compare("Password", ErrorMessage = "Пароли не совпадают!")]
-        public string? ConfirmPassword { get; set; }
-        public string Role { get; set; } = null!;
+        // Role for authorization 
+        public string? Role { get; set; } = "";
     }
 }

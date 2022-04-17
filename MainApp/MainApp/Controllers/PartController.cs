@@ -1,25 +1,45 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using MainApp.Services;
+using MainApp.Models;
 
 namespace MainApp.Controllers
 {
+    // Controller to manage tutorial parts 
+    [Authorize(Roles = "admin, editor")]
     public class PartController : Controller
     {
-        // При помощи AnchorTagHelper передачу параметров
+        // Data context for parts
+        private TopicsContext data;
+        // Logger for exceptions
+        private ILogger<PartsService> logger;
+        public PartController(TopicsContext _db, ILogger<PartsService> _logger)
+        {
+            data = _db;
+            logger = _logger;
+        }
+
+
 
         [HttpGet]
-        [Route("adm/control/partview")]
-        [Route("ed/control/partview")]
-        [Authorize(Roles = "admin, editor")]
-        public async Task<IActionResult> ViewPartsAsync(int id, string table)
+        public async Task<IActionResult> ViewParts(int id, string parentName, string table)
         {
-            PartsService broadcastService = new PartsService();
-            var part = await broadcastService.GetPartsAsync_Db(id, table);
+            PartsService partService = new PartsService(data, logger);
 
-            if (part != null)
+            var parts = await partService.GetPartsAsync(id, table);
+            ViewBag.Name = parentName;
+            return View(parts);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ViewPost(int id)
+        {
+            PartsService partService = new PartsService(data, logger);
+
+            var post = await partService.GetPartAsync(id, "subchapter");
+            if (post != null)
             {
-                return View(part);
+                return View(post);
             }
             else
             {
@@ -27,33 +47,9 @@ namespace MainApp.Controllers
             }
         }
 
-        [HttpGet]
-        [Route("adm/control/postview")]
-        [Route("ed/control/postview")]
-        [Authorize(Roles = "admin, editor")]
-        public async Task<IActionResult> ViewPostAsync(int id)
-        {
-            PartsService broadcastService = new PartsService();
-            var part = await broadcastService.GetPartAsync_Db(id, "subchapter");
-
-            if (part != null)
-            {
-                return View(part);
-            }
-            else
-            {
-                return BadRequest();
-            }
-        }
-
-
-
 
 
         [HttpGet]
-        [Route("adm/control/parts/addpart")]
-        [Route("ed/control/parts/addpart")]
-        [Authorize(Roles = "admin, editor")]
         public IActionResult AddPart(int parentId, string parentName, string table)
         {
             var part = new { parentId, parentName, table };
@@ -61,20 +57,17 @@ namespace MainApp.Controllers
         }
 
         [HttpPost]
-        [Route("adm/control/parts/addpart")]
-        [Route("ed/control/parts/addpart")]
-        [Authorize(Roles = "admin, editor")]
-        public async Task<IActionResult> AddPartAsync(string partName)
+        public async Task<IActionResult> AddPart(string partName)
         {
-            PartsService broadcastService = new PartsService();
+            PartsService partService = new PartsService(data, logger);
 
             var form = HttpContext.Request.Form;
             int.TryParse(form["parentId"], out int parentId);
             string table = form["table"];
 
-            if (await broadcastService.AddPartAsync_Db(parentId, partName, table))
+            if (await partService.AddPartAsync(parentId, partName, table))
             {
-                return RedirectToAction("ViewPartsAsync", new { id = parentId, table = table });
+                return RedirectToAction("ViewParts", new { id = parentId, table = table });
             }
             else
             {
@@ -82,11 +75,7 @@ namespace MainApp.Controllers
             }
         }
 
-
         [HttpGet]
-        [Route("adm/control/parts/addpost")]
-        [Route("ed/control/parts/addpost")]
-        [Authorize(Roles = "admin, editor")]
         public IActionResult AddPost(int parentId, string parentName)
         {
             var part = new { parentId, parentName };
@@ -94,19 +83,16 @@ namespace MainApp.Controllers
         }
 
         [HttpPost]
-        [Route("adm/control/parts/addpost")]
-        [Route("ed/control/parts/addpost")]
-        [Authorize(Roles = "admin, editor")]
-        public async Task<IActionResult> AddPostAsync(string postName, string content)
+        public async Task<IActionResult> AddPost(string postName, string content)
         {
-            PartsService broadcastService = new PartsService();
+            PartsService partService = new PartsService(data, logger);
 
             var form = HttpContext.Request.Form;
             int.TryParse(form["parentId"], out int parentId);
 
-            if (await broadcastService.AddPostAsync_Db(parentId, postName, content))
+            if (await partService.AddPostAsync(parentId, postName, content))
             {
-                return RedirectToAction("ViewPartsAsync", new { id = parentId, table = "subchapter" });
+                return RedirectToAction("ViewParts", new { id = parentId, table = "subchapter" });
             }
             else
             {
@@ -119,39 +105,32 @@ namespace MainApp.Controllers
 
 
         [HttpGet]
-        [Route("adm/control/parts/updatepart")]
-        [Route("ed/control/parts/updatepart")]
-        [Authorize(Roles = "admin, editor")]
-        public async Task<IActionResult> UpdatePartAsync(int id, string table)
+        public async Task<IActionResult> UpdatePart(int id, string table)
         {
-            PartsService broadcastService = new PartsService();
+            PartsService partService = new PartsService(data, logger);
 
-            var part = await broadcastService.GetPartAsync_Db(id, table);
-
+            var part = await partService.GetPartAsync(id, table);
             if(table != "section")
             {
-                ViewBag.Parents = await broadcastService.GetPartsAsync_Db(id, table + "s");
+                ViewBag.Parents = await partService.GetPartsAsync(id, table + "s");
             }
 
             return View(part);
         }
 
         [HttpPut]
-        [Route("adm/control/parts/updatepart")]
-        [Route("ed/control/parts/updatepart")]
-        [Authorize(Roles = "admin, editor")]
-        public async Task<IActionResult> UpdatePartAsync(string newName)
+        public async Task<IActionResult> UpdatePart(string newName)
         {
-            PartsService broadcastService = new PartsService();
+            PartsService partService = new PartsService(data, logger);
 
             var form = HttpContext.Request.Form;
             int.TryParse(form["partId"], out int partId);
             int.TryParse(form["parentId"], out int parentId);
             string table = form["table"];
 
-            if (await broadcastService.UpdatePartAsync_Db(partId, parentId, newName, String.Empty, table))
+            if (await partService.UpdatePartAsync(partId, parentId, newName, String.Empty, table))
             {
-                return RedirectToAction("ViewPartsAsync", new { id = parentId, table = table });
+                return RedirectToAction("ViewParts", new { id = parentId, table = table });
             }
             else
             {
@@ -160,21 +139,18 @@ namespace MainApp.Controllers
         }
 
         [HttpPut]
-        [Route("adm/control/parts/updatepost")]
-        [Route("ed/control/parts/updatepost")]
-        [Authorize(Roles = "admin, editor")]
-        public async Task<IActionResult> UpdatePostAsync(string newName, string content)
+        public async Task<IActionResult> UpdatePost(string newName, string content)
         {
-            PartsService broadcastService = new PartsService();
+            PartsService partService = new PartsService(data, logger);
 
             var form = HttpContext.Request.Form;
             int.TryParse(form["partId"], out int partId);
             int.TryParse(form["parentId"], out int parentId);
             string table = form["table"];
 
-            if (await broadcastService.UpdatePartAsync_Db(partId, parentId, newName, content, table))
+            if (await partService.UpdatePartAsync(partId, parentId, newName, content, table))
             {
-                return RedirectToAction("ViewPartsAsync", new { id = parentId, table = table });
+                return RedirectToAction("ViewParts", new { id = parentId, table = table });
             }
             else
             {
@@ -184,17 +160,13 @@ namespace MainApp.Controllers
 
 
 
-
-
         [HttpDelete]
-        [Route("api/parts/remove}")]
-        [Authorize(Roles = "admin, editor")]
+        [Route("/api/parts/remove")]
         public async Task<IActionResult> DeletePartAsync(int id, string table)
         {
-            PartsService broadcastService = new PartsService();
+            PartsService partService = new PartsService(data, logger);
 
-            var part = await broadcastService.RemovePartAsync_Db(id, table);
-
+            var part = await partService.RemovePartAsync(id, table);
             if (part != null)
             {
                 return Json(part);

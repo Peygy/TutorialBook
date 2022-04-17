@@ -4,6 +4,11 @@ namespace MainApp.Services
 {
     public class HashService
     {
+        // Took from here ↓↓↓
+        // https://stackoverflow.com/questions/20621950/asp-net-identitys-default-password-hasher-how-does-it-work-and-is-it-secure/20622428#20622428
+
+        // Service for generating a hash of a password
+        // and verifying the entered password for correctness
         public static string HashPassword(string userPassword)
         {
             byte[] salt;

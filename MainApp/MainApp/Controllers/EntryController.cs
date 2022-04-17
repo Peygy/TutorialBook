@@ -1,140 +1,149 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MainApp.Services;
+using MainApp.Models;
 
 namespace MainApp.Controllers
 {
+    // Controller for managing user and staff registrations and logins
     public class EntryController : Controller
     {
-        // Methods responsible for organizing user and staff registrations and logins
-        // User registration
+        // Data context for users and crew
+        private UserContext data;
+        // Logger for exceptions
+        private ILogger<AuthService> logger;
+        public EntryController(UserContext _db , ILogger<AuthService> _logger)
+        {
+            data = _db;
+            logger = _logger;
+        }
+
+        
+
         [HttpGet]
-        [Route("/reg")]
         public IActionResult UserRegistration()
         {
             return View();
         }
 
         [HttpPost]
-        [Route("/reg")]
-        public async Task<IActionResult> UserRegistration(string userLogin, string userPassword)
+        public async Task<IActionResult> UserRegistration(CreateUserModel newUser)
         {
-            AuthService DbController = new AuthService();
+            AuthService DbController = new AuthService(data, logger);
 
             if (ModelState.IsValid)
             {
-                if (userPassword.Length < 7)
+                if (DbController.AvailabilityCheck(newUser.Login))
                 {
-                    ModelState.AddModelError("Password", "Пароль слишком короткий");
-                    return View();
-                }
-
-                if (DbController.AvailabilityCheck(userLogin))
-                {
-                    await DbController.AddUserAsync(userLogin, userPassword, HttpContext);
-                    return Redirect("/study");
+                    await DbController.AddUserAsync(newUser.Login, newUser.Password, HttpContext);
+                    return Redirect("/page/studypage");
                 }
                 else
                 {
-                    ModelState.AddModelError("Login", "Пользователь с таким логином уже существует");
-                    return View();
+                    ViewBag.Error = "Пользователь с таким логином уже существует";
+                    return View(newUser);
                 }
             }
 
-            return View();
+            return View(newUser);
         }
 
 
-        // User entry (login)
+
         [HttpGet]
-        [Route("/login")]
-        public IActionResult UserIdentification()
+        public IActionResult UserLogin()
         {
             return View();
         }
 
         [HttpPost]
-        [Route("/login")]
-        public async Task<IActionResult> UserIdentification(string userLogin, string userPassword, bool remember)
+        public async Task<IActionResult> UserLogin(User user, bool remember)
         {
-            AuthService DbController = new AuthService();
+            AuthService DbController = new AuthService(data, logger);
 
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                if (await DbController.UserAuthenticationAsync(userLogin, userPassword))
+                if (await DbController.UserAuthenticationAsync(user.Login, user.Password))
                 {
-                    await DbController.UserAuthorizationAsync(userLogin, remember, HttpContext);
-                    return Redirect("/studypage");
+                    await DbController.UserAuthorizationAsync(user.Login, remember, HttpContext);
+                    return Redirect("/page/studypage");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Логин или пароль неверны!");
-                    return View();
+                    ViewBag.Error = "Логин или пароль неверны!";
+                    return View(user);
                 }
             }
 
-            return View();
+            return View(user);
         }
 
 
-        // Logout from website
-        [Route("logout")]
-        public async Task<IActionResult> UserLogout()
+
+        public async Task<IActionResult> Logout()
         {
             CookieService cookieService = new CookieService();
             await cookieService.LogoutAsync(HttpContext);
-            return Redirect("/welcomepage");
+            return Redirect("/page/welcomepage");
         }
 
 
 
 
-        // Admin entry (login)
         [HttpGet]
-        [Route("admlog")]
-        public IActionResult AdmIdentification()
+        public IActionResult AdmLogin()
         {
-            return View();
+            return View("~/Views/Entry/CrewLogin.cshtml");
         }
 
         [HttpPost]
-        [Route("admlog")]
-        public async Task<IActionResult> AdmIdentification(string admLogin, string admPassword)
+        public async Task<IActionResult> AdmLogin(Admin admin)
         {
-            AuthService DbController = new AuthService();
+            AuthService DbController = new AuthService(data, logger);
 
             if (ModelState.IsValid)
             {
-                await DbController.AdmAuthenticationAsync(admLogin, admPassword, HttpContext);
-                return Redirect("adm/control");
+                if (await DbController.AdmAuthenticationAsync(admin.Login, admin.Password, HttpContext))
+                {
+                    return Redirect("/page/admincontrol");
+                }
+                else
+                {
+                    ViewBag.Error = "Логин или пароль неверны!";
+                    return View("~/Views/Entry/CrewLogin.cshtml", admin);
+                }
             }
 
-            return View();
+            return View("~/Views/Entry/CrewLogin.cshtml", admin);
         }
 
 
 
 
-        // Editor entry (login)
         [HttpGet]
-        [Route("edlog")]
-        public IActionResult EdIdentification()
+        public IActionResult EdLogin()
         {
-            return View();
+            return View("~/Views/Entry/CrewLogin.cshtml");
         }
 
         [HttpPost]
-        [Route("edlog")]
-        public async Task<IActionResult> EdIdentification(string edLogin, string edPassword)
+        public async Task<IActionResult> EdLogin(Admin admin)
         {
-            AuthService DbController = new AuthService();
+            AuthService DbController = new AuthService(data, logger);
 
             if (ModelState.IsValid)
             {
-                await DbController.EdAuthenticationAsync(edLogin, edPassword, HttpContext);
-                return Redirect("ed/control");
+                if (await DbController.EdAuthenticationAsync(admin.Login, admin.Password, HttpContext))
+                {
+                    return Redirect("/page/edcontrol");
+                }
+                else
+                {
+                    ViewBag.Error = "Логин или пароль неверны!";
+                    return View("~/Views/Entry/CrewLogin.cshtml", admin);
+                }
             }
 
-            return View();
+            return View("~/Views/Entry/CrewLogin.cshtml", admin);
         }
     }
 }

@@ -25,11 +25,16 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
     {
         options.Cookie.Name = "Auth";
         options.Cookie.HttpOnly = true;
-        options.LoginPath = "/login";
-        options.AccessDeniedPath = "/study";
-        options.LogoutPath = "/main";
+        options.LoginPath = "/entry/userlogin";
+        options.AccessDeniedPath = "/page/studypage";
+        options.LogoutPath = "/page/welcomepage";
     });
 builder.Services.AddAuthorization();
+// Ñonverting all queries to lowercase for ease of use, for example: ~/Main/View changes to ~/main/view
+builder.Services.Configure<RouteOptions>(options =>
+{
+    options.LowercaseUrls = true;
+});
 
 
 
@@ -41,5 +46,8 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Page}/{action=WelcomePage}/{id?}");
 
 app.Run();

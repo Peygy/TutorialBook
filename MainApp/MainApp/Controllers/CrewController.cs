@@ -1,64 +1,66 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using MainApp.Services;
-
+using MainApp.Models;
 
 namespace MainApp.Controllers
 {
+    // Controller to manage users and crew
     public class CrewController : Controller
     {
-        // Methods for managing admins and users for the editor
-        // And methods that are included in the list of admin methods
+        // Data context for users and crew
+        private UserContext data;
+        // Logger for exceptions
+        private ILogger<CrewService> logger;
+        public CrewController(UserContext _db, ILogger<CrewService> _logger)
+        {
+            data = _db;
+            logger = _logger;
+        }
 
-        // Display all users for admin
+
+
         [HttpGet]
         [Authorize(Roles = "admin")]
-        [Route("adm/control/users")]
         public async Task<IActionResult> ViewUsers()
         {
-            CrewService service = new CrewService();
+            CrewService service = new CrewService(data, logger);
             var users = await service.GetCrewOrUsersAsync("users");
             return View(users);
         }
 
-        // Display all users and admins for editor
         [HttpGet]
-        [Authorize(Roles = "creator")]
-        [Route("ed/control/crew")]
+        [Authorize(Roles = "editor")]
         public async Task<IActionResult> ViewCrewOrUsers()
         {
-            CrewService service = new CrewService();
+            CrewService service = new CrewService(data, logger);
             var users = await service.GetCrewOrUsersAsync("users");
             return View(users);
         }
 
         [HttpPost]
-        [Authorize(Roles = "creator")]
-        [Route("ed/control/crew")]
+        [Authorize(Roles = "editor")]
         public async Task<IActionResult> ViewCrewOrUsers(string role)
         {
-            CrewService service = new CrewService();
+            CrewService service = new CrewService(data, logger);
             var crew = await service.GetCrewOrUsersAsync(role);
             return View(crew);
         }
 
 
 
-        // Adding a new admin to control the website
         [HttpGet]
-        [Authorize(Roles = "creator")]
-        [Route("ed/control/addcrew")]
+        [Authorize(Roles = "editor")]
         public IActionResult AddAdmin()
         {
             return View();
         }
 
         [HttpPost]
-        [Authorize(Roles = "creator")]
-        [Route("ed/control/addcrew")]
+        [Authorize(Roles = "editor")]
         public async Task<IActionResult> AddAdmin(string name, string password)
         {
-            CrewService service = new CrewService();
+            CrewService service = new CrewService(data, logger);
 
             if(await service.AddAdminAsync(name, password))
             {
@@ -72,13 +74,12 @@ namespace MainApp.Controllers
 
 
 
-        // Remove admin and user if needed
         [HttpDelete]
-        [Route("api/crew/remove}")]
+        [Route("api/crew/remove")]
         [Authorize(Roles = "admin, editor")]
         public async Task<IActionResult> DeleteCrewAsync(int id, string role)
         {
-            CrewService service = new CrewService();
+            CrewService service = new CrewService(data, logger);
 
             var crew = await service.RemoveCrewAsync(id, role);
 

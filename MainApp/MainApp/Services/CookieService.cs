@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Authentication;
 
 namespace MainApp.Services
 {
+    // Service to generate cookies when logging in or registering
+    // and deleting them when logging out of the site
     public class CookieService
     {
         public async Task AuthenticateAsync(string login, string role, HttpContext context)
