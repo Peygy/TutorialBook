@@ -2,9 +2,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using MainApp.Models;
 
-
 var builder = WebApplication.CreateBuilder(args);
-
 
 // Connecting a Data Context for an Application Release
 #if RELEASE
