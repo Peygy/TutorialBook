@@ -14,6 +14,7 @@ namespace MainApp.Models
         public string? Password { get; set; }
         [Required(ErrorMessage = "Не подтвержден пароль!")]
         [Compare("Password", ErrorMessage = "Пароли не совпадают!")]
+        [DataType(DataType.Password)]
         public string? ConfirmPassword { get; set; }
     }
 }

@@ -35,7 +35,7 @@ namespace MainApp.Controllers
                 if (DbController.AvailabilityCheck(newUser.Login))
                 {
                     await DbController.AddUserAsync(newUser.Login, newUser.Password, HttpContext);
-                    return Redirect("/page/studypage");
+                    return Redirect("/page/study");
                 }
                 else
                 {
@@ -65,7 +65,7 @@ namespace MainApp.Controllers
                 if (await DbController.UserAuthenticationAsync(user.Login, user.Password))
                 {
                     await DbController.UserAuthorizationAsync(user.Login, remember, HttpContext);
-                    return Redirect("/page/studypage");
+                    return Redirect("/page/study");
                 }
                 else
                 {
@@ -83,12 +83,13 @@ namespace MainApp.Controllers
         {
             CookieService cookieService = new CookieService();
             await cookieService.LogoutAsync(HttpContext);
-            return Redirect("/page/welcomepage");
+            return Redirect("/page/welcome");
         }
 
 
 
 
+        [Route("adlog")]
         [HttpGet]
         public IActionResult AdmLogin()
         {
@@ -119,6 +120,7 @@ namespace MainApp.Controllers
 
 
 
+        [Route("edlog")]
         [HttpGet]
         public IActionResult EdLogin()
         {

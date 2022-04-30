@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="shortcut icon" href=~/lib/favicon.ico/>
+    <link rel="stylesheet" href=~/css/mainlayoutstyle.css/> 
+</head>
+<body>
+    <header>      
+        <div class="catalog-header-body">
+            <nav class="catalog-header-navigator">
+                <ul class="catalog-header-menu">
+                    <li><a asp-controller="#" asp-action="#">Учащимся</a></li>
+                    <li><a asp-controller="#" asp-action="#">Вакансии</a></li>
+                    <li><a asp-controller="#" asp-action="#">О Нас</a></li>
+                </ul>                
+            </nav>
+
+            <div class="catalog-header-middle">
+                <div class="catalog-header-brand">
+                    <a asp-controller="Page" asp-action="Welcome" class="catalog-header-brand-link">
+                        <img src="~/lib/favicon.png" class="catalog-header-brand-link-logo">
+                        <h2 class="catalog-header-brand-link-name">Tutorial Book</h2>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="catalog-header-account">
+                @if (@Model != null)
+                {
+                    <a asp-controller="Page" asp-action="ViewProfile">Аккаунт</a>
+                    <a asp-controller="Entry" asp-action="Logout">Выйти</a>
+                }
+                else
+                {
+                    <a asp-controller="Entry" asp-action="UserLogin">Войти</a>
+                    <a asp-controller="Entry" asp-action="UserRegistration">Регистрация</a>
+                } 
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="main">@RenderBody()</div>
+    </main>
+
+    <footer>
+        <div class="bottom-body">
+            <article>
+                <div class="bottom-body-we">
+                    <a asp-controller="Page" asp-action="Welcome">
+                        <img src="~/lib/favicon.png" class="bottom-body-we-logo">
+                    </a>
+                    <span> Copyright © 2022 LeoIsak, Inc. </span>
+                </div>
+                <ul class="bottom-body-info">
+                    <li><a asp-controller="#" asp-action="#">Правообладателям</a></li>
+                    <li><a asp-controller="#" asp-action="#">Конфидециальность</a></li>
+                    <li><a asp-controller="#" asp-action="#">Безопасность</a></li>
+                    <li><a asp-controller="#" asp-action="#">Связь с нами</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

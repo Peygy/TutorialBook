@@ -13,6 +13,6 @@ namespace MainApp.Models
         [DataType(DataType.Password)]
         public string? Password { get; set; }
         // Role for authorization 
-        public string? Role { get; set; } = "";
+        public string? Role { get; set; } = "user";
     }
 }

@@ -16333,8 +16333,18 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "h:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\Views\\Shared\\MainLayout.cshtml",
+      "TargetPath": "Views\\Shared\\MainLayout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "h:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\Views\\Entry\\UserLogin.cshtml",
       "TargetPath": "Views\\Entry\\UserLogin.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "h:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\Views\\Page\\Welcome.cshtml",
+      "TargetPath": "Views\\Page\\Welcome.cshtml",
       "FileKind": "mvc"
     }
   ],

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
-using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
+using MainApp.Models;
 
 namespace MainApp.Services
 {
@@ -25,6 +26,19 @@ namespace MainApp.Services
         public async Task LogoutAsync(HttpContext context)
         {
             await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        }
+
+        public User GetUserCookie(HttpContext context)
+        {
+            var login = context.User.FindFirst(ClaimsIdentity.DefaultNameClaimType);
+            var role = context.User.FindFirst(ClaimsIdentity.DefaultRoleClaimType);
+
+            if (login != null && role != null)
+            {
+                return new User { Login = login!.Value, Role = role!.Value };
+            }
+
+            return null;
         }
     }
 }

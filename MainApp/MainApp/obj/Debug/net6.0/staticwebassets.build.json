@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "nR1SbwqGmX+EuCs8HR+CM33UAzm4ToyJc1N6rjAXNTs=",
+  "Hash": "f9b79ccIomBq/vjXdsXZA58xJ6I29dA+ulbAZGJRsbg=",
   "Source": "MainApp",
   "BasePath": "_content/MainApp",
   "Mode": "Default",
@@ -34,6 +34,23 @@
       "OriginalItemSpec": "wwwroot\\css\\entrystyle.css"
     },
     {
+      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\css\\mainlayoutstyle.css",
+      "SourceId": "MainApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "BasePath": "_content/MainApp",
+      "RelativePath": "css/mainlayoutstyle.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\mainlayoutstyle.css"
+    },
+    {
       "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\lib\\favicon.ico",
       "SourceId": "MainApp",
       "SourceType": "Discovered",
@@ -49,6 +66,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\favicon.ico"
+    },
+    {
+      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\lib\\favicon.png",
+      "SourceId": "MainApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "BasePath": "_content/MainApp",
+      "RelativePath": "lib/favicon.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\favicon.png"
     }
   ]
 }

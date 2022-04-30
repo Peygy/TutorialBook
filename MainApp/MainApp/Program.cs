@@ -24,8 +24,8 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.Cookie.Name = "Auth";
         options.Cookie.HttpOnly = true;
         options.LoginPath = "/entry/userlogin";
-        options.AccessDeniedPath = "/page/studypage";
-        options.LogoutPath = "/page/welcomepage";
+        options.AccessDeniedPath = "/page/study";
+        options.LogoutPath = "/page/welcome";
     });
 builder.Services.AddAuthorization();
 // Ñonverting all queries to lowercase for ease of use, for example: ~/Main/View changes to ~/main/view
@@ -46,6 +46,6 @@ app.UseAuthorization();
 app.MapControllers();
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Page}/{action=WelcomePage}/{id?}");
+    pattern: "{controller=Page}/{action=Welcome}/{id?}");
 
 app.Run();
