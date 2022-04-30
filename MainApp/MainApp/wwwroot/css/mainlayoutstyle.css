@@ -57,7 +57,7 @@ header a:hover {
     text-decoration: transparent;
     vertical-align: middle;
 }
-@media screen and (max-width: 1187px) and (max-height: 917px) {
+@media screen and (max-width: 1204px) and (max-height: 947px) {
     .catalog-header-brand-link-logo {
         margin-left: 55px;
     }
