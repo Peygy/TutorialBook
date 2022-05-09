@@ -12,7 +12,7 @@
         <div class="catalog-header-body">
             <nav class="catalog-header-navigator">
                 <ul class="catalog-header-menu">
-                    <li><a asp-controller="#" asp-action="#">Учащимся</a></li>
+                    <li><a asp-controller="Page" asp-action="Study">Учащимся</a></li>
                     <li><a asp-controller="#" asp-action="#">Вакансии</a></li>
                     <li><a asp-controller="#" asp-action="#">О Нас</a></li>
                 </ul>                
@@ -43,7 +43,7 @@
     </header>
 
     <main>
-        <div class="main">@RenderBody()</div>
+        @RenderBody()
     </main>
 
     <footer>

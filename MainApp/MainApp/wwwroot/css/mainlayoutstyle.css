@@ -80,23 +80,12 @@ header a:hover {
     margin: 0 25px 0 25px;
 }
 
-
-main {
-    display: flex;
-    height: 50rem;
-    align-items: center;
-    justify-content: center;
-    background-color: rgb(216, 216, 216);
-    color: rgb(87, 87, 87);
-}
-
-
 .bottom-body {
     display: flex;
     margin: 0;
     padding: 0 20px;
     justify-content: center;
-    background-color: rgb(216, 216, 216);
+    background-color: rgb(255, 255, 255);
     color: rgb(87, 87, 87);
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bolder;

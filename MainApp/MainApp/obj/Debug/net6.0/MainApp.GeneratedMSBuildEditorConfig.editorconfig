@@ -8,49 +8,49 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = MainApp
 build_property.RootNamespace = MainApp
-build_property.ProjectDir = h:\Programming\Web\Repos\TutorialBook\MainApp\MainApp\
+build_property.ProjectDir = H:\Programming\Web\Repos\TutorialBook\MainApp\MainApp\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
-build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = h:\Programming\Web\Repos\TutorialBook\MainApp\MainApp
+build_property.GenerateRazorMetadataSourceChecksumAttributes = true
+build_property.MSBuildProjectDirectory = H:\Programming\Web\Repos\TutorialBook\MainApp\MainApp
 build_property._RazorSourceGeneratorDebug = 
 
-[h:/Programming/Web/Repos/TutorialBook/MainApp/MainApp/Views/Entry/CrewLogin.cshtml]
+[H:/Programming/Web/Repos/TutorialBook/MainApp/MainApp/Views/Entry/CrewLogin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50cnlcQ3Jld0xvZ2luLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[h:/Programming/Web/Repos/TutorialBook/MainApp/MainApp/Views/Entry/UserLogin.cshtml]
+[H:/Programming/Web/Repos/TutorialBook/MainApp/MainApp/Views/Entry/UserLogin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50cnlcVXNlckxvZ2luLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[h:/Programming/Web/Repos/TutorialBook/MainApp/MainApp/Views/Entry/UserRegistration.cshtml]
+[H:/Programming/Web/Repos/TutorialBook/MainApp/MainApp/Views/Entry/UserRegistration.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50cnlcVXNlclJlZ2lzdHJhdGlvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[h:/Programming/Web/Repos/TutorialBook/MainApp/MainApp/Views/Page/AdmControl.cshtml]
+[H:/Programming/Web/Repos/TutorialBook/MainApp/MainApp/Views/Page/AdmControl.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFnZVxBZG1Db250cm9sLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[h:/Programming/Web/Repos/TutorialBook/MainApp/MainApp/Views/Page/EdControl.cshtml]
+[H:/Programming/Web/Repos/TutorialBook/MainApp/MainApp/Views/Page/EdControl.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFnZVxFZENvbnRyb2wuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[h:/Programming/Web/Repos/TutorialBook/MainApp/MainApp/Views/Page/Study.cshtml]
+[H:/Programming/Web/Repos/TutorialBook/MainApp/MainApp/Views/Page/Study.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFnZVxTdHVkeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[h:/Programming/Web/Repos/TutorialBook/MainApp/MainApp/Views/Page/Welcome.cshtml]
+[H:/Programming/Web/Repos/TutorialBook/MainApp/MainApp/Views/Page/Welcome.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFnZVxXZWxjb21lLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[h:/Programming/Web/Repos/TutorialBook/MainApp/MainApp/Views/Part/ViewParts.cshtml]
+[H:/Programming/Web/Repos/TutorialBook/MainApp/MainApp/Views/Part/ViewParts.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFydFxWaWV3UGFydHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[h:/Programming/Web/Repos/TutorialBook/MainApp/MainApp/Views/Shared/MainLayout.cshtml]
+[H:/Programming/Web/Repos/TutorialBook/MainApp/MainApp/Views/Shared/MainLayout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXE1haW5MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[h:/Programming/Web/Repos/TutorialBook/MainApp/MainApp/Views/_ViewImports.cshtml]
+[H:/Programming/Web/Repos/TutorialBook/MainApp/MainApp/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 

@@ -33,6 +33,9 @@ builder.Services.Configure<RouteOptions>(options =>
 {
     options.LowercaseUrls = true;
 });
+#if DEBUG
+    builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+#endif
 
 
 

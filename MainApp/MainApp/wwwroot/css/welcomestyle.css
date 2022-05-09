@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+
+.content {
+    display: flex;
+    margin: 0;
+    padding: 0 20% 0 20%;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+    color: rgb(36, 36, 36);
+    flex-wrap: wrap;
+    font-family: 'Montserrat', sans-serif;
+    font-size: large;
+}
+
+.content-header {
+    display: flex;
+    margin-top: 15px;
+    color: rgb(66, 66, 66);
+    font-size: xx-large;
+    font-family: 'Bebas Neue', cursive;
+    text-align: center;
+}
+
+.content-info {
+    display: flex;
+    margin: 30px 0 30px 0;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    line-height: 30px;
+    font-size: larger;
+}
+.content-info p {
+    margin: 0;
+    padding-left: 40px;
+}
+.content-info img {
+    width: 200px;
+}
+
+.content-study-new {
+    display: flex;
+    margin: 30px 0 30px 0;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    line-height: 30px;
+    font-size: larger;
+}
+.content-study-new img {
+    width: 500px;
+}
+.content-study-new p {
+    margin: 0;
+    padding-right: 40px;
+}
+.content-study-new a {
+    font-weight: bolder;
+    text-decoration: none;
+    color: rgb(36, 36, 36);
+}
+.content-study-new a:hover {
+    color: rgb(177, 0, 0);
+}
+
+.content-have-knowledges {
+    display: flex;
+    margin: 30px 0 70px 0;
+    align-items: center;
+    justify-content: center;
+    text-align: left;
+    line-height: 30px;
+    font-size: larger;
+}
+.content-have-knowledges p {
+    margin: 0;
+    padding-left: 40px;
+}
+.content-have-knowledges a {
+    font-weight: bolder;
+    text-decoration: none;
+    color: rgb(36, 36, 36);
+}
+.content-have-knowledges a:hover {
+    color: rgb(177, 0, 0);
+}
+
+.content-join-us {
+    display: flex;
+    flex-direction: column;
+    margin: 30px 0 90px 0;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 30px;
+    font-size: larger;
+}
+.content-join-us img {
+    width: 200px;
+}
+.content-join-us p {
+    margin: 0;
+    padding-top: 40px;
+}
+.content-join-us a {
+    font-weight: bolder;
+    text-decoration: none;
+    color: rgb(36, 36, 36);
+}
+.content-join-us a:hover {
+    color: rgb(177, 0, 0);
+}

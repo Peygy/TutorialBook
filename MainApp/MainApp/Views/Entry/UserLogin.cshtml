@@ -18,11 +18,11 @@
             <span asp-validation-for="Password"  />
         </p>
         <p>
-            <input as name="remember" type="checkbox" value="remember" />
+            @Html.CheckBox("remember")
             <label>Remember</label>
         </p>
         <p>
-            <input type="submit" value="Send"  />
+            <input type="submit" value="Send" />
         </p>
 </form>
  
