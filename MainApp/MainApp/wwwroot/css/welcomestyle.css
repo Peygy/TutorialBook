@@ -1,6 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 
 .content {
     display: flex;
@@ -8,7 +7,6 @@
     padding: 0 20% 0 20%;
     align-items: center;
     justify-content: center;
-    background-color: rgb(255, 255, 255);
     color: rgb(36, 36, 36);
     flex-wrap: wrap;
     font-family: 'Montserrat', sans-serif;
@@ -20,7 +18,7 @@
     margin-top: 15px;
     color: rgb(66, 66, 66);
     font-size: xx-large;
-    font-family: 'Bebas Neue', cursive;
+    font-family: 'Ubuntu', sans-serif;
     text-align: center;
 }
 

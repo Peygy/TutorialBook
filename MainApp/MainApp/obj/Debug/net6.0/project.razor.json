@@ -16303,6 +16303,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "h:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\Views\\Shared\\EntryLayout.cshtml",
+      "TargetPath": "Views\\Shared\\EntryLayout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "h:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\Views\\Entry\\UserRegistration.cshtml",
       "TargetPath": "Views\\Entry\\UserRegistration.cshtml",
       "FileKind": "mvc"
