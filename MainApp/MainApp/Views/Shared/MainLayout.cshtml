@@ -5,29 +5,29 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link rel="shortcut icon" href=~/lib/favicon.ico/>
-    <link rel="stylesheet" href=~/css/mainlayoutstyle.css/> 
+    <link rel="stylesheet" href=~/styles/layout/mainlayout.css/> 
 </head>
 <body>
     <header>      
-        <div class="catalog-header-body">
-            <nav class="catalog-header-navigator">
-                <ul class="catalog-header-menu">
-                    <li><a asp-controller="Page" asp-action="Study">Учащимся</a></li>
-                    <li><a asp-controller="#" asp-action="#">Вакансии</a></li>
-                    <li><a asp-controller="#" asp-action="#">О Нас</a></li>
+        <div class="catalog-head">
+            <nav class="catalog-head__nav">
+                <ul class="catalog-head__menu">
+                    <li class="catalog-head__item"><a asp-controller="Page" asp-action="Study">Учащимся</a></li>
+                    <li class="catalog-head__item"><a asp-controller="#" asp-action="#">Вакансии</a></li>
+                    <li class="catalog-head__item"><a asp-controller="#" asp-action="#">О Нас</a></li>
                 </ul>                
             </nav>
 
-            <div class="catalog-header-middle">
-                <div class="catalog-header-brand">
-                    <a asp-controller="Page" asp-action="Welcome" class="catalog-header-brand-link">
-                        <img src="~/img/favicon.png" class="catalog-header-brand-link-logo">
-                        <h2 class="catalog-header-brand-link-name">Tutorial Book</h2>
+            <div class="catalog-head__face">
+                <div class="catalog-head__brand">
+                    <a asp-controller="Page" asp-action="Welcome">
+                        <img src="~/img/favicon.png" class="catalog-head-brand__logo">
+                        <h2 class="catalog-head-brand__name">Tutorial Book</h2>
                     </a>
                 </div>
             </div>
             
-            <div class="catalog-header-account">
+            <div class="catalog-head__account">
                 @if (@Model != null)
                 {
                     <a asp-controller="Page" asp-action="ViewProfile">Аккаунт</a>
@@ -47,19 +47,19 @@
     </main>
 
     <footer>
-        <div class="bottom-body">
-            <article>
-                <div class="bottom-body-we">
+        <div class="bottom">
+            <article class="bottom-main">
+                <div class="bottom__we">
                     <a asp-controller="Page" asp-action="Welcome">
-                        <img src="~/lib/favicon.png" class="bottom-body-we-logo">
+                        <img src="~/img/favicon.png" class="bottom-we__logo">
                     </a>
                     <span> Copyright © 2022 LeoIsak, Inc. </span>
                 </div>
-                <ul class="bottom-body-info">
-                    <li><a asp-controller="#" asp-action="#">Правообладателям</a></li>
-                    <li><a asp-controller="#" asp-action="#">Конфидециальность</a></li>
-                    <li><a asp-controller="#" asp-action="#">Безопасность</a></li>
-                    <li><a asp-controller="#" asp-action="#">Связь с нами</a></li>
+                <ul class="bottom__info">
+                    <li class="bottom-info__item"><a asp-controller="#" asp-action="#">Правообладателям</a></li>
+                    <li class="bottom-info__item"><a asp-controller="#" asp-action="#">Конфидециальность</a></li>
+                    <li class="bottom-info__item"><a asp-controller="#" asp-action="#">Безопасность</a></li>
+                    <li class="bottom-info__item"><a asp-controller="#" asp-action="#">Связь с нами</a></li>
                 </ul>
             </div>
         </div>

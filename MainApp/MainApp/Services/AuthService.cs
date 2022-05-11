@@ -21,15 +21,11 @@ namespace MainApp.Services
         {
             try
             {
-                if (!data.Users.Any(u => u.Login == userLogin))
-                {
-                    return true;
-                }
+                if (!data.Users.Any(u => u.Login == userLogin)) return true;
             }
             catch (Exception ex)
             {
                 logger.LogError(ex.Message);
-
             }
 
             return false;
@@ -65,7 +61,7 @@ namespace MainApp.Services
                 if (data.Users.Any(u => u.Login == userLogin))
                 {
                     var userDb = await data.Users.FirstOrDefaultAsync(u => u.Login == userLogin);
-                    if (HashService.VerifyHashedPassword(userDb.Password, userPassword)) { return true; }
+                    if (HashService.VerifyHashedPassword(userDb.Password, userPassword)) return true;
                 }
             }
             catch (Exception ex)

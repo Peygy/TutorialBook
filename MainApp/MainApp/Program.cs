@@ -50,6 +50,6 @@ app.MapControllers();
 app.MapControllerRoute(
     name: "default",
     //pattern: "{controller=Page}/{action=Welcome}/{id?}");
-    pattern: "{controller=Entry}/{action=UserLogin}/{id?}");
+    pattern: "{controller=Page}/{action=AdmControl}/{id?}");
 
 app.Run();

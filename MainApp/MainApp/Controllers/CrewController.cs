@@ -62,14 +62,9 @@ namespace MainApp.Controllers
         {
             CrewService service = new CrewService(data, logger);
 
-            if(await service.AddAdminAsync(name, password))
-            {
+            if(await service.AddAdminAsync(name, password)) 
                 return RedirectToAction("ViewCrewOrUsers");
-            }
-            else
-            {
-                return BadRequest();
-            }
+            else return BadRequest();
         }
 
 
@@ -83,14 +78,8 @@ namespace MainApp.Controllers
 
             var crew = await service.RemoveCrewAsync(id, role);
 
-            if (crew != null)
-            {
-                return Json(crew);
-            }
-            else
-            {
-                return BadRequest();
-            }
+            if (crew != null) return Json(crew);
+            else return BadRequest();
         }
     }
 }
