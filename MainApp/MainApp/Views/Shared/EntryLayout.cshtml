@@ -7,19 +7,21 @@
     <link rel="stylesheet" href=~/styles/entry/entry.css/>
 </head>
 <body>
-    <main>      
-        <div class="content">
-            <div class="content-brand">
-                <a asp-controller="Page" asp-action="Welcome" class="content-brand-link">
-                    <img src="~/img/favicon.png" class="content-brand-link-logo">
+    <main class="content">      
+        <div class="content__body">
+            <div class="content__brand">
+                <a asp-controller="Page" asp-action="Welcome">
+                    <img src="~/img/favicon.png" class="content-brand__logo">
                 </a>
             </div>
-            <div class="content-header">               
+
+            <div class="content__head">               
                 @if (IsSectionDefined("Header"))
                 {
                     @RenderSection("Header")
                 }
             </div>
+
             <div>
                 @RenderBody()
             </div>

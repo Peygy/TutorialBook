@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "j3wjWjEThvgChxCmfw2SS7ubEmIpCYU3L+xW569XpW8=",
+  "Hash": "6Z7sOA4eCpYti8aDnUU2UbQTvvzUtWH/lp/Bi4zyt9Y=",
   "Source": "MainApp",
   "BasePath": "_content/MainApp",
   "Mode": "Default",
@@ -136,12 +136,12 @@
       "OriginalItemSpec": "wwwroot\\lib\\favicon.ico"
     },
     {
-      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\entry\\enrty.css",
+      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\entry\\entry.css",
       "SourceId": "MainApp",
       "SourceType": "Discovered",
       "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
       "BasePath": "_content/MainApp",
-      "RelativePath": "styles/entry/enrty.css",
+      "RelativePath": "styles/entry/entry.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -150,15 +150,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\styles\\entry\\enrty.css"
+      "OriginalItemSpec": "wwwroot\\styles\\entry\\entry.css"
     },
     {
-      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\entry\\enrty.css.map",
+      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\entry\\entry.css.map",
       "SourceId": "MainApp",
       "SourceType": "Discovered",
       "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
       "BasePath": "_content/MainApp",
-      "RelativePath": "styles/entry/enrty.css.map",
+      "RelativePath": "styles/entry/entry.css.map",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -167,15 +167,15 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\styles\\entry\\enrty.css.map"
+      "OriginalItemSpec": "wwwroot\\styles\\entry\\entry.css.map"
     },
     {
-      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\entry\\enrty.scss",
+      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\entry\\entry.scss",
       "SourceId": "MainApp",
       "SourceType": "Discovered",
       "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
       "BasePath": "_content/MainApp",
-      "RelativePath": "styles/entry/enrty.scss",
+      "RelativePath": "styles/entry/entry.scss",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -184,7 +184,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\styles\\entry\\enrty.scss"
+      "OriginalItemSpec": "wwwroot\\styles\\entry\\entry.scss"
     },
     {
       "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\layout\\mainlayout.css",

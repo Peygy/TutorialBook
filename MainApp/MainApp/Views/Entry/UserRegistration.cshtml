@@ -10,26 +10,30 @@
     <h1>Регистрация</h1>
 }
 
-<form method="post" class="content-main">
-        <div class="form-error">
+<form method="post" class="content__main">
+        <div class="form__error">
             @ViewBag.Error
         </div>
-        <div class="form-input">
+
+        <div class="form__input">
             <label asp-for="Login">Login</label><br />
             <input type="text" asp-for="Login" /><br />
             <span asp-validation-for="Login"  />
         </div>
-        <div class="form-input">
+
+        <div class="form__input">
             <label asp-for="Password">Password</label><br />
             <input type="password" asp-for="Password" /><br />
             <span asp-validation-for="Password"  />
         </div>
-        <div class="form-input">
+
+        <div class="form__input">
             <label asp-for="ConfirmPassword">Confirm Password</label><br />
             <input type="password" asp-for="ConfirmPassword" />
             <span asp-validation-for="ConfirmPassword"  />
         </div>
-        <div class="form-button">
+
+        <div class="form__button">
             <button type="submit">Зарегистрироваться</button>
         </div>
 </form>
