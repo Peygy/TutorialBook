@@ -1,0 +1,46 @@
+//General
+@mixin flex_main($display, $justify, $align){
+    display: $display;
+    justify-content: $justify;
+    align-items: $align;
+}
+@mixin flex_size($grow, $shrink){
+    flex-grow: $grow;
+    flex-shrink: $shrink;
+}
+@mixin indents($marg, $pad){
+    margin: $marg;
+    padding: $pad;
+}
+@mixin img_size($width){
+    width: $width;
+}
+
+
+//mainlayout
+@mixin text_params-layout($height){
+    height: $height;    
+    text-decoration: transparent;
+    vertical-align: middle;
+}
+
+
+//welcome
+@mixin text_params-welcome($align){
+    text-align: $align;
+    font-size: larger;
+    line-height: 30px;
+}
+@mixin a_params-welcome($font_link, $color_link){
+    font-family: $font_link;
+    font-weight: bolder;
+    text-decoration: none;
+    color: $color_link;
+}
+
+
+//entry
+@mixin size_params-entry($width, $height){
+    width: $width;
+    height: $height;
+}

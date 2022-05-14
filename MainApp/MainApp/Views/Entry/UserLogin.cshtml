@@ -24,9 +24,11 @@
             <input type="password" asp-for="Password" /><br />
             <span asp-validation-for="Password"  />
         </div>
-        <div>
-            @Html.CheckBox("remember")
-            <label>Remember</label>
+        <div>           
+            <label>
+                <input id="remember" name="remember" type="checkbox" value="true">
+                Remember
+            </label>
         </div>
         <div class="form__button">
             <button type="submit">Войти</button>

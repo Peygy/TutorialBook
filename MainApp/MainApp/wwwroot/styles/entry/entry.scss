@@ -1,90 +1,83 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+@import '../mixins';
+@import '../vars';
+
 
 body {
-    margin: 0;
-    padding: 0;
-    background-color: hsl(210,8%,95%);
+    @include indents(0, 0);
+    background-color: $back_body;
 }
-.content {
-    display: flex;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
 
-    &__body{
-        display: flex;
-        width: 40vh;
+.content{
+    @include flex_main(flex, center, center);
+    @include size_params-entry(null, 100vh);
+    font-family: $font_text; 
+
+    &__wrapper{
+        @include flex_main(flex, null, null);
+        @include size_params-entry(40vh, null);
         flex-direction: column;
-        flex-wrap: nowrap;
-        font-family: 'Montserrat', sans-serif;       
+        flex-wrap: nowrap;      
     }
     &__brand{
-        display: flex;
-        justify-content: center;
+        @include flex_main(flex, center, null);
     }
     &-brand__logo{
-        height: 60px;   
+        @include size_params-entry(null, 60px);
         text-decoration: transparent;
     }
 
     &__head{
-        display: flex;
-        justify-content: center;
-        margin-bottom: 40px;
-        font-family: 'Ubuntu', sans-serif;  
+        @include flex_main(flex, center, null);
+        @include indents(0 0 40px 0, null);
+        font-family: $font_head;  
         
         h1{
-            margin: 10px 0 30px 0 ;  
+            @include indents(10px 0 30px 0, null);
         }
     }
 
     &__main{
-        display: flex;   
-        border-radius: 5px;
-        padding: 30px;
-        justify-content: center;
+        @include flex_main(flex, center, null); 
+        @include indents(null, 30px);
         flex-direction: column;
-        box-shadow: 0 10px 24px hsla(0,0%,0%,0.05), 0 20px 48px 
-        hsla(0, 0%, 0%, 0.05), 0 1px 4px hsla(0, 0%, 0%, 0.1);;
-        background-color: white;        
+        box-shadow: $box-shadow;
+        background-color: white; 
+        border-radius: 5px;       
 
         .form{
             &__error{ 
-                margin-bottom: 15px;
+                @include indents(0 0 15px 0, null);
                 font-weight: 600;
-                color: #c00300;
+                color: $valid_false;
             }
             &__input{
-                margin-bottom: 20px;
+                @include indents(0 0 20px 0, null);
 
                 input{
-                    width: 100%;
+                    @include size_params-entry(100%, null);
+                    @include indents(5px 0 5px 0, 0.6em 0.7em);
                     box-sizing: border-box;
-                    margin: 5px 0 5px 0;
-                    padding: 0.6em 0.7em;
+                    border: 1px solid;
                     border-radius: 5px;
-                    border-style: solid;
-                    border-width: 1px;
 
                     &:hover {
-                        border-color: rgb(65, 65, 65);
-                        box-shadow: 0 10px 24px hsla(0,0%,0%,0.05), 0 20px 48px 
-                        hsla(0, 0%, 0%, 0.05), 0 1px 4px hsla(0, 0%, 0%, 0.1);;
+                        border-color: $back_border;
+                        box-shadow: $box-shadow;
                     }
                 }
             }
+
             &__button{
                 box-sizing: border-box;
-                margin-top: 30px;
+                @include indents(30px 0 0 0, null);
 
                 button {
-                    width: 100%;
-                    padding: 0.8em;
-                    background-color: rgb(87, 87, 87);
-                    color: rgb(236, 236, 236);
-                    border-radius: 5px;
+                    @include size_params-entry(100%, null);
+                    @include indents(null, 0.8em);
+                    background-color: $back_head;
+                    color: $front_head_link;
                     border: 0;
+                    border-radius: 5px;
                     cursor: pointer;
 
                     &:hover{
@@ -97,28 +90,28 @@ body {
     }
 
     .field-validation-error {
-        color: #c00300;
+        color: $valid_false;
     }
     input{
         .valid {
-            border: 1px solid #0ea800;
+            border: 1px solid $valid_true;
         }
         .valid:hover {
-            border: 1px solid #0ea800;
+            border: 1px solid $valid_true;
         }
         .valid:focus {
-            border: 2px solid #0ea800;
-            outline: #0ea800;
+            border: 2px solid $valid_true;
+            outline: $valid_true;
         }
         .input-validation-error {
-            border: 1px solid #c00300;
+            border: 1px solid $valid_false;
         }
         .input-validation-error:hover {
-            border: 1px solid #c00300;
+            border: 1px solid $valid_false;
         }
         .input-validation-error:focus {
-            border: 2px solid #c00300;
-            outline: #c00300;
+            border: 2px solid $valid_false;
+            outline: $valid_false;
         }
     }
 }

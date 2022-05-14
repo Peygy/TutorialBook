@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "6Z7sOA4eCpYti8aDnUU2UbQTvvzUtWH/lp/Bi4zyt9Y=",
+  "Hash": "RMtC/u9TTN/zmgfjROJ6s5cWUM9APMXkV0wFPj3er34=",
   "Source": "MainApp",
   "BasePath": "_content/MainApp",
   "Mode": "Default",
@@ -134,6 +134,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\favicon.ico"
+    },
+    {
+      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\_mixins.scss",
+      "SourceId": "MainApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "BasePath": "_content/MainApp",
+      "RelativePath": "styles/_mixins.scss",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\styles\\_mixins.scss"
+    },
+    {
+      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\_vars.scss",
+      "SourceId": "MainApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "BasePath": "_content/MainApp",
+      "RelativePath": "styles/_vars.scss",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\styles\\_vars.scss"
     },
     {
       "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\entry\\entry.css",

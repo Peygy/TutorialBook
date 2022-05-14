@@ -1,117 +1,87 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+@import '../mixins';
+@import '../vars';
 
-@mixin img-widht($size){
-    width: $size;
-}
 
-.content {
-    display: flex;
-    margin: 0;
-    padding: 0 20% 0 20%;
-    align-items: center;
-    justify-content: center;
-    color: rgb(36, 36, 36);
-    flex-wrap: wrap;
-    font-family: 'Montserrat', sans-serif;
-    font-size: large;
-
+.content{
+    &__wrapper{
+        @include flex_main(flex, center, center);
+        @include indents(0, 0 20% 0 20%);
+        flex-wrap: wrap;
+        font-family: $font_text;
+        font-size: large; 
+        color: $front_main-bottom_text-link;
+    }
+    
     &__head{
-        display: flex;
-        margin-top: 15px;
-        color: rgb(66, 66, 66);
+        @include flex_main(flex, null, null);
+        @include indents(25px 0 0 0, null);
+        font-family: $font_head;
         font-size: xx-large;
-        font-family: 'Ubuntu', sans-serif;
         text-align: center;
+        color: $front_main_head;
     }
     &__info{
-        display: flex;
-        margin: 30px 0 30px 0;
-        align-items: center;
-        justify-content: center;
-        text-align: left;
-        line-height: 30px;
-        font-size: larger;
+        @include flex_main(flex,center, center);
+        @include indents(10px 0 30px 0, null);
+        @include text_params-welcome(left);
 
         p{
-            margin: 0;
-            padding-left: 40px;
+            @include indents(0, 0 0 0 40px);
         }
         img{
-            @include img-widht(200px);
+            @include img_size(200px);
         }
     }
     &__study-new{
-        display: flex;
-        margin: 30px 0 30px 0;
-        align-items: center;
-        justify-content: center;
-        text-align: left;
-        line-height: 30px;
-        font-size: larger;
+        @include flex_main(flex, center, center);
+        @include indents(30px 0 30px 0, null);
+        @include text_params-welcome(left);
 
         img{
-            @include img-widht(500px);
+            @include img_size(500px);
         }
         p{
-            margin: 0;
-            padding-right: 40px;
+            @include indents(0, 0 40px 0 0);
         }
         a{
-            font-weight: bolder;
-            text-decoration: none;
-            color: rgb(36, 36, 36);
+            @include a_params-welcome($font_link, $front_main-bottom_text-link);
         }
         a:hover{
-            color: rgb(177, 0, 0);
+            color: $front_bottom_link-hover;
         }
     }
     &__have-knowledges{
-        display: flex;
-        margin: 30px 0 70px 0;
-        align-items: center;
-        justify-content: center;
-        text-align: left;
-        line-height: 30px;
-        font-size: larger;
+        @include flex_main(flex, center, center);
+        @include indents(30px 0 70px 0, null);
+        @include text_params-welcome(left);
 
         p{
-            margin: 0;
-            padding-left: 40px;
+            @include indents(0, 0 0 0 40px);
         }
         a{
-            font-weight: bolder;
-            text-decoration: none;
-            color: rgb(36, 36, 36);
+            @include a_params-welcome($font_link, $front_main-bottom_text-link);
         }
-        a:hover {
-            color: rgb(177, 0, 0);
+        a:hover{
+            color: $front_bottom_link-hover;
         }
     }
     &__join-us{
-        display: flex;
+        @include flex_main(flex, center, center);
+        @include indents(30px 0 90px 0, null);
+        @include text_params-welcome(center);
         flex-direction: column;
-        margin: 30px 0 90px 0;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        line-height: 30px;
-        font-size: larger;
 
         img{
-            @include img-widht(200px);
+            @include img_size(200px);
         }
         p{
-            margin: 0;
-            padding-top: 40px;
+            @include indents(0, 40px 0 0 0);
         }
         a{
-            font-weight: bolder;
-            text-decoration: none;
-            color: rgb(36, 36, 36);
+            @include a_params-welcome($font_link, $color_main-bottom_text-link);
         }
         a:hover{
-            color: rgb(177, 0, 0);
+            color: $front_bottom_link-hover;
         }
     }
 }
