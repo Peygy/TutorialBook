@@ -10,6 +10,8 @@
 <body>
     <header>      
         <div class="catalog-head">
+            @await Component.InvokeAsync("RoleService")
+
             <nav class="catalog-head__nav">
                 <ul class="catalog-head__menu">
                     <li class="catalog-head__item"><a asp-controller="Page" asp-action="Study">Учащимся</a></li>

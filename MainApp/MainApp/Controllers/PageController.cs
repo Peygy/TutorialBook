@@ -9,8 +9,8 @@ namespace MainApp.Controllers
     {
         public IActionResult Welcome()
         {
-            CookieService cookieService = new CookieService();
-            var user = cookieService.GetUserCookie(HttpContext);
+            CookieService cookieService = new CookieService(HttpContext);
+            var user = cookieService.GetUserCookie();
             return View(user);
         }
 

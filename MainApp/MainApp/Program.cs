@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using MainApp.Models;
+using MainApp.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,7 +30,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.LogoutPath = "/page/welcome";
     });
 builder.Services.AddAuthorization();
-// Ñonverting all queries to lowercase for ease of use, for example: ~/Main/View changes to ~/main/view
+// Converting all queries to lowercase for easy of use, for example: ~/Main/View changes to ~/main/view
 builder.Services.Configure<RouteOptions>(options =>
 {
     options.LowercaseUrls = true;
@@ -46,7 +48,6 @@ app.UseStaticFiles();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Page}/{action=Welcome}/{id?}");

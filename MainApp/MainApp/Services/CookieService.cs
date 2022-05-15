@@ -9,7 +9,14 @@ namespace MainApp.Services
     // and deleting them when logging out of the site
     public class CookieService
     {
-        public async Task AuthenticateAsync(string login, string role, HttpContext context)
+        private HttpContext context;
+        public CookieService(HttpContext _context)
+        {
+            context = _context;
+        }
+
+
+        public async Task AuthenticateAsync(string login, string role)
         {
             var claims = new List<Claim>
             {
@@ -23,12 +30,12 @@ namespace MainApp.Services
             await context.SignInAsync(claimsPrincipal);
         }
 
-        public async Task LogoutAsync(HttpContext context)
+        public async Task LogoutAsync()
         {
             await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         }
 
-        public User GetUserCookie(HttpContext context)
+        public User GetUserCookie()
         {
             var login = context.User.FindFirst(ClaimsIdentity.DefaultNameClaimType);
             var role = context.User.FindFirst(ClaimsIdentity.DefaultRoleClaimType);
@@ -40,5 +47,7 @@ namespace MainApp.Services
 
             return null;
         }
+
+        public string Role() => context.User.FindFirst(ClaimsIdentity.DefaultRoleClaimType).Value;
     }
 }

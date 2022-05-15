@@ -35,7 +35,7 @@ namespace MainApp.Controllers
                 if (DbController.AvailabilityCheck(newUser.Login))
                 {
                     await DbController.AddUserAsync(newUser.Login, newUser.Password, HttpContext);
-                    return Redirect("/page/study");
+                    return RedirectToAction("Study","Page");
                 }
                 else
                 {
@@ -65,7 +65,7 @@ namespace MainApp.Controllers
                 if (await DbController.UserAuthenticationAsync(user.Login, user.Password))
                 {
                     await DbController.UserAuthorizationAsync(user.Login, remember, HttpContext);
-                    return Redirect("/page/study");
+                    return RedirectToAction("Study","Page");
                 }
                 else
                 {
@@ -81,23 +81,22 @@ namespace MainApp.Controllers
 
         public async Task<IActionResult> Logout()
         {
-            CookieService cookieService = new CookieService();
-            await cookieService.LogoutAsync(HttpContext);
-            return Redirect("/page/welcome");
+            CookieService cookieService = new CookieService(HttpContext);
+            await cookieService.LogoutAsync();
+            return RedirectToAction("Welcome","Page");
         }
 
 
 
 
-        [Route("adlog")]
         [HttpGet]
-        public IActionResult AdmLogin()
+        public IActionResult CrewLogin()
         {
             return View("~/Views/Entry/CrewLogin.cshtml");
         }
 
         [HttpPost]
-        public async Task<IActionResult> AdmLogin(Admin admin)
+        public async Task<IActionResult> CrewLogin(Admin admin)
         {
             AuthService DbController = new AuthService(data, logger);
 
@@ -105,41 +104,14 @@ namespace MainApp.Controllers
             {
                 if (await DbController.AdmAuthenticationAsync(admin.Login, admin.Password, HttpContext))
                 {
-                    return Redirect("/page/admincontrol");
+                    return RedirectToAction("AdmControl","Page");
                 }
                 else
                 {
-                    ViewBag.Error = "Логин или пароль неверны!";
-                    return View("~/Views/Entry/CrewLogin.cshtml", admin);
-                }
-            }
-
-            return View("~/Views/Entry/CrewLogin.cshtml", admin);
-        }
-
-
-
-
-        [Route("edlog")]
-        [HttpGet]
-        public IActionResult EdLogin()
-        {
-            return View("~/Views/Entry/CrewLogin.cshtml");
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> EdLogin(Admin admin)
-        {
-            AuthService DbController = new AuthService(data, logger);
-
-            if (ModelState.IsValid)
-            {
-                if (await DbController.EdAuthenticationAsync(admin.Login, admin.Password, HttpContext))
-                {
-                    return Redirect("/page/edcontrol");
-                }
-                else
-                {
+                    if (await DbController.EdAuthenticationAsync(admin.Login, admin.Password, HttpContext))
+                    {
+                        return RedirectToAction("EdControl","Page");
+                    }
                     ViewBag.Error = "Логин или пароль неверны!";
                     return View("~/Views/Entry/CrewLogin.cshtml", admin);
                 }
