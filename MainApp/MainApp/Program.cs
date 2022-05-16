@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using MainApp.Models;
-using MainApp.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -35,6 +34,7 @@ builder.Services.Configure<RouteOptions>(options =>
 {
     options.LowercaseUrls = true;
 });
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 #if DEBUG
     builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 #endif

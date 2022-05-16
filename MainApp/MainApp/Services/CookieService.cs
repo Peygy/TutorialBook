@@ -34,20 +34,5 @@ namespace MainApp.Services
         {
             await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
         }
-
-        public User GetUserCookie()
-        {
-            var login = context.User.FindFirst(ClaimsIdentity.DefaultNameClaimType);
-            var role = context.User.FindFirst(ClaimsIdentity.DefaultRoleClaimType);
-
-            if (login != null && role != null)
-            {
-                return new User { Login = login!.Value, Role = role!.Value };
-            }
-
-            return null;
-        }
-
-        public string Role() => context.User.FindFirst(ClaimsIdentity.DefaultRoleClaimType).Value;
     }
 }

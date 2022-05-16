@@ -1,4 +1,23 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http;
+@using System.Security.Claims;
+@using MainApp.Models;
+
+@functions{
+    public string GetUserRole()
+    {
+        var role = Context.User.FindFirst(ClaimsIdentity.DefaultRoleClaimType); 
+
+        if (role != null)
+        {
+            return role.Value;
+        }
+
+        return null;
+    }
+}
+
+
+<!DOCTYPE html>
 
 <html>
 <head>
@@ -10,13 +29,19 @@
 <body>
     <header>      
         <div class="catalog-head">
-            @await Component.InvokeAsync("RoleService")
-
             <nav class="catalog-head__nav">
                 <ul class="catalog-head__menu">
-                    <li class="catalog-head__item"><a asp-controller="Page" asp-action="Study">Учащимся</a></li>
-                    <li class="catalog-head__item"><a asp-controller="#" asp-action="#">Вакансии</a></li>
-                    <li class="catalog-head__item"><a asp-controller="#" asp-action="#">О Нас</a></li>
+                    @if (@GetUserRole() == "admin" || @GetUserRole() == "editor")
+                    {
+                        <li class="catalog-head__item"><a asp-controller="#" asp-action="#">Управление</a></li>
+                        <li class="catalog-head__item"><a asp-controller="#" asp-action="#">Учебник</a></li>
+                    }
+                    else
+                    {
+                        <li class="catalog-head__item"><a asp-controller="Page" asp-action="Study">Учащимся</a></li>
+                        <li class="catalog-head__item"><a asp-controller="#" asp-action="#">Вакансии</a></li>
+                        <li class="catalog-head__item"><a asp-controller="#" asp-action="#">О Нас</a></li>
+                    }
                 </ul>                
             </nav>
 
@@ -30,15 +55,15 @@
             </div>
             
             <div class="catalog-head__account">
-                @if (@Model != null)
-                {
-                    <a asp-controller="Page" asp-action="ViewProfile">Аккаунт</a>
-                    <a asp-controller="Entry" asp-action="Logout">Выйти</a>
-                }
-                else
+                @if (@GetUserRole() == null)
                 {
                     <a asp-controller="Entry" asp-action="UserLogin">Войти</a>
                     <a asp-controller="Entry" asp-action="UserRegistration">Регистрация</a>
+                }
+                else
+                {
+                    <a asp-controller="Page" asp-action="ViewProfile">Аккаунт</a>
+                    <a asp-controller="Entry" asp-action="Logout">Выйти</a>
                 } 
             </div>
         </div>
