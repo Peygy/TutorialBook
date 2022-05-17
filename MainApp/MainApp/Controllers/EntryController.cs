@@ -52,6 +52,12 @@ namespace MainApp.Controllers
         [HttpGet]
         public IActionResult UserLogin()
         {
+            CookieService cookieService = new CookieService(HttpContext);
+
+            if (cookieService.GetUserInfo() != null)
+            {
+                return RedirectToAction("Study","Page");
+            }
             return View();
         }
 
@@ -92,6 +98,14 @@ namespace MainApp.Controllers
         [HttpGet]
         public IActionResult CrewLogin()
         {
+            CookieService cookieService = new CookieService(HttpContext);
+
+            switch (cookieService.GetUserInfo().Role) 
+            {
+                case "admin": return RedirectToAction("AdmControl","Page");
+                case "editor": return RedirectToAction("EdControl","Page");
+                default: break;
+            }
             return View("~/Views/Entry/CrewLogin.cshtml");
         }
 

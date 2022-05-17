@@ -7,8 +7,9 @@ body{
 }
 
 .catalog-head{
-    @include flex_main(flex, center, center);
+    @include flex_main(grid, center, null);
     @include indents(null, 5px 10rem);
+    grid-template-columns: repeat(3, 1fr);
     background-color: $back_head;
     border-bottom: 2px solid $back_border;
 
@@ -49,7 +50,7 @@ body{
 
     &__account{
         @include flex_main(flex, center, center);
-        @include flex_size(1.5, 2);
+        @include flex_size(1, 2);
 
         a{
             @include indents(0 25px 0 25px, null);
@@ -79,7 +80,7 @@ body{
 
     &-main{
         @include flex_main(flex, space-between, center);
-        @include indents(null, 20px 10rem);
+        @include indents(60px 0 0 0, 20px 10rem);
         border-top: 2px solid $back_border;
     }
     &__we{

@@ -67,7 +67,7 @@
     }
     &__join-us{
         @include flex_main(flex, center, center);
-        @include indents(30px 0 90px 0, null);
+        @include indents(30px 0 30px 0, null);
         @include text_params-welcome(center);
         flex-direction: column;
 
@@ -78,7 +78,7 @@
             @include indents(0, 40px 0 0 0);
         }
         a{
-            @include a_params-welcome($font_link, $color_main-bottom_text-link);
+            @include a_params-welcome($font_link, $front_main-bottom_text-link);
         }
         a:hover{
             color: $front_bottom_link-hover;

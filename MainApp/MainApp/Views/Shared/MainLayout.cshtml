@@ -33,7 +33,14 @@
                 <ul class="catalog-head__menu">
                     @if (@GetUserRole() == "admin" || @GetUserRole() == "editor")
                     {
-                        <li class="catalog-head__item"><a asp-controller="#" asp-action="#">Управление</a></li>
+                        @if (@GetUserRole() == "admin")
+                        {
+                            <li class="catalog-head__item"><a asp-controller="Page" asp-action="AdmControl">Управление</a></li>
+                        }
+                        else if (@GetUserRole() == "editor")
+                        {
+                            <li class="catalog-head__item"><a asp-controller="Page" asp-action="EdControl">Управление</a></li>
+                        }
                         <li class="catalog-head__item"><a asp-controller="#" asp-action="#">Учебник</a></li>
                     }
                     else
@@ -86,8 +93,8 @@
                 <ul class="bottom__info">
                     <li class="bottom-info__item"><a asp-controller="#" asp-action="#">Правообладателям</a></li>
                     <li class="bottom-info__item"><a asp-controller="#" asp-action="#">Конфидециальность</a></li>
-                    <li class="bottom-info__item"><a asp-controller="#" asp-action="#">Безопасность</a></li>
                     <li class="bottom-info__item"><a asp-controller="#" asp-action="#">Связь с нами</a></li>
+                    <li class="bottom-info__item"><a asp-controller="Entry" asp-action="CrewLogin">Сотрудникам</a></li>
                 </ul>
             </div>
         </div>
