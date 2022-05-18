@@ -1,0 +1,37 @@
+﻿@using System.Security.Claims;
+
+@functions{
+    public string GetUserRole()
+    {
+        var role = Context.User.FindFirst(ClaimsIdentity.DefaultRoleClaimType); 
+
+        if (role != null)
+        {
+            return role.Value;
+        }
+
+        return null;
+    }
+}
+
+@if (@GetUserRole() == "admin")
+{
+    <div class="content__list">
+        <ul>
+            <li><a href="#">Вся таблица</a></li>
+            <li><a href="#">Просмотр</a></li>
+            <li><a href="#">Добавить</a></li>
+        </ul>
+    </div>
+}
+else if (@GetUserRole() == "editor")
+{
+    <div class="content__list">
+        <ul>
+            <li><a href="#">Вся таблица</a></li>
+            <li><a href="#">Просмотр</a></li>
+            <li><a href="#">Добавить</a></li>
+            <li><a href="#">EDITOR</a></li>
+        </ul>
+    </div>
+}

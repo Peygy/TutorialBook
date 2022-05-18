@@ -1,6 +1,4 @@
-﻿@using Microsoft.AspNetCore.Http;
-@using System.Security.Claims;
-@using MainApp.Models;
+﻿@using System.Security.Claims;
 
 @functions{
     public string GetUserRole()
@@ -24,7 +22,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     <link rel="shortcut icon" href=~/lib/favicon.ico/>
-    <link rel="stylesheet" href=~/styles/layout/mainlayout.css/> 
+    <link rel="stylesheet" href=~/styles/layouts/main/mainlayout.css/> 
 </head>
 <body>
     <header>      
@@ -35,11 +33,11 @@
                     {
                         @if (@GetUserRole() == "admin")
                         {
-                            <li class="catalog-head__item"><a asp-controller="Page" asp-action="AdmControl">Управление</a></li>
+                            <li class="catalog-head__item"><a asp-controller="Part" asp-action="ViewParts">Управление</a></li>
                         }
                         else if (@GetUserRole() == "editor")
                         {
-                            <li class="catalog-head__item"><a asp-controller="Page" asp-action="EdControl">Управление</a></li>
+                            <li class="catalog-head__item"><a asp-controller="Part" asp-action="ViewParts">Управление</a></li>
                         }
                         <li class="catalog-head__item"><a asp-controller="#" asp-action="#">Учебник</a></li>
                     }

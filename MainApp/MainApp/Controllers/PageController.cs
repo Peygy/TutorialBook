@@ -18,15 +18,9 @@ namespace MainApp.Controllers
         }
 
         [Authorize(Roles = "admin, editor")]
-        public IActionResult AdmControl()
+        public IActionResult CrewPanel()
         {
-            return View();
-        }
-
-        [Authorize(Roles = "editor")]
-        public IActionResult EdControl()
-        {         
-            return View();
+            return PartialView();
         }
 
         [Authorize(Roles = "user")]

@@ -1,26 +1,14 @@
 ﻿@model List<MainApp.Models.GeneralPart>
 
-
-<h2>@ViewBag.Name</h2>
-<a>Добавить</a>
-
-@if(Model != null)
-{
-    <table>
-    <tr><th>Название</th><th></th><th></th><th></th></tr>
-    @foreach (var obj in Model)
-    {
-        <tr>
-            <td>@obj.Title</td>
-            <td><a>Просмотр</a></td>
-            <td><a>Изменить</a></td>
-            <td><a>Удаление</a></td>
-        </tr>
-    }
-</table>
+@{
+    ViewBag.Title = "Control";
+    Layout = "/Views/Shared/MainLayout.cshtml";
 }
-else
-{
-    <p>Добавте новых!</p>
-}
+
+<div class="content__wrapper">
+    @await Html.PartialAsync("~/Views/Page/CrewPanel.cshtml")
+    <div class="content__main">
+        
+    </div>
+</div>
 

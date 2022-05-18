@@ -27,12 +27,8 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50cnlcVXNlclJlZ2lzdHJhdGlvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[h:/Programming/Web/Repos/TutorialBook/MainApp/MainApp/Views/Page/AdmControl.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFnZVxBZG1Db250cm9sLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[h:/Programming/Web/Repos/TutorialBook/MainApp/MainApp/Views/Page/EdControl.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFnZVxFZENvbnRyb2wuY3NodG1s
+[h:/Programming/Web/Repos/TutorialBook/MainApp/MainApp/Views/Page/CrewPanel.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFnZVxDcmV3UGFuZWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [h:/Programming/Web/Repos/TutorialBook/MainApp/MainApp/Views/Page/Study.cshtml]

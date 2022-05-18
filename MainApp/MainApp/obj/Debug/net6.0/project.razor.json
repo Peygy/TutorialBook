@@ -16303,6 +16303,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "h:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\Views\\Page\\CrewPanel.cshtml",
+      "TargetPath": "Views\\Page\\CrewPanel.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "h:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\Views\\Shared\\EntryLayout.cshtml",
       "TargetPath": "Views\\Shared\\EntryLayout.cshtml",
       "FileKind": "mvc"
@@ -16310,16 +16315,6 @@
     {
       "FilePath": "h:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\Views\\Entry\\UserRegistration.cshtml",
       "TargetPath": "Views\\Entry\\UserRegistration.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "h:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\Views\\Page\\AdmControl.cshtml",
-      "TargetPath": "Views\\Page\\AdmControl.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "h:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\Views\\Page\\EdControl.cshtml",
-      "TargetPath": "Views\\Page\\EdControl.cshtml",
       "FileKind": "mvc"
     },
     {
