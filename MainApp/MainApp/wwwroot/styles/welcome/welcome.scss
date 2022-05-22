@@ -14,7 +14,6 @@
     
     &__head{
         @include flex_main(flex, null, null);
-        @include indents(25px 0 0 0, null);
         font-family: $font_head;
         font-size: xx-large;
         text-align: center;

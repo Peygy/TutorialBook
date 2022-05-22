@@ -1,0 +1,41 @@
+﻿@using System.Security.Claims;
+
+@functions{
+    public string GetUserRole()
+    {
+        var role = Context.User.FindFirst(ClaimsIdentity.DefaultRoleClaimType); 
+
+        if (role != null)
+        {
+            return role.Value;
+        }
+
+        return null;
+    }
+}
+
+<link rel="stylesheet" href="~/styles/panel/panel.css">
+
+@if (@GetUserRole() == "admin")
+{
+    <div class="content__menu">
+        <h2>Работа с разделами</h2>
+        <ul class="content__list">
+            @await Html.PartialAsync("~/Views/Partial/PanelMenu.cshtml");
+        </ul>
+    </div>
+}
+else if (@GetUserRole() == "editor")
+{
+    <div class="content__menu">
+        <h2>Работа с разделами</h2>
+        <ul class="content__list">
+            @await Html.PartialAsync("~/Views/Partial/PanelMenu.cshtml")
+        </ul>
+        <h2>Работа с пользователями</h2>
+        <ul class="content__list">
+            <li class="content__list-chapter"><a href="#">Пользователи</a></li>
+            <li class="content__list-chapter"><a href="#">Персонал</a></li>
+        </ul>
+    </div>
+}

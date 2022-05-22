@@ -26,40 +26,40 @@
 </head>
 <body>
     <header>      
-        <div class="catalog-head">
-            <nav class="catalog-head__nav">
-                <ul class="catalog-head__menu">
+        <div class="head">
+            <nav class="head__nav">
+                <ul class="head__menu">
                     @if (@GetUserRole() == "admin" || @GetUserRole() == "editor")
                     {
                         @if (@GetUserRole() == "admin")
                         {
-                            <li class="catalog-head__item"><a asp-controller="Part" asp-action="ViewParts">Управление</a></li>
+                            <li class="head__item"><a asp-controller="Part" asp-action="ViewParts">Управление</a></li>
                         }
                         else if (@GetUserRole() == "editor")
                         {
-                            <li class="catalog-head__item"><a asp-controller="Part" asp-action="ViewParts">Управление</a></li>
+                            <li class="head__item"><a asp-controller="Part" asp-action="ViewParts">Управление</a></li>
                         }
-                        <li class="catalog-head__item"><a asp-controller="#" asp-action="#">Учебник</a></li>
+                        <li class="head__item"><a asp-controller="#" asp-action="#">Учебник</a></li>
                     }
                     else
                     {
-                        <li class="catalog-head__item"><a asp-controller="Page" asp-action="Study">Учащимся</a></li>
-                        <li class="catalog-head__item"><a asp-controller="#" asp-action="#">Вакансии</a></li>
-                        <li class="catalog-head__item"><a asp-controller="#" asp-action="#">О Нас</a></li>
+                        <li class="head__item"><a asp-controller="Page" asp-action="Study">Учащимся</a></li>
+                        <li class="head__item"><a asp-controller="#" asp-action="#">Вакансии</a></li>
+                        <li class="head__item"><a asp-controller="#" asp-action="#">О Нас</a></li>
                     }
                 </ul>                
             </nav>
 
-            <div class="catalog-head__face">
-                <div class="catalog-head__brand">
+            <div class="head__face">
+                <div class="head__brand">
                     <a asp-controller="Page" asp-action="Welcome">
-                        <img src="~/img/favicon.png" class="catalog-head-brand__logo">
-                        <h2 class="catalog-head-brand__name">Tutorial Book</h2>
+                        <img src="~/img/favicon.png" class="head-brand__logo">
+                        <h2 class="head-brand__name">Tutorial Book</h2>
                     </a>
                 </div>
             </div>
             
-            <div class="catalog-head__account">
+            <div class="head__account">
                 @if (@GetUserRole() == null)
                 {
                     <a asp-controller="Entry" asp-action="UserLogin">Войти</a>

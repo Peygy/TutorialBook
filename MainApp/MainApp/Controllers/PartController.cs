@@ -26,9 +26,26 @@ namespace MainApp.Controllers
         {
             PartsService partService = new PartsService(data, logger);
 
-            var parts = await partService.GetPartsAsync(id, table);
-            ViewBag.Name = parentName;
-            return View(parts);
+            if (table == "subchapter")
+            {
+                var parts = await partService.GetPostsAsync(id);
+                if (parts != null)
+                {
+                    ViewBag.Name = parentName;
+                    return View(parts);
+                }
+            }
+            else
+            {
+                var parts = await partService.GetPartsAsync(id, table);
+                if (parts != null)
+                {
+                    ViewBag.Name = parentName;
+                    return View(parts);
+                }
+            }
+
+            return BadRequest();
         }
 
         [HttpGet]
@@ -41,10 +58,8 @@ namespace MainApp.Controllers
             {
                 return View(post);
             }
-            else
-            {
-                return BadRequest();
-            }
+
+            return BadRequest();
         }
 
 
@@ -69,10 +84,8 @@ namespace MainApp.Controllers
             {
                 return RedirectToAction("ViewParts", new { id = parentId, table = table });
             }
-            else
-            {
-                return BadRequest();
-            }
+
+            return BadRequest();
         }
 
         [HttpGet]
@@ -94,10 +107,8 @@ namespace MainApp.Controllers
             {
                 return RedirectToAction("ViewParts", new { id = parentId, table = "subchapter" });
             }
-            else
-            {
-                return BadRequest();
-            }
+
+            return BadRequest();
         }
 
 
@@ -112,7 +123,7 @@ namespace MainApp.Controllers
             var part = await partService.GetPartAsync(id, table);
             if(table != "section")
             {
-                ViewBag.Parents = await partService.GetPartsAsync(id, table + "s");
+                ViewBag.Parents = await partService.GetPartsAsync(id, table + "parents");
             }
 
             return View(part);
@@ -132,10 +143,8 @@ namespace MainApp.Controllers
             {
                 return RedirectToAction("ViewParts", new { id = parentId, table = table });
             }
-            else
-            {
-                return BadRequest();
-            }
+
+            return BadRequest();
         }
 
         [HttpPut]
@@ -152,10 +161,8 @@ namespace MainApp.Controllers
             {
                 return RedirectToAction("ViewParts", new { id = parentId, table = table });
             }
-            else
-            {
-                return BadRequest();
-            }
+
+            return BadRequest();
         }
 
 
@@ -171,10 +178,8 @@ namespace MainApp.Controllers
             {
                 return Json(part);
             }
-            else
-            {
-                return BadRequest();
-            }
+
+            return BadRequest();
         }
     }
 }

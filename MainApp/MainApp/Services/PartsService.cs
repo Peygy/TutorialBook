@@ -9,6 +9,7 @@ namespace MainApp.Services
         // Data context for parts
         private TopicsContext data;
         // Logger for exceptions
+
         private ILogger<PartsService> logger;
         public PartsService(TopicsContext _db, ILogger<PartsService> _logger)
         {
@@ -20,24 +21,18 @@ namespace MainApp.Services
 
         public async Task<List<GeneralPart>> GetPartsAsync(int id, string table)
         {
-            var titles = new List<GeneralPart>();
-
             try
             {
                 switch (table)
                 {
-                    // For Display
+                    // For Display parts
                     case "onload":
                         var sections = await data.Sections.ToListAsync();
                         if (sections == null)
                         {
                             return null;
                         }
-                        foreach (var part in sections)
-                        {
-                            titles.Add(new GeneralPart { Id = part.Id, Title = part.Title, Table = "section" });
-                        }
-                        return titles;
+                        return sections;
 
                     case "section":
                         var section = await data.Sections.FirstOrDefaultAsync(s => s.Id == id);
@@ -45,11 +40,9 @@ namespace MainApp.Services
                         {
                             return null;
                         }
-                        foreach (var part in await data.Subsections.Where(s => s.Section == section).ToListAsync())
-                        {
-                            titles.Add(new GeneralPart { Id = part.Id, Title = part.Title, Table = "subsection" });
-                        }
-                        return titles;
+                        var subsections = await data.Subsections.Where(s => s.Parent == section).ToListAsync();
+
+                        return subsections;
 
                     case "subsection":
                         var subsection = await data.Subsections.FirstOrDefaultAsync(s => s.Id == id);
@@ -57,11 +50,8 @@ namespace MainApp.Services
                         {
                             return null;
                         }
-                        foreach (var part in await data.Chapters.Where(s => s.Subsection == subsection).ToListAsync())
-                        {
-                            titles.Add(new GeneralPart { Id = part.Id, Title = part.Title, Table = "chapter" });
-                        }
-                        return titles;
+
+                        return await data.Chapters.Where(s => s.Parent == subsection).ToListAsync();
 
                     case "chapter":
                         var chapter = await data.Chapters.FirstOrDefaultAsync(s => s.Id == id);
@@ -69,73 +59,42 @@ namespace MainApp.Services
                         {
                             return null;
                         }
-                        foreach (var part in await data.Subchapters.Where(s => s.Chapter == chapter).ToListAsync())
-                        {
-                            titles.Add(new GeneralPart { Id = part.Id, Title = part.Title, Table = "subchapter" });
-                        }
-                        return titles;
 
-                    case "subchapter":
-                        var subchapter = await data.Subchapters.FirstOrDefaultAsync(s => s.Id == id);
-                        if (subchapter == null)
-                        {
-                            return null;
-                        }
-                        foreach (var part in await data.Posts.Where(s => s.Subchapter == subchapter).ToListAsync())
-                        {
-                            titles.Add(new GeneralPart { Id = part.Id, Title = part.Title, Table = "post" });
-                        }
-                        return titles;
+                        return await data.Subchapters.Where(s => s.Parent == chapter).ToListAsync();
 
 
-                    // For Choosing
-                    case "subsections":
+                    // For Choosing new Parent
+                    case "subsectionparents":
                         subsection = await data.Subsections.FirstOrDefaultAsync(s => s.Id == id);
                         if (subsection == null)
                         {
                             return null;
                         }
-                        foreach (var part in await data.Sections.Where(p => p != subsection.Section).ToListAsync())
-                        {
-                            titles.Add(new GeneralPart { Id = part.Id, Title = part.Title, Table = "section" });
-                        }
-                        return titles;
+                        return await data.Sections.Where(p => p != subsection.Parent).ToListAsync();
 
-                    case "chapters":
+                    case "chapterparents":
                         chapter = await data.Chapters.FirstOrDefaultAsync(s => s.Id == id);
                         if (chapter == null)
                         {
                             return null;
                         }
-                        foreach (var part in await data.Subsections.Where(p => p != chapter.Subsection).ToListAsync())
-                        {
-                            titles.Add(new GeneralPart { Id = part.Id, Title = part.Title, Table = "subsection" });
-                        }
-                        return titles;
+                        return await data.Subsections.Where(p => p != chapter.Parent).ToListAsync();
 
-                    case "subchapters":
-                        subchapter = await data.Subchapters.FirstOrDefaultAsync(s => s.Id == id);
+                    case "subchapterparents":
+                        var subchapter = await data.Subchapters.FirstOrDefaultAsync(s => s.Id == id);
                         if (subchapter == null)
                         {
                             return null;
                         }
-                        foreach (var part in await data.Chapters.Where(p => p != subchapter.Chapter).ToListAsync())
-                        {
-                            titles.Add(new GeneralPart { Id = part.Id, Title = part.Title, Table = "chapter" });
-                        }
-                        return titles;
+                        return await data.Chapters.Where(p => p != subchapter.Parent).ToListAsync();
 
-                    case "posts":
+                    case "postparents":
                         var post = await data.Posts.FirstOrDefaultAsync(s => s.Id == id);
                         if (post == null)
                         {
                             return null;
                         }
-                        foreach (var part in await data.Subchapters.Where(p => p != post.Subchapter).ToListAsync())
-                        {
-                            titles.Add(new GeneralPart { Id = part.Id, Title = part.Title, Table = "subchapter" });
-                        }
-                        return titles;
+                        return await data.Subchapters.Where(p => p != post.Parent).ToListAsync();
                 }
             }
             catch (Exception ex)
@@ -146,6 +105,18 @@ namespace MainApp.Services
             return null;
         }
 
+        public async Task<List<Post>> GetPostsAsync(int id)
+        {
+            var subchapter = await data.Subchapters.FirstOrDefaultAsync(s => s.Id == id);
+            if (subchapter == null)
+            {
+                return null;
+            }
+
+            return await data.Posts.Where(s => s.Parent == subchapter).ToListAsync();
+        }
+
+
         public async Task<GeneralPart> GetPartAsync(int id, string table)
         {
             try
@@ -155,40 +126,35 @@ namespace MainApp.Services
                     case "section":
                         if (data.Sections.Any(s => s.Id == id))
                         {
-                            var section = await data.Sections.FirstOrDefaultAsync(s => s.Id == id);
-                            return new GeneralPart { Id = section.Id, Title = section.Title, Table = "section" };
+                            return await data.Sections.FirstOrDefaultAsync(s => s.Id == id);
                         }
                         return null;
 
                     case "subsection":
                         if (data.Subsections.Any(s => s.Id == id))
-                        {
-                            var subsection = await data.Subsections.FirstOrDefaultAsync(s => s.Id == id);
-                            return new GeneralPart { Id = subsection.Id, Title = subsection.Title, Table = "subsection" };
+                        { 
+                            return await data.Subsections.FirstOrDefaultAsync(s => s.Id == id);
                         }
                         return null;
 
                     case "chapter":
                         if (data.Chapters.Any(s => s.Id == id))
                         {
-                            var chapter = await data.Chapters.FirstOrDefaultAsync(s => s.Id == id);
-                            return new GeneralPart { Id = chapter.Id, Title = chapter.Title, Table = "chapter" };
+                            return await data.Chapters.FirstOrDefaultAsync(s => s.Id == id);
                         }
                         return null;
 
                     case "subchapter":
                         if (data.Subchapters.Any(s => s.Id == id))
                         {
-                            var subchapter = await data.Subchapters.FirstOrDefaultAsync(s => s.Id == id);
-                            return new GeneralPart { Id = subchapter.Id, Title = subchapter.Title, Table = "subchapter" };
+                            return await data.Subchapters.FirstOrDefaultAsync(s => s.Id == id);
                         }
                         return null;
 
                     case "post":
                         if (data.Posts.Any(s => s.Id == id))
                         {
-                            var post = await data.Posts.FirstOrDefaultAsync(s => s.Id == id);
-                            return new GeneralPart { Id = post.Id, Title = post.Title, Content = post.Content, Table = "post" };
+                            return await data.Posts.FirstOrDefaultAsync(s => s.Id == id);
                         }
                         return null;
                 }
@@ -214,7 +180,7 @@ namespace MainApp.Services
                     case "section":
                         if (!data.Sections.Any(s => s.Title == addName))
                         {
-                            var section = new Section { Title = addName, CreatedDate = DateTime.UtcNow };
+                            var section = new GeneralPart { Title = addName, CreatedDate = DateTime.UtcNow, Table = "section" };
                             await data.Sections.AddAsync(section);
                             await data.SaveChangesAsync();
                             return true;
@@ -225,7 +191,7 @@ namespace MainApp.Services
                         if (!data.Subsections.Any(s => s.Title == addName))
                         {
                             var section = await data.Sections.FirstOrDefaultAsync(s => s.Id == parentId);
-                            var subsection = new Subsection { Title = addName, CreatedDate = DateTime.UtcNow, Section = section };
+                            var subsection = new GeneralPart { Title = addName, CreatedDate = DateTime.UtcNow, Parent = section, Table = "subsection" };
                             await data.Subsections.AddAsync(subsection);
                             await data.SaveChangesAsync();
                             return true;
@@ -236,7 +202,7 @@ namespace MainApp.Services
                         if (!data.Chapters.Any(s => s.Title == addName))
                         {
                             var subsection = await data.Subsections.FirstOrDefaultAsync(s => s.Id == parentId);
-                            var chapter = new Chapter { Title = addName, CreatedDate = DateTime.UtcNow, Subsection = subsection };
+                            var chapter = new GeneralPart { Title = addName, CreatedDate = DateTime.UtcNow, Parent = subsection, Table = "chapter" };
                             await data.Chapters.AddAsync(chapter);
                             await data.SaveChangesAsync();
                             return true;
@@ -247,7 +213,7 @@ namespace MainApp.Services
                         if (!data.Subchapters.Any(s => s.Title == addName))
                         {
                             var chapter = await data.Chapters.FirstOrDefaultAsync(s => s.Id == parentId);
-                            var subchapter = new Subchapter { Title = addName, CreatedDate = DateTime.UtcNow, Chapter = chapter };
+                            var subchapter = new GeneralPart { Title = addName, CreatedDate = DateTime.UtcNow, Parent = chapter, Table = "subchapter" };
                             await data.Subchapters.AddAsync(subchapter);
                             await data.SaveChangesAsync();
                             return true;
@@ -267,10 +233,10 @@ namespace MainApp.Services
         {
             try
             {
-                if (!data.Posts.Any(p => p.Title == postName && p.Subchapter.Id == parentId))
+                if (!data.Posts.Any(p => p.Title == postName && p.ParentId == parentId))
                 {
                     var subchapter = await data.Subchapters.FirstOrDefaultAsync(s => s.Id == parentId);
-                    var post = new Post { Title = postName, Content = content, CreatedDate = DateTime.UtcNow, Subchapter = subchapter };
+                    var post = new Post { Title = postName, Content = content, CreatedDate = DateTime.UtcNow, Parent = subchapter, Table = "post" };
                     await data.Posts.AddAsync(post);
                     await data.SaveChangesAsync();
                     return true;
@@ -313,7 +279,7 @@ namespace MainApp.Services
 
                             if (section != null)
                             {
-                                subsection.Section = section;
+                                subsection.Parent = section;
                             }
 
                             subsection.CreatedDate = DateTime.UtcNow;
@@ -331,7 +297,7 @@ namespace MainApp.Services
 
                             if (subsection != null)
                             {
-                                chapter.Subsection = subsection;
+                                chapter.Parent = subsection;
                             }
 
                             chapter.CreatedDate = DateTime.UtcNow;
@@ -349,7 +315,7 @@ namespace MainApp.Services
 
                             if (chapter != null)
                             {
-                                subchapter.Chapter = chapter;
+                                subchapter.Parent = chapter;
                             }
 
                             subchapter.CreatedDate = DateTime.UtcNow;
@@ -368,7 +334,7 @@ namespace MainApp.Services
 
                             if (subchapter != null)
                             {
-                                post.Subchapter = subchapter;
+                                post.Parent = subchapter;
                             }
 
                             post.CreatedDate = DateTime.UtcNow;

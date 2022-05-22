@@ -54,7 +54,7 @@ namespace MainApp.Controllers
         {
             CookieService cookieService = new CookieService(HttpContext);
 
-            if (cookieService.GetUserInfo() != null)
+            if (cookieService.GetUserInfo().Login != null)
             {
                 return RedirectToAction("Study","Page");
             }
@@ -102,11 +102,12 @@ namespace MainApp.Controllers
 
             switch (cookieService.GetUserInfo().Role) 
             {
-                case "admin": return RedirectToAction("AdmControl","Page");
-                case "editor": return RedirectToAction("EdControl","Page");
-                default: break;
+                case "admin": return RedirectToAction("ViewParts","Part");
+                case "editor": return RedirectToAction("ViewParts","Part");
+                case "null": return View("~/Views/Entry/CrewLogin.cshtml");
             }
-            return View("~/Views/Entry/CrewLogin.cshtml");
+
+            return null;
         }
 
         [HttpPost]
@@ -116,19 +117,13 @@ namespace MainApp.Controllers
 
             if (ModelState.IsValid)
             {
-                if (await DbController.AdmAuthenticationAsync(admin.Login, admin.Password, HttpContext))
+                if (await DbController.AdmAuthenticationAsync(admin.Login, admin.Password, HttpContext) 
+                || await DbController.EdAuthenticationAsync(admin.Login, admin.Password, HttpContext))
                 {
-                    return RedirectToAction("AdmControl","Page");
+                    return RedirectToAction("ViewParts","Part");
                 }
-                else
-                {
-                    if (await DbController.EdAuthenticationAsync(admin.Login, admin.Password, HttpContext))
-                    {
-                        return RedirectToAction("EdControl","Page");
-                    }
-                    ViewBag.Error = "Логин или пароль неверны!";
-                    return View("~/Views/Entry/CrewLogin.cshtml", admin);
-                }
+                ViewBag.Error = "Логин или пароль неверны!";
+                return View("~/Views/Entry/CrewLogin.cshtml", admin);
             }
 
             return View("~/Views/Entry/CrewLogin.cshtml", admin);

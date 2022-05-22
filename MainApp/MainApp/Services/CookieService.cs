@@ -44,7 +44,7 @@ namespace MainApp.Services
             {
                 return new User {Login = login.Value, Role = role.Value};
             }
-            return null;
+            return new User {Role = "null"};
         }
     }
 }

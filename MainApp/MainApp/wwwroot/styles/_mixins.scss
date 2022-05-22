@@ -4,10 +4,6 @@
     justify-content: $justify;
     align-items: $align;
 }
-@mixin flex_size($grow, $shrink){
-    flex-grow: $grow;
-    flex-shrink: $shrink;
-}
 @mixin indents($marg, $pad){
     margin: $marg;
     padding: $pad;
@@ -15,6 +11,7 @@
 @mixin img_size($width){
     width: $width;
 }
+
 
 
 //mainlayout
@@ -43,4 +40,24 @@
 @mixin size_params-entry($width, $height){
     width: $width;
     height: $height;
+}
+
+//panel
+@mixin a_params-panel(){
+    a{
+        font-weight: bolder;
+        text-decoration: none;
+        color: $front_main-bottom_text-link;
+        font-family: $font_link;
+    }
+    a:hover{
+        color: $front_bottom_link-hover;
+    }
+    a:target{
+        .chapter{
+            &__wrapper{
+                display: flex;
+            }
+        }
+    }
 }

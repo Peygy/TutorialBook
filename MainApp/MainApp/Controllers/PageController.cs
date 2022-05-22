@@ -15,15 +15,8 @@ namespace MainApp.Controllers
         public IActionResult Study()
         {
             return View();
-        }
+        }    
 
-        [Authorize(Roles = "admin, editor")]
-        public IActionResult CrewPanel()
-        {
-            return PartialView();
-        }
-
-        [Authorize(Roles = "user")]
         public IActionResult ViewProfile()
         {
             return View();

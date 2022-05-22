@@ -8,10 +8,10 @@ namespace MainApp.Models
     {
         // Section -> Subsection -> Chapter -> Subchapter -> Post
 
-        public DbSet<Section> Sections { get; set; } = null!;
-        public DbSet<Subsection> Subsections { get; set; } = null!;
-        public DbSet<Chapter> Chapters { get; set; } = null!;
-        public DbSet<Subchapter> Subchapters { get; set; } = null!;
+        public DbSet<GeneralPart> Sections { get; set; } = null!;
+        public DbSet<GeneralPart> Subsections { get; set; } = null!;
+        public DbSet<GeneralPart> Chapters { get; set; } = null!;
+        public DbSet<GeneralPart> Subchapters { get; set; } = null!;
         public DbSet<Post> Posts { get; set; } = null!;
         
 
