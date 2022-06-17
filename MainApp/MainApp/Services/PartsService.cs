@@ -9,8 +9,8 @@ namespace MainApp.Services
         // Data context for parts
         private TopicsContext data;
         // Logger for exceptions
-
         private ILogger<PartsService> logger;
+
         public PartsService(TopicsContext _db, ILogger<PartsService> _logger)
         {
             data = _db;
@@ -166,7 +166,6 @@ namespace MainApp.Services
 
             return null;
         }
-
 
 
 
@@ -356,8 +355,8 @@ namespace MainApp.Services
 
 
 
-        //Delete
-        public async Task<JsonContent> RemovePartAsync(int id, string table)
+        //Delete part or post
+        public async Task<GeneralPart> RemovePartAsync(int id, string table)
         {
             try
             {
@@ -369,7 +368,7 @@ namespace MainApp.Services
                             var section = await data.Sections.FirstOrDefaultAsync(s => s.Id == id);
                             data.Sections.Remove(section);
                             await data.SaveChangesAsync();
-                            return JsonContent.Create(section);
+                            return section;
                         }
                         return null;
 
@@ -379,7 +378,7 @@ namespace MainApp.Services
                             var subsection = await data.Subsections.FirstOrDefaultAsync(s => s.Id == id);
                             data.Subsections.Remove(subsection);
                             await data.SaveChangesAsync();
-                            return JsonContent.Create(subsection);
+                            return subsection;
                         }
                         return null;
 
@@ -389,7 +388,7 @@ namespace MainApp.Services
                             var chapter = await data.Chapters.FirstOrDefaultAsync(s => s.Id == id);
                             data.Chapters.Remove(chapter);
                             await data.SaveChangesAsync();
-                            return JsonContent.Create(chapter);
+                            return chapter;
                         }
                         return null;
 
@@ -399,20 +398,27 @@ namespace MainApp.Services
                             var subchapter = await data.Subchapters.FirstOrDefaultAsync(s => s.Id == id);
                             data.Subchapters.Remove(subchapter);
                             await data.SaveChangesAsync();
-                            return JsonContent.Create(subchapter);
-                        }
-                        return null;
-
-                    case "subchapter":
-                        if (data.Subchapters.Any(s => s.Id == id))
-                        {
-                            var post = await data.Posts.FirstOrDefaultAsync(s => s.Id == id);
-                            data.Posts.Remove(post);
-                            await data.SaveChangesAsync();
-                            return JsonContent.Create(post);
+                            return subchapter;
                         }
                         return null;
                 }
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.Message);
+            }
+
+            return null;
+        }
+
+        public async Task<Post> RemovePostAsync(int id)
+        {
+            try
+            {
+                var post = await data.Posts.FirstOrDefaultAsync(s => s.Id == id);
+                data.Posts.Remove(post);
+                await data.SaveChangesAsync();
+                return post;
             }
             catch (Exception ex)
             {

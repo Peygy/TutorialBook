@@ -12,6 +12,6 @@ namespace MainApp.Models
         [Required(ErrorMessage = "Не указан пароль")]
         public string? Password { get; set; }
         // Role for authorization
-        public string Role { get; set; } = "";
+        public string Role { get; set; } = "admin";
     }
 }

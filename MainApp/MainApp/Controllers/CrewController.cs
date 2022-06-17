@@ -12,6 +12,8 @@ namespace MainApp.Controllers
         private UserContext data;
         // Logger for exceptions
         private ILogger<CrewService> logger;
+        private CrewService crewService;
+
         public CrewController(UserContext _db, ILogger<CrewService> _logger)
         {
             data = _db;
@@ -24,27 +26,16 @@ namespace MainApp.Controllers
         [Authorize(Roles = "admin")]
         public async Task<IActionResult> ViewUsers()
         {
-            CrewService service = new CrewService(data, logger);
-            var users = await service.GetCrewOrUsersAsync("users");
-            return View(users);
+            crewService = new CrewService(data, logger);
+            return View(await crewService.GetUsersAsync());
         }
 
         [HttpGet]
         [Authorize(Roles = "editor")]
-        public async Task<IActionResult> ViewCrewOrUsers()
+        public async Task<IActionResult> ViewAdmins()
         {
-            CrewService service = new CrewService(data, logger);
-            var users = await service.GetCrewOrUsersAsync("users");
-            return View(users);
-        }
-
-        [HttpPost]
-        [Authorize(Roles = "editor")]
-        public async Task<IActionResult> ViewCrewOrUsers(string role)
-        {
-            CrewService service = new CrewService(data, logger);
-            var crew = await service.GetCrewOrUsersAsync(role);
-            return View(crew);
+            crewService = new CrewService(data, logger);
+            return View(await crewService.GetAdminsAsync());
         }
 
 
@@ -58,28 +49,44 @@ namespace MainApp.Controllers
 
         [HttpPost]
         [Authorize(Roles = "editor")]
-        public async Task<IActionResult> AddAdmin(string name, string password)
+        public async Task<IActionResult> AddAdmin(Admin admin)
         {
-            CrewService service = new CrewService(data, logger);
+            crewService = new CrewService(data, logger);
 
-            if(await service.AddAdminAsync(name, password)) 
-                return RedirectToAction("ViewCrewOrUsers");
-            else return BadRequest();
+            if (ModelState.IsValid)
+            {
+                if (await crewService.AddAdminAsync(admin))
+                    return RedirectToAction("ViewAdmins");
+                else return BadRequest();
+            }
+
+            return View(admin);
         }
 
 
 
         [HttpDelete]
-        [Route("api/crew/remove")]
+        [Route("api/users/remove/{id:int}")]
         [Authorize(Roles = "admin, editor")]
-        public async Task<IActionResult> DeleteCrewAsync(int id, string role)
+        public async Task<IActionResult> DeleteUsers(int id)
         {
-            CrewService service = new CrewService(data, logger);
+            crewService = new CrewService(data, logger);
 
-            var crew = await service.RemoveCrewAsync(id, role);
+            var user = await crewService.RemoveUserAsync(id);
+            if (user != null) return Json(user);
+            else return View();
+        }
 
-            if (crew != null) return Json(crew);
-            else return BadRequest();
+        [HttpDelete]
+        [Route("api/admins/remove/{id:int}")]
+        [Authorize(Roles = "editor")]
+        public async Task<IActionResult> DeleteAdmins(int id)
+        {
+            crewService = new CrewService(data, logger);
+
+            var admin = await crewService.RemoveAdminAsync(id);
+            if (admin != null) return Json(admin);
+            else return View();
         }
     }
 }

@@ -9,11 +9,16 @@ namespace MainApp.Services
         private UserContext data;
         // Logger for exceptions
         private ILogger<AuthService> logger;
-        public AuthService(UserContext _db, ILogger<AuthService> _logger)
+        private CookieService cookieService;
+        private HttpContext context;
+
+        public AuthService(UserContext _db, ILogger<AuthService> _logger, HttpContext _context)
         {
             data = _db;
             logger = _logger;
+            context = _context;
         }
+
 
 
         // Checking the user for uniqueness in the database
@@ -33,15 +38,15 @@ namespace MainApp.Services
 
 
 
-        public async Task AddUserAsync(string userLogin, string userPassword, HttpContext context)
+        public async Task AddUserAsync(string userLogin, string userPassword)
         {
             try
             {
-                CookieService cookieService = new CookieService(context);
+                cookieService = new CookieService(context);
 
                 string newPassword = HashService.HashPassword(userPassword);
-                var user = new User { Login = userLogin, Password = newPassword, Role = "user" };
-                await cookieService.AuthenticateAsync(userLogin, "user");
+                var user = new User { Login = userLogin, Password = newPassword };
+                await cookieService.CookieAuthenticateAsync(userLogin, "user");
 
                 await data.Users.AddAsync(user);
                 await data.SaveChangesAsync();
@@ -72,30 +77,34 @@ namespace MainApp.Services
             return false;
         }
 
-        public async Task UserAuthorizationAsync(string userLogin, bool remember, HttpContext context)
+        public async Task UserAuthorizationAsync(string userLogin, bool remember)
         {
-            CookieService cookieService = new CookieService(context);
-            
+            cookieService = new CookieService(context);
+
             if (remember == true)
             {
-                await cookieService.AuthenticateAsync(userLogin, "user");
+                await cookieService.CookieAuthenticateAsync(userLogin, "user");
+            }
+            else
+            {
+                cookieService.SessionAuthenticateAsync(userLogin, "user");
             }
         }
 
 
         
-        public async Task<bool> AdmAuthenticationAsync(string admLogin, string admPassword, HttpContext context)
+        public async Task<bool> AdmAuthenticationAsync(string admLogin, string admPassword)
         {
             try
             {
-                CookieService cookieService = new CookieService(context);
+                cookieService = new CookieService(context);
 
                 if (data.Crew.Any(u => u.Login == admLogin && u.Role == "admin"))
                 {
                     var admDb = await data.Crew.FirstOrDefaultAsync(u => u.Login == admLogin);
                     if (HashService.VerifyHashedPassword(admDb.Password, admPassword)) 
                     {
-                        await cookieService.AuthenticateAsync(admLogin, "admin");
+                        await cookieService.CookieAuthenticateAsync(admLogin, "admin");
                         return true; 
                     }                 
                 }
@@ -110,18 +119,18 @@ namespace MainApp.Services
 
 
 
-        public async Task<bool> EdAuthenticationAsync(string edLogin, string edPassword, HttpContext context)
+        public async Task<bool> EdAuthenticationAsync(string edLogin, string edPassword)
         {
             try
             {
-                CookieService cookieService = new CookieService(context);
+                cookieService = new CookieService(context);
 
                 if (data.Crew.Any(u => u.Login == edLogin && u.Role == "editor"))
                 {
                     var edDb = await data.Crew.FirstOrDefaultAsync(u => u.Login == edLogin);
                     if (HashService.VerifyHashedPassword(edDb.Password, edPassword))
                     {
-                        await cookieService.AuthenticateAsync(edLogin, "editor");
+                        await cookieService.CookieAuthenticateAsync(edLogin, "editor");
                         return true;
                     }
                 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\MainApp.csproj": {}
+    "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\MainApp.csproj": {}
   },
   "projects": {
-    "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\MainApp.csproj": {
+    "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\MainApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\MainApp.csproj",
+        "projectUniqueName": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\MainApp.csproj",
         "projectName": "MainApp",
-        "projectPath": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\MainApp.csproj",
+        "projectPath": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\MainApp.csproj",
         "packagesPath": "C:\\Users\\isako\\.nuget\\packages\\",
-        "outputPath": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\obj\\",
+        "outputPath": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\isako\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,13 +40,17 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Mvc.Core": {
+              "target": "Package",
+              "version": "[2.2.5, )"
+            },
             "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": {
               "target": "Package",
-              "version": "[6.0.4, )"
+              "version": "[6.0.6, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[6.0.4, )"
+              "version": "[6.0.6, )"
             },
             "Pomelo.EntityFrameworkCore.MySql": {
               "target": "Package",
@@ -71,7 +75,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     }

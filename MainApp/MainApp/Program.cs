@@ -15,20 +15,34 @@ var builder = WebApplication.CreateBuilder(args);
 #endif
 
 
+
 // Adding Data Contexts as a Service to an Application
-builder.Services.AddDbContext<TopicsContext>(options => options.UseMySql(connection, new MySqlServerVersion(new Version(8,0,28))));
-builder.Services.AddDbContext<UserContext>(options => options.UseMySql(connection, new MySqlServerVersion(new Version(8,0,28))));
+builder.Services.AddDbContext<TopicsContext>(options => options.UseMySql(connection, new MySqlServerVersion(new Version(8,0,29))));
+builder.Services.AddDbContext<UserContext>(options => options.UseMySql(connection, new MySqlServerVersion(new Version(8,0,29))));
 builder.Services.AddControllersWithViews();
+
+// Adding Sessions to services
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.Cookie.Name = "AuthSession";
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+    options.IdleTimeout = TimeSpan.FromSeconds(3600);
+});
+
+// Adding Cookies to services
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
-        options.Cookie.Name = "Auth";
+        options.Cookie.Name = "AuthCookie";
         options.Cookie.HttpOnly = true;
         options.LoginPath = "/entry/userlogin";
         options.AccessDeniedPath = "/page/study";
         options.LogoutPath = "/page/welcome";
     });
 builder.Services.AddAuthorization();
+
 // Converting all queries to lowercase for easy of use, for example: ~/Main/View changes to ~/main/view
 builder.Services.Configure<RouteOptions>(options =>
 {
@@ -47,6 +61,8 @@ app.UseStaticFiles();
 // Authentication and Authorization connection for entry
 app.UseAuthentication();
 app.UseAuthorization();
+// For using Sessions
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

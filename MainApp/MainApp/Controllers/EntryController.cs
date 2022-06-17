@@ -11,14 +11,18 @@ namespace MainApp.Controllers
         private UserContext data;
         // Logger for exceptions
         private ILogger<AuthService> logger;
+        private AuthService authService;
+        private CookieService cookieService;
+
         public EntryController(UserContext _db , ILogger<AuthService> _logger)
         {
             data = _db;
             logger = _logger;
         }
 
-        
 
+
+        // Account registration
         [HttpGet]
         public IActionResult UserRegistration()
         {
@@ -28,13 +32,13 @@ namespace MainApp.Controllers
         [HttpPost]
         public async Task<IActionResult> UserRegistration(CreateUserModel newUser)
         {
-            AuthService DbController = new AuthService(data, logger);
+            authService = new AuthService(data, logger, HttpContext);
 
             if (ModelState.IsValid)
             {
-                if (DbController.AvailabilityCheck(newUser.Login))
+                if (authService.AvailabilityCheck(newUser.Login))
                 {
-                    await DbController.AddUserAsync(newUser.Login, newUser.Password, HttpContext);
+                    await authService.AddUserAsync(newUser.Login, newUser.Password);
                     return RedirectToAction("Study","Page");
                 }
                 else
@@ -49,10 +53,11 @@ namespace MainApp.Controllers
 
 
 
+        // Account login
         [HttpGet]
         public IActionResult UserLogin()
         {
-            CookieService cookieService = new CookieService(HttpContext);
+            cookieService = new CookieService(HttpContext);
 
             if (cookieService.GetUserInfo().Login != null)
             {
@@ -64,13 +69,13 @@ namespace MainApp.Controllers
         [HttpPost]
         public async Task<IActionResult> UserLogin(User user, bool remember)
         {
-            AuthService DbController = new AuthService(data, logger);
+            authService = new AuthService(data, logger, HttpContext);
 
             if (ModelState.IsValid)
             {
-                if (await DbController.UserAuthenticationAsync(user.Login, user.Password))
+                if (await authService.UserAuthenticationAsync(user.Login, user.Password))
                 {
-                    await DbController.UserAuthorizationAsync(user.Login, remember, HttpContext);
+                    await authService.UserAuthorizationAsync(user.Login, remember);
                     return RedirectToAction("Study","Page");
                 }
                 else
@@ -87,7 +92,7 @@ namespace MainApp.Controllers
 
         public async Task<IActionResult> Logout()
         {
-            CookieService cookieService = new CookieService(HttpContext);
+            cookieService = new CookieService(HttpContext);
             await cookieService.LogoutAsync();
             return RedirectToAction("Welcome","Page");
         }
@@ -98,13 +103,13 @@ namespace MainApp.Controllers
         [HttpGet]
         public IActionResult CrewLogin()
         {
-            CookieService cookieService = new CookieService(HttpContext);
+            cookieService = new CookieService(HttpContext);
 
             switch (cookieService.GetUserInfo().Role) 
             {
-                case "admin": return RedirectToAction("ViewParts","Part");
-                case "editor": return RedirectToAction("ViewParts","Part");
-                case "null": return View("~/Views/Entry/CrewLogin.cshtml");
+                case "admin" or "editor": return RedirectToAction("ViewParts","Part");
+                case "user": return RedirectToAction("Study", "Page");
+                case "null": return BadRequest();
             }
 
             return null;
@@ -113,20 +118,21 @@ namespace MainApp.Controllers
         [HttpPost]
         public async Task<IActionResult> CrewLogin(Admin admin)
         {
-            AuthService DbController = new AuthService(data, logger);
+            authService = new AuthService(data, logger, HttpContext);
 
             if (ModelState.IsValid)
             {
-                if (await DbController.AdmAuthenticationAsync(admin.Login, admin.Password, HttpContext) 
-                || await DbController.EdAuthenticationAsync(admin.Login, admin.Password, HttpContext))
+                if (await authService.AdmAuthenticationAsync(admin.Login, admin.Password) 
+                || await authService.EdAuthenticationAsync(admin.Login, admin.Password))
                 {
                     return RedirectToAction("ViewParts","Part");
                 }
+
                 ViewBag.Error = "Логин или пароль неверны!";
-                return View("~/Views/Entry/CrewLogin.cshtml", admin);
+                return View(admin);
             }
 
-            return View("~/Views/Entry/CrewLogin.cshtml", admin);
+            return View(admin);
         }
     }
 }

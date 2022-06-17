@@ -1,15 +1,20 @@
 ﻿@using System.Security.Claims;
+@using Microsoft.AspNetCore.Http;
 
 @functions{
     public string GetUserRole()
     {
-        var role = Context.User.FindFirst(ClaimsIdentity.DefaultRoleClaimType); 
-
-        if (role != null)
+        var roleCookie = Context.User.FindFirst(ClaimsIdentity.DefaultRoleClaimType); 
+        if (roleCookie != null)
         {
-            return role.Value;
+            return roleCookie.Value;
         }
 
+        var roleSession = Context.Session.GetString("role"); 
+        if (roleSession != null)
+        {
+            return roleSession;
+        }
         return null;
     }
 }

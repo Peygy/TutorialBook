@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ebEHBB3gDJNdxR9Q9wlwWfXsLCSO/PHCJIVbgzSlvCs=",
+  "Hash": "hXfsZrB4mfvPkfnk3ntQJrLiWllvg7fjDEe8DpjGmDo=",
   "Source": "MainApp",
   "BasePath": "_content/MainApp",
   "Mode": "Default",
@@ -10,17 +10,17 @@
     {
       "Name": "MainApp\\wwwroot",
       "Source": "MainApp",
-      "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
       "BasePath": "_content/MainApp",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\img\\content-have-knowledges.png",
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\img\\content-have-knowledges.png",
       "SourceId": "MainApp",
       "SourceType": "Discovered",
-      "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
       "BasePath": "_content/MainApp",
       "RelativePath": "img/content-have-knowledges.png",
       "AssetKind": "All",
@@ -34,10 +34,10 @@
       "OriginalItemSpec": "wwwroot\\img\\content-have-knowledges.png"
     },
     {
-      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\img\\content-header.png",
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\img\\content-header.png",
       "SourceId": "MainApp",
       "SourceType": "Discovered",
-      "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
       "BasePath": "_content/MainApp",
       "RelativePath": "img/content-header.png",
       "AssetKind": "All",
@@ -51,10 +51,10 @@
       "OriginalItemSpec": "wwwroot\\img\\content-header.png"
     },
     {
-      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\img\\content-join-us.png",
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\img\\content-join-us.png",
       "SourceId": "MainApp",
       "SourceType": "Discovered",
-      "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
       "BasePath": "_content/MainApp",
       "RelativePath": "img/content-join-us.png",
       "AssetKind": "All",
@@ -68,10 +68,10 @@
       "OriginalItemSpec": "wwwroot\\img\\content-join-us.png"
     },
     {
-      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\img\\content-study-new.png",
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\img\\content-study-new.png",
       "SourceId": "MainApp",
       "SourceType": "Discovered",
-      "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
       "BasePath": "_content/MainApp",
       "RelativePath": "img/content-study-new.png",
       "AssetKind": "All",
@@ -85,10 +85,10 @@
       "OriginalItemSpec": "wwwroot\\img\\content-study-new.png"
     },
     {
-      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\img\\error.png",
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\img\\error.png",
       "SourceId": "MainApp",
       "SourceType": "Discovered",
-      "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
       "BasePath": "_content/MainApp",
       "RelativePath": "img/error.png",
       "AssetKind": "All",
@@ -102,10 +102,10 @@
       "OriginalItemSpec": "wwwroot\\img\\error.png"
     },
     {
-      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\img\\favicon.png",
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\img\\favicon.png",
       "SourceId": "MainApp",
       "SourceType": "Discovered",
-      "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
       "BasePath": "_content/MainApp",
       "RelativePath": "img/favicon.png",
       "AssetKind": "All",
@@ -119,10 +119,10 @@
       "OriginalItemSpec": "wwwroot\\img\\favicon.png"
     },
     {
-      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\js\\panel.js",
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\js\\panel.js",
       "SourceId": "MainApp",
       "SourceType": "Discovered",
-      "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
       "BasePath": "_content/MainApp",
       "RelativePath": "js/panel.js",
       "AssetKind": "All",
@@ -136,10 +136,10 @@
       "OriginalItemSpec": "wwwroot\\js\\panel.js"
     },
     {
-      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\lib\\favicon.ico",
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\lib\\favicon.ico",
       "SourceId": "MainApp",
       "SourceType": "Discovered",
-      "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
       "BasePath": "_content/MainApp",
       "RelativePath": "lib/favicon.ico",
       "AssetKind": "All",
@@ -153,10 +153,10 @@
       "OriginalItemSpec": "wwwroot\\lib\\favicon.ico"
     },
     {
-      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\_mixins.scss",
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\_mixins.scss",
       "SourceId": "MainApp",
       "SourceType": "Discovered",
-      "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
       "BasePath": "_content/MainApp",
       "RelativePath": "styles/_mixins.scss",
       "AssetKind": "All",
@@ -170,10 +170,10 @@
       "OriginalItemSpec": "wwwroot\\styles\\_mixins.scss"
     },
     {
-      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\_vars.scss",
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\_vars.scss",
       "SourceId": "MainApp",
       "SourceType": "Discovered",
-      "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
       "BasePath": "_content/MainApp",
       "RelativePath": "styles/_vars.scss",
       "AssetKind": "All",
@@ -187,10 +187,10 @@
       "OriginalItemSpec": "wwwroot\\styles\\_vars.scss"
     },
     {
-      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\layouts\\entry\\entrylayout.css",
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\layouts\\entry\\entrylayout.css",
       "SourceId": "MainApp",
       "SourceType": "Discovered",
-      "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
       "BasePath": "_content/MainApp",
       "RelativePath": "styles/layouts/entry/entrylayout.css",
       "AssetKind": "All",
@@ -204,10 +204,10 @@
       "OriginalItemSpec": "wwwroot\\styles\\layouts\\entry\\entrylayout.css"
     },
     {
-      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\layouts\\entry\\entrylayout.css.map",
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\layouts\\entry\\entrylayout.css.map",
       "SourceId": "MainApp",
       "SourceType": "Discovered",
-      "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
       "BasePath": "_content/MainApp",
       "RelativePath": "styles/layouts/entry/entrylayout.css.map",
       "AssetKind": "All",
@@ -221,10 +221,10 @@
       "OriginalItemSpec": "wwwroot\\styles\\layouts\\entry\\entrylayout.css.map"
     },
     {
-      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\layouts\\entry\\entrylayout.scss",
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\layouts\\entry\\entrylayout.scss",
       "SourceId": "MainApp",
       "SourceType": "Discovered",
-      "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
       "BasePath": "_content/MainApp",
       "RelativePath": "styles/layouts/entry/entrylayout.scss",
       "AssetKind": "All",
@@ -238,10 +238,10 @@
       "OriginalItemSpec": "wwwroot\\styles\\layouts\\entry\\entrylayout.scss"
     },
     {
-      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\layouts\\main\\mainlayout.css",
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\layouts\\main\\mainlayout.css",
       "SourceId": "MainApp",
       "SourceType": "Discovered",
-      "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
       "BasePath": "_content/MainApp",
       "RelativePath": "styles/layouts/main/mainlayout.css",
       "AssetKind": "All",
@@ -255,10 +255,10 @@
       "OriginalItemSpec": "wwwroot\\styles\\layouts\\main\\mainlayout.css"
     },
     {
-      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\layouts\\main\\mainlayout.css.map",
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\layouts\\main\\mainlayout.css.map",
       "SourceId": "MainApp",
       "SourceType": "Discovered",
-      "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
       "BasePath": "_content/MainApp",
       "RelativePath": "styles/layouts/main/mainlayout.css.map",
       "AssetKind": "All",
@@ -272,10 +272,10 @@
       "OriginalItemSpec": "wwwroot\\styles\\layouts\\main\\mainlayout.css.map"
     },
     {
-      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\layouts\\main\\mainlayout.scss",
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\layouts\\main\\mainlayout.scss",
       "SourceId": "MainApp",
       "SourceType": "Discovered",
-      "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
       "BasePath": "_content/MainApp",
       "RelativePath": "styles/layouts/main/mainlayout.scss",
       "AssetKind": "All",
@@ -289,10 +289,10 @@
       "OriginalItemSpec": "wwwroot\\styles\\layouts\\main\\mainlayout.scss"
     },
     {
-      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\panel\\panel.css",
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\panel\\panel.css",
       "SourceId": "MainApp",
       "SourceType": "Discovered",
-      "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
       "BasePath": "_content/MainApp",
       "RelativePath": "styles/panel/panel.css",
       "AssetKind": "All",
@@ -306,10 +306,10 @@
       "OriginalItemSpec": "wwwroot\\styles\\panel\\panel.css"
     },
     {
-      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\panel\\panel.css.map",
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\panel\\panel.css.map",
       "SourceId": "MainApp",
       "SourceType": "Discovered",
-      "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
       "BasePath": "_content/MainApp",
       "RelativePath": "styles/panel/panel.css.map",
       "AssetKind": "All",
@@ -323,10 +323,10 @@
       "OriginalItemSpec": "wwwroot\\styles\\panel\\panel.css.map"
     },
     {
-      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\panel\\panel.scss",
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\panel\\panel.scss",
       "SourceId": "MainApp",
       "SourceType": "Discovered",
-      "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
       "BasePath": "_content/MainApp",
       "RelativePath": "styles/panel/panel.scss",
       "AssetKind": "All",
@@ -340,10 +340,10 @@
       "OriginalItemSpec": "wwwroot\\styles\\panel\\panel.scss"
     },
     {
-      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\welcome\\welcome.css",
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\welcome\\welcome.css",
       "SourceId": "MainApp",
       "SourceType": "Discovered",
-      "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
       "BasePath": "_content/MainApp",
       "RelativePath": "styles/welcome/welcome.css",
       "AssetKind": "All",
@@ -357,10 +357,10 @@
       "OriginalItemSpec": "wwwroot\\styles\\welcome\\welcome.css"
     },
     {
-      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\welcome\\welcome.css.map",
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\welcome\\welcome.css.map",
       "SourceId": "MainApp",
       "SourceType": "Discovered",
-      "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
       "BasePath": "_content/MainApp",
       "RelativePath": "styles/welcome/welcome.css.map",
       "AssetKind": "All",
@@ -374,10 +374,10 @@
       "OriginalItemSpec": "wwwroot\\styles\\welcome\\welcome.css.map"
     },
     {
-      "Identity": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\welcome\\welcome.scss",
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\styles\\welcome\\welcome.scss",
       "SourceId": "MainApp",
       "SourceType": "Discovered",
-      "ContentRoot": "H:\\Programming\\Web\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
       "BasePath": "_content/MainApp",
       "RelativePath": "styles/welcome/welcome.scss",
       "AssetKind": "All",

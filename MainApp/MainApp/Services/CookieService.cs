@@ -9,14 +9,16 @@ namespace MainApp.Services
     // and deleting them when logging out of the site
     public class CookieService
     {
-        private HttpContext context;
+        public HttpContext context;
+
         public CookieService(HttpContext _context)
         {
             context = _context;
         }
 
 
-        public async Task AuthenticateAsync(string login, string role)
+
+        public async Task CookieAuthenticateAsync(string login, string role)
         {
             var claims = new List<Claim>
             {
@@ -30,21 +32,39 @@ namespace MainApp.Services
             await context.SignInAsync(claimsPrincipal);
         }
 
+        public void SessionAuthenticateAsync(string login, string role)
+        {
+            context.Session.SetString("login", login);
+            context.Session.SetString("role", role);
+        }
+
+
+
         public async Task LogoutAsync()
         {
             await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            context.Session.Clear();
         }
+
+
 
         public User GetUserInfo()
         {
-            var login = context.User.FindFirst(ClaimsIdentity.DefaultNameClaimType); 
-            var role = context.User.FindFirst(ClaimsIdentity.DefaultRoleClaimType); 
-
-            if (login != null && role != null)
+            var loginCookie = context.User.FindFirst(ClaimsIdentity.DefaultNameClaimType); 
+            var roleCookie = context.User.FindFirst(ClaimsIdentity.DefaultRoleClaimType); 
+            if (loginCookie != null && roleCookie != null)
             {
-                return new User {Login = login.Value, Role = role.Value};
+                return new User {Login = loginCookie.Value, Role = roleCookie.Value};
             }
-            return new User {Role = "null"};
+
+            var loginSession = context.Session.GetString("login");
+            var roleSession = context.Session.GetString("role");
+            if (loginSession != null && roleSession != null)
+            {
+                return new User { Login = loginSession, Role = roleSession };
+            }
+
+            return new User { Role = "null" };
         }
     }
 }
