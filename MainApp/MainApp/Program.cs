@@ -62,6 +62,7 @@ IHostEnvironment? env = app.Services.GetService<IHostEnvironment>();
 app.UseStaticFiles();
 app.UseDefaultFiles();
 
+// Node_modules folder support
 if (env != null)
 {
     app.UseFileServer(new FileServerOptions()
