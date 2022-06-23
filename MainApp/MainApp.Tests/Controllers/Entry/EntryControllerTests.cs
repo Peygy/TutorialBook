@@ -190,7 +190,7 @@ namespace MainApp.Tests.Controllers.Entry
                     }
                 case "null":
                     {
-                        Assert.IsType<BadRequestResult>(result);
+                        Assert.IsType<ViewResult>(result);
                         break;
                     }
             }

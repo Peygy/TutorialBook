@@ -1,0 +1,34 @@
+@import 'wwwroot/sass/modules/_mixins.scss';
+@import 'wwwroot/sass/modules/_vars.scss';
+
+.content{
+    &__wrapper{
+        @include flex_main(inline-flex, null, null);
+        @include indents(30px 0 0 50px, null);
+    }
+    &__menu{
+        @include indents(null, 0 50px 0 0);
+        border-right: 2px solid #333333;
+
+        h2{
+            font-family: $font_head;
+        }
+    }
+    &__list{
+        list-style: none;
+
+        &-chapter{
+            @include a_params-panel();
+        }
+
+    }
+}
+
+.chapter{
+    &__wrapper{
+        display: none;
+    }
+    &__list{
+        list-style: none;
+    }
+}

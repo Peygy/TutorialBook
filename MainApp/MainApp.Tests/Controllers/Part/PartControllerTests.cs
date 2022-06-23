@@ -24,6 +24,22 @@ namespace MainApp.Tests.Controllers.Part
 
 
         [Fact]
+        public void ViewParts_Returns_ViewResult_OnLoad()
+        {
+            var id = 0;
+            var parentName = "test";
+            mockRepo.Setup(repo => repo.GetParts(id, "onload"))
+                .Returns(GetListOfParts());
+
+            var result = controller.ViewParts(id, parentName, null);
+            var viewResult = Assert.IsType<ViewResult>(result);
+            var model = Assert.IsAssignableFrom<IEnumerable<GeneralPart>>(viewResult.Model);
+
+            Assert.Equal(GetListOfParts().Count(), model.Count());
+            Assert.Equal("section", viewResult.ViewData["Name"]);
+        }
+
+        [Fact]
         public void ViewParts_Returns_BadRequest()
         {
             var id = 0;
@@ -52,6 +68,7 @@ namespace MainApp.Tests.Controllers.Part
             var model = Assert.IsAssignableFrom<IEnumerable<GeneralPart>>(viewResult.Model);
 
             Assert.Equal(GetListOfParts().Count, model.Count());
+            Assert.Equal(parentName, viewResult.ViewData["Name"]);
         }
 
         [Fact]
@@ -68,6 +85,7 @@ namespace MainApp.Tests.Controllers.Part
             var model = Assert.IsAssignableFrom<IEnumerable<Post>>(viewResult.Model);
 
             Assert.Equal(GetListOfPosts().Count, model.Count());
+            Assert.Equal(parentName, viewResult.ViewData["Name"]);
         }
 
         [Fact]

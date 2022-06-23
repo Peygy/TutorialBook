@@ -18,6 +18,13 @@ namespace MainApp.Tests.Controllers.Part
 
         public IActionResult ViewParts(int id, string parentName, string table)
         {
+            if (table == null)
+            {
+                var parts = repo.GetParts(0, "onload");
+                ViewBag.Name = "section";
+                return View(parts);
+            }
+
             if (table == "subchapter")
             {
                 var posts = repo.GetPosts(id);

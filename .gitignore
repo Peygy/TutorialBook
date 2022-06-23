@@ -83,3 +83,4 @@ StyleCopReport.xml
 *.log
 
 MainApp/MainApp/appsettings.json
+MainApp/MainApp/node_modules

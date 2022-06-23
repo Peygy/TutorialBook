@@ -28,6 +28,13 @@ namespace MainApp.Controllers
         {
             partService = new PartsService(data, logger);
 
+            if (table == null)
+            {
+                var parts = await partService.GetPartsAsync(0, "onload");
+                ViewBag.Name = "section";
+                return View(parts);
+            }
+
             if (table == "subchapter")
             {
                 var posts = await partService.GetPostsAsync(id);

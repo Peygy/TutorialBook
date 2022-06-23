@@ -1,3 +1,4 @@
+using Microsoft.Extensions.FileProviders;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using MainApp.Models;
@@ -17,8 +18,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 // Adding Data Contexts as a Service to an Application
-builder.Services.AddDbContext<TopicsContext>(options => options.UseMySql(connection, new MySqlServerVersion(new Version(8,0,29))));
-builder.Services.AddDbContext<UserContext>(options => options.UseMySql(connection, new MySqlServerVersion(new Version(8,0,29))));
+builder.Services.AddDbContext<TopicsContext>(options => options.UseNpgsql(connection));
+builder.Services.AddDbContext<UserContext>(options => options.UseNpgsql(connection));
 builder.Services.AddControllersWithViews();
 
 // Adding Sessions to services
@@ -56,7 +57,22 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 
 var app = builder.Build();
+IHostEnvironment? env = app.Services.GetService<IHostEnvironment>();
+
 app.UseStaticFiles();
+app.UseDefaultFiles();
+
+if (env != null)
+{
+    app.UseFileServer(new FileServerOptions()
+    {
+        FileProvider = new PhysicalFileProvider(
+            Path.Combine(env.ContentRootPath, "node_modules")),
+        RequestPath = "/node_modules",
+        EnableDirectoryBrowsing = false
+    });
+}
+
 
 // Authentication and Authorization connection for entry
 app.UseAuthentication();

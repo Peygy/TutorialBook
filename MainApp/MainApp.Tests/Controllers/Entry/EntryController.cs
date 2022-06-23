@@ -85,7 +85,7 @@ namespace MainApp.Tests.Controllers.Entry
             {
                 case "admin" or "editor": return RedirectToAction("ViewParts", "Part");
                 case "user": return RedirectToAction("Study", "Page");
-                case "null": return BadRequest();
+                case "null": return View();
             }
 
             return null;
