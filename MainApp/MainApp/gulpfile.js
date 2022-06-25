@@ -1,28 +1,55 @@
-﻿"use strict"
+﻿const { src, dest, watch, lastRun, series } = require("gulp");
 
-var gulp = require("gulp"),
-    scss = require('gulp-sass')(require('sass')),
+var sass = require('gulp-sass')(require('sass')),
     group_media = require("gulp-group-css-media-queries"),
     clean_css = require("gulp-clean-css"),
-    rename = require("gulp-rename");
+    rename = require("gulp-rename"),
+    browserSync = require("browser-sync").create();
 
 var paths = {
-    webroot: "./wwwroot/"
+    sass: "./wwwroot/sass/*.scss",
+    css: "./wwwroot/css",
+    cshtml: "./Views/**/*cshtml"
 }
 
-function sass() {
-    return gulp.src(paths.webroot + '/sass/*.scss')
-        .pipe(scss())
+
+function CsHtml() {
+    return src(paths.cshtml, {since: lastRun(CsHtml)})
+        .pipe(browserSync.stream())
+}
+exports.CsHtml = CsHtml;
+
+function Sass() {
+    return src(paths.sass)
+        .pipe(sass())
         .pipe(group_media())
-        .pipe(gulp.dest(paths.webroot + '/css'))
+        .pipe(dest(paths.css))
         .pipe(clean_css())
         .pipe(
             rename({
                 extname: ".min.css"
             })
         )
-        .pipe(gulp.dest(paths.webroot + '/css'))
+        .pipe(dest(paths.css))
+        .pipe(browserSync.stream())
 }
+exports.Sass = Sass;
 
+function myServer() {
+    var files = [
+        paths.cshtml,
+        paths.sass,
+        paths.css
+    ];
 
-exports.default = sass
+    browserSync.init(files, {
+        proxy: 'http://localhost:5104',
+        notify: false
+    });
+
+    watch(paths.sass, {usePolling: true}, Sass).on('change', browserSync.reload);
+    watch(paths.cshtml, {usePolling: true}, CsHtml).on('change', browserSync.reload);
+}
+exports.myServer = myServer;
+
+exports.default = series(Sass, CsHtml, myServer);

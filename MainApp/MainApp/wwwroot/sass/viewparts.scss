@@ -1,0 +1,39 @@
+@use 'wwwroot/sass/modules/_mixins.scss' as *;
+@use 'wwwroot/sass/modules/_vars.scss' as *;
+
+
+.content{
+    &__wrapper{
+        @include flex_main(inline-flex, null, null);
+        @include indents(30px 0 0 0, null);
+        @include calc_height(284px);
+    }
+    &__main{
+        @include flex_main(flex, null, center);
+        @include calc_width(393.53px);
+        flex-direction: column;
+    }
+}
+
+.main{
+    &__title{
+        display: block;
+    }
+    &__table{
+        &-hat{
+
+        }
+        &-row{
+            
+        }
+        &-header{
+            
+        }
+        &-body{
+            
+        }
+        &-data{
+            
+        }
+    }
+}

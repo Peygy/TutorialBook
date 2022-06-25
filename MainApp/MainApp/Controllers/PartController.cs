@@ -31,10 +31,10 @@ namespace MainApp.Controllers
             if (table == null)
             {
                 var parts = await partService.GetPartsAsync(0, "onload");
-                ViewBag.Name = "section";
+                ViewBag.Name = "Секции";
                 return View(parts);
             }
-
+ 
             if (table == "subchapter")
             {
                 var posts = await partService.GetPostsAsync(id);

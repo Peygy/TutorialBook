@@ -1,3 +1,6 @@
+@use 'wwwroot/sass/modules/_vars.scss' as *;
+
+
 //General
 @mixin flex_main($display, $justify, $align){
     display: $display;
@@ -10,6 +13,12 @@
 }
 @mixin img_size($width){
     width: $width;
+}
+@mixin calc_width($width){
+    min-width: calc(100vw - $width);
+}
+@mixin calc_height($height){
+    min-height: calc(100vh - $height);
 }
 
 

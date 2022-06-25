@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "+70/eGgPfGeQgSMePAc9/A7wfqqy6ojZ/3R4Rkpaue8=",
+  "Hash": "+JU10RmpJypPDSiYQggZK49DWHfh+4YTh+uEh4sAdpM=",
   "Source": "MainApp",
   "BasePath": "_content/MainApp",
   "Mode": "Default",
@@ -117,6 +117,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\panel.min.css"
+    },
+    {
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\css\\viewparts.css",
+      "SourceId": "MainApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "BasePath": "_content/MainApp",
+      "RelativePath": "css/viewparts.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\viewparts.css"
+    },
+    {
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\css\\viewparts.min.css",
+      "SourceId": "MainApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "BasePath": "_content/MainApp",
+      "RelativePath": "css/viewparts.min.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\viewparts.min.css"
     },
     {
       "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\css\\welcome.css",
@@ -372,6 +406,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\sass\\panel.scss"
+    },
+    {
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\sass\\viewparts.scss",
+      "SourceId": "MainApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "BasePath": "_content/MainApp",
+      "RelativePath": "sass/viewparts.scss",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\sass\\viewparts.scss"
     },
     {
       "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\sass\\welcome.scss",

@@ -1,5 +1,5 @@
-﻿@import 'wwwroot/sass/modules/_mixins.scss';
-@import 'wwwroot/sass/modules/_vars.scss';
+﻿@use 'wwwroot/sass/modules/_mixins.scss' as *;
+@use 'wwwroot/sass/modules/_vars.scss' as *;
 
 
 body{
@@ -8,7 +8,7 @@ body{
 
 
 .head{
-    @include flex_main(grid, center, null);
+    @include flex_main(grid, space-around, null);
     @include indents(0 0 30px 0, 5px 10rem);
     grid-template-columns: repeat(3, 1fr);
     background-color: $back_head;
@@ -77,7 +77,7 @@ body{
     color: $front_main-bottom_text-link;
 
     &-main{
-        @include flex_main(flex, space-between, center);
+        @include flex_main(flex, space-around, center);
         @include indents(60px 0 0 0, 20px 10rem);
         border-top: 2px solid $back_border;
     }

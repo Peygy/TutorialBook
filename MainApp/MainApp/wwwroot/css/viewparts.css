@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Rubik&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
+
+.content__wrapper {
+  display: inline-flex;
+  margin: 30px 0 0 0;
+  min-height: calc(100vh - 284px);
+}
+
+.content__main {
+  display: flex;
+  align-items: center;
+  min-width: calc(100vw - 393.53px);
+  flex-direction: column;
+}
+
+.main__title {
+  display: block;
+}

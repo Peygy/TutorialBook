@@ -1,13 +1,10 @@
-@import 'wwwroot/sass/modules/_mixins.scss';
-@import 'wwwroot/sass/modules/_vars.scss';
+@use 'wwwroot/sass/modules/_mixins.scss' as *;
+@use 'wwwroot/sass/modules/_vars.scss' as *;
+
 
 .content{
-    &__wrapper{
-        @include flex_main(inline-flex, null, null);
-        @include indents(30px 0 0 50px, null);
-    }
     &__menu{
-        @include indents(null, 0 50px 0 0);
+        @include indents(null, 0 50px 0 50px);
         border-right: 2px solid #333333;
 
         h2{
@@ -15,6 +12,7 @@
         }
     }
     &__list{
+        @include indents(16px 0 70px 0, null);
         list-style: none;
 
         &-chapter{

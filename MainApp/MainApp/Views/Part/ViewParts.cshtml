@@ -5,10 +5,44 @@
     Layout = "/Views/Shared/MainLayout.cshtml";
 }
 
+<link rel="stylesheet" href="~/css/viewparts.min.css">
+
 <div class="content__wrapper">
     @await Html.PartialAsync("~/Views/Partial/CrewPanel.cshtml")
     <div class="content__main">
-        
+        <div class="main__title">@ViewBag.Name</div>
+        <table class="main__table">
+            <thead class="main__table-hat">
+                <tr class="main__table-row">
+                    <th class="main__table-header">Название</th>
+                    <th class="main__table-header">Добавить</th>
+                </tr>
+            </thead>
+            <tbody class="main__table-body">
+                @if(Model!=null)
+                {
+                    @foreach (var part in Model)
+                    {
+                        <tr class="main__table-row">
+                            <td class="main__table-data">@part.Title</td>
+                            <td class="main__table-data">
+                                <a>Просмотр</a>
+                                <a>Изменить</a>
+                                <a>Удалить</a>
+                            </td >
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr class="main__table-row">
+                        <td colspan="2">
+                            Здесь пока-что пусто... Может <a href="">добавим</a>?
+                        </td>
+                    </tr>
+                }      
+            </tbody>
+        </table>
     </div>
 </div>
 
