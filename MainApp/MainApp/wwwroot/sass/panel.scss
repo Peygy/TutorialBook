@@ -4,11 +4,12 @@
 
 .content{
     &__menu{
-        @include indents(null, 0 50px 0 50px);
-        border-right: 2px solid #333333;
+        @include indents(null, 0 50px);
+        border-right: $main-border;
 
         h2{
             font-family: $font_head;
+            white-space: nowrap;
         }
     }
     &__list{
@@ -16,7 +17,7 @@
         list-style: none;
 
         &-chapter{
-            @include a_params-panel();
+            @include a_params-panel;
         }
 
     }
@@ -29,4 +30,8 @@
     &__list{
         list-style: none;
     }
+}
+
+a:hover{
+    cursor: pointer;
 }

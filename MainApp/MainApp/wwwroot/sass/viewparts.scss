@@ -12,28 +12,55 @@
         @include flex_main(flex, null, center);
         @include calc_width(393.53px);
         flex-direction: column;
+        
+        a{
+            color: black;
+            text-decoration: none;
+        }
+        a:hover{
+            color: rgb(37, 37, 37);
+        }
     }
 }
 
 .main{
     &__title{
-        display: block;
+        margin-bottom: 50px;
+        font-family: $font_head;
     }
     &__table{
-        &-hat{
+        @include flex_main(grid, null, null);
+        white-space: nowrap;
 
+        &-hat{
+            @include border_table-hat;
+            font-family: $font_head;
+            background-color: $table_hat;
         }
         &-row{
-            
+            @include flex_main(grid, null, null);   
+            @include border_table-row;             
+            grid-template-columns: repeat(2, auto);
         }
         &-header{
-            
+            @include indents(null, 0 50px);
+            @include border_table-data;
         }
         &-body{
-            
+            font-family: $font_text;
         }
         &-data{
-            
+            @include flex_main(flex, center, null);
+            @include indents(null, 20px);
+            @include border_table-data;
+
+            a{
+                font-weight: 900;
+            }
         }
     }
+}
+
+#empty-table{
+    grid-template-columns: repeat(1, auto);
 }

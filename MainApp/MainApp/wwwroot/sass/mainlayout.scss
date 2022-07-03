@@ -71,7 +71,6 @@ body{
 .bottom {
     @include flex_main(flex, center, null);
     @include indents(null, 0 20px);
-    font-family: $font-head;
     font-weight: bolder;
     background-color: rgb(255, 255, 255);
     color: $front_main-bottom_text-link;
@@ -83,6 +82,7 @@ body{
     }
     &__we{
         @include flex_main(flex, center, center);
+        font-family: $font-head;
     }
     &-we__logo{
         @include indents(0 10px 0 0, null);
@@ -93,6 +93,7 @@ body{
         @include flex_main(flex, space-between, null);
         @include indents(0, null);
         list-style: none;
+        font-family: $font_link;
     }
     &-info__item{
         @include indents(0 15px 0 15px, null);

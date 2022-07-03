@@ -52,7 +52,7 @@
 }
 
 //panel
-@mixin a_params-panel(){
+@mixin a_params-panel{
     a{
         font-weight: bolder;
         text-decoration: none;
@@ -69,4 +69,16 @@
             }
         }
     }
+}
+
+//viewparts
+@mixin border_table-hat{
+    border-top: $main-border; 
+}
+@mixin border_table-row{
+    border-left: $main-border; 
+    border-bottom: $main-border; 
+}
+@mixin border_table-data{
+    border-right: $main-border; 
 }

@@ -8,18 +8,20 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Connecting a Data Context for an Application Release
 #if RELEASE
-    string connection = builder.Configuration.GetConnectionString("DefaultConnection");
+    string connectionUser = builder.Configuration.GetConnectionString("DefaultUserConnection");
+    string connectionTopics = builder.Configuration.GetConnectionString("DefaultTopicConnection");
 #endif
 // Connecting a Data Context for Application Testing
 #if DEBUG
-    string connection = builder.Configuration.GetConnectionString("TestConnection");
+    string connectionUser = builder.Configuration.GetConnectionString("TestUserConnection");
+    string connectionTopics = builder.Configuration.GetConnectionString("TestTopicConnection");
 #endif
 
 
 
 // Adding Data Contexts as a Service to an Application
-builder.Services.AddDbContext<TopicsContext>(options => options.UseNpgsql(connection));
-builder.Services.AddDbContext<UserContext>(options => options.UseNpgsql(connection));
+builder.Services.AddDbContext<UserContext>(options => options.UseNpgsql(connectionUser));
+builder.Services.AddDbContext<TopicsContext>(options => options.UseNpgsql(connectionTopics));
 builder.Services.AddControllersWithViews();
 
 // Adding Sessions to services

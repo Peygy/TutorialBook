@@ -43,6 +43,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFydGlhbFxQYW5lbE1lbnUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[H:/Programming/ASP/Repos/TutorialBook/MainApp/MainApp/Views/Part/AddPart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFydFxBZGRQYXJ0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [H:/Programming/ASP/Repos/TutorialBook/MainApp/MainApp/Views/Part/ViewParts.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFydFxWaWV3UGFydHMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 

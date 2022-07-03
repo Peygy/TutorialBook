@@ -9,6 +9,7 @@ namespace MainApp.Models
         public DbSet<User> Users { get; set; } = null!;
         public DbSet<Admin> Crew { get; set; } = null!;
 
+
         public UserContext(DbContextOptions<UserContext> options) : base(options)
         {
             Database.EnsureCreated();

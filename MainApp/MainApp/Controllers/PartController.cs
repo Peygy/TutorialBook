@@ -24,44 +24,23 @@ namespace MainApp.Controllers
 
 
         [HttpGet]
-        public async Task<IActionResult> ViewParts(int id, string parentName, string table)
+        public async Task<IActionResult> ViewParts(int parentId, string parentName, string table)
         {
             partService = new PartsService(data, logger);
 
-            if (table == null)
-            {
-                var parts = await partService.GetPartsAsync(0, "onload");
-                ViewBag.Name = "Секции";
-                return View(parts);
-            }
- 
-            if (table == "subchapter")
-            {
-                var posts = await partService.GetPostsAsync(id);
-                if (posts != null)
-                {
-                    ViewBag.Name = parentName;
-                    return View(posts);
-                }
-            }
-            else
-            {
-                var parts = await partService.GetPartsAsync(id, table);
-                if (parts != null)
-                {
-                    ViewBag.Name = parentName;
-                    return View(parts);
-                }
-            }
-
-            return BadRequest();
+            var parts = await partService.GetPartsAsync(parentId, table);
+            ViewBag.ParentId = parentId;
+            ViewBag.Table = table;
+            ViewBag.ParentName = parentName;
+            return View(parts);
         }
 
         [HttpGet]
-        public async Task<IActionResult> ViewPost(int id)
+        public async Task<IActionResult> ViewPost(int postId)
         {
             partService = new PartsService(data, logger);
-            var post = await partService.GetPartAsync(id, "subchapter");
+
+            var post = await partService.GetPartAsync(postId, "subchapter");
             if (post != null)
             {
                 return View(post);
@@ -75,45 +54,25 @@ namespace MainApp.Controllers
         [HttpGet]
         public IActionResult AddPart(int parentId, string parentName, string table)
         {
-            var part = new List<object[]> { new object[] { parentId, parentName, table } };
-            return View(part);
+            ViewBag.ParentId = parentId;
+            ViewBag.ParentName = parentName;
+            ViewBag.Table = table;
+            return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddPart(string partName)
+        public async Task<IActionResult> AddPart(
+            int parentId, 
+            string parentName, 
+            string partName, 
+            string content, 
+            string table)
         {
             partService = new PartsService(data, logger);
 
-            var form = HttpContext.Request.Form;
-            int.TryParse(form["parentId"], out int parentId);
-            string table = form["table"];
-
-            if (await partService.AddPartAsync(parentId, partName, table))
+            if (await partService.AddPartAsync(parentId, partName, content, table))
             {
-                return RedirectToAction("ViewParts", new List<object[]> { new object[] { parentId, table } });
-            }
-
-            return BadRequest();
-        }
-
-        [HttpGet]
-        public IActionResult AddPost(int parentId, string parentName)
-        {
-            var part = new List<object[]> { new object[] { parentId, parentName } };
-            return View(part);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> AddPost(string postName, string content)
-        {
-            partService = new PartsService(data, logger);
-
-            var form = HttpContext.Request.Form;
-            int.TryParse(form["parentId"], out int parentId);
-
-            if (await partService.AddPostAsync(parentId, postName, content))
-            {
-                return RedirectToAction("ViewParts", new List<object[]> { new object[] { parentId, "subchapter" } });
+                return RedirectToAction("ViewParts", new { parentId, parentName, table });
             }
 
             return BadRequest();
@@ -121,65 +80,37 @@ namespace MainApp.Controllers
 
 
 
-
-
         [HttpGet]
-        public async Task<IActionResult> UpdatePart(int id, string table)
+        public async Task<IActionResult> UpdatePart(int partId, string table, string parentTable)
         {
             partService = new PartsService(data, logger);
 
-            var part = await partService.GetPartAsync(id, table);
+            var part = await partService.GetPartAsync(partId, table);
             if(table != "section")
             {
-                ViewBag.Parents = await partService.GetPartsAsync(id, table + "parents");
+                ViewBag.Parents = await partService.GetPartsParentsAsync(partId, table);              
             }
+
+            ViewBag.ParentTable = parentTable;
 
             return View(part);
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdatePart(string newName)
+        public async Task<IActionResult> UpdatePart(
+            int partId, 
+            int parentId, 
+            string newName, 
+            string content, 
+            string parentName, 
+            string table, 
+            string parentTable)
         {
             partService = new PartsService(data, logger);
-
-            var form = HttpContext.Request.Form;
-            int.TryParse(form["partId"], out int partId);
-            int.TryParse(form["parentId"], out int parentId);
-            string table = form["table"];
-
-            if (await partService.UpdatePartAsync(partId, parentId, newName, String.Empty, table))
-            {
-                return RedirectToAction("ViewParts", new List<object[]> { new object[] { parentId, table } });
-            }
-
-            return BadRequest();
-        }
-
-
-        [HttpGet]
-        public async Task<IActionResult> UpdatePost(int id)
-        {
-            partService = new PartsService(data, logger);
-
-            var post = await partService.GetPartAsync(id, "post");
-            ViewBag.Parents = await partService.GetPartsAsync(id, "postparents");
-
-            return View(post);
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> UpdatePost(string newName, string content)
-        {
-            partService = new PartsService(data, logger);
-
-            var form = HttpContext.Request.Form;
-            int.TryParse(form["partId"], out int partId);
-            int.TryParse(form["parentId"], out int parentId);
-            string table = form["table"];
 
             if (await partService.UpdatePartAsync(partId, parentId, newName, content, table))
             {
-                return RedirectToAction("ViewParts", new List<object[]> { new object[] { parentId, table } });
+                return RedirectToAction("ViewParts", new { parentId, parentName, parentTable });
             }
 
             return BadRequest();
@@ -188,24 +119,13 @@ namespace MainApp.Controllers
 
 
         [HttpDelete]
-        [Route("/api/parts/remove")]
-        public async Task<IActionResult> DeletePartAsync(int id, string table)
+        [Route("/api/part/remove")]
+        public async Task<IActionResult> DeletePartAsync(int partId, string table)
         {
             partService = new PartsService(data, logger);
 
-            var part = await partService.RemovePartAsync(id, table);
+            var part = await partService.RemovePartAsync(partId, table);
             if (part != null) return Json(part);
-            return BadRequest();
-        }
-
-        [HttpDelete]
-        [Route("/api/parts/remove")]
-        public async Task<IActionResult> DeletePostAsync(int id)
-        {
-            partService = new PartsService(data, logger);
-
-            var post = await partService.RemovePostAsync(id);
-            if (post != null) return Json(post);
             return BadRequest();
         }
     }

@@ -5,39 +5,74 @@
     Layout = "/Views/Shared/MainLayout.cshtml";
 }
 
+@functions{
+    public string TableName(string table)
+    {
+        switch (table)
+        {
+            case "section":
+                return "Секция";
+            case "subsection":
+                return "Подсекция";
+            case "chapter":
+                return "Раздел";
+            case "subchapter":
+                return "Подраздел";
+        }
+        return null;
+    }
+}
+
 <link rel="stylesheet" href="~/css/viewparts.min.css">
 
 <div class="content__wrapper">
     @await Html.PartialAsync("~/Views/Partial/CrewPanel.cshtml")
     <div class="content__main">
-        <div class="main__title">@ViewBag.Name</div>
+        <h2>@TableName(@ViewBag.Table)</h2>
+        <h3 class="main__title">@ViewBag.Name</h3>
+
         <table class="main__table">
             <thead class="main__table-hat">
                 <tr class="main__table-row">
-                    <th class="main__table-header">Название</th>
-                    <th class="main__table-header">Добавить</th>
+                    <th class="main__table-header"><h3>Название</h3></th>
+                    <th class="main__table-header">
+                        <h3>
+                            <a asp-controller="Part" asp-action="AddPart" 
+                            asp-route-parentId="@ViewBag.ParentId" asp-route-parentName="@ViewBag.ParentName" asp-route-table="@ViewBag.Table">Добавить</a>                      
+                        </h3>
+                    </th>
                 </tr>
             </thead>
             <tbody class="main__table-body">
-                @if(Model!=null)
+                @if(Model.Count!=0)
                 {
                     @foreach (var part in Model)
                     {
                         <tr class="main__table-row">
                             <td class="main__table-data">@part.Title</td>
-                            <td class="main__table-data">
-                                <a>Просмотр</a>
-                                <a>Изменить</a>
-                                <a>Удалить</a>
-                            </td >
+                            @if(@ViewBag.Table == "onload")
+                            {
+                                <td class="main__table-data">
+                                    <a>Просмотр</a>
+                                    <a>Удалить</a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td class="main__table-data">
+                                    <a>Просмотр</a>
+                                    <a>Изменить</a>
+                                    <a>Удалить</a>
+                                </td>
+                            }
                         </tr>
                     }
                 }
                 else
                 {
-                    <tr class="main__table-row">
-                        <td colspan="2">
-                            Здесь пока-что пусто... Может <a href="">добавим</a>?
+                    <tr class="main__table-row" id="empty-table">
+                        <td class="main__table-data" >
+                            Ничего нет
                         </td>
                     </tr>
                 }      

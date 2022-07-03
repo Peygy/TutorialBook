@@ -1,0 +1,13 @@
+<div>
+    <form asp-controller="Part" asp-action="AddPart" method="post">
+        <div>
+            <label for="">Название:</label><br>
+            <input type="text" name="partName"><br>
+            <input name="parentId" value="@ViewBag.ParentId" style="display: none;">
+            <input name="parentName" value="@ViewBag.ParentName" style="display: none;">
+            <input name="content" value="null" style="display: none;">
+            <input name="table" value="@ViewBag.Table" style="display: none;">
+            <input type="submit" value="Добавить новый пункт">
+        </div>
+    </form>      
+</div>

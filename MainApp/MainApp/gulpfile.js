@@ -7,7 +7,7 @@ var sass = require('gulp-sass')(require('sass')),
     browserSync = require("browser-sync").create();
 
 var paths = {
-    sass: "./wwwroot/sass/*.scss",
+    sass: "./wwwroot/sass/**/*.scss",
     css: "./wwwroot/css",
     cshtml: "./Views/**/*cshtml"
 }
