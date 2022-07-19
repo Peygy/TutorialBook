@@ -57,7 +57,7 @@ namespace MainApp.Controllers
             {
                 if (await crewService.AddAdminAsync(admin))
                     return RedirectToAction("ViewAdmins");
-                else return BadRequest();
+                else return RedirectToAction("Error", "Page");
             }
 
             return View(admin);

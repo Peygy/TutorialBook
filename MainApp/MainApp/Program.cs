@@ -63,6 +63,7 @@ IHostEnvironment? env = app.Services.GetService<IHostEnvironment>();
 
 app.UseStaticFiles();
 app.UseDefaultFiles();
+app.UseStatusCodePagesWithReExecute("/error/{0}");
 
 // Node_modules folder support
 if (env != null)
@@ -85,6 +86,6 @@ app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Page}/{action=Welcome}/{id?}");
+    pattern: "{controller=Page}/{action=Welcome}/{id?}"); 
 
 app.Run();

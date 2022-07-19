@@ -6,13 +6,15 @@
     &__wrapper{
         @include flex_main(inline-flex, null, null);
         @include indents(30px 0 0 0, null);
-        @include calc_height(284px);
     }
     &__main{
         @include flex_main(flex, null, center);
         @include calc_width(393.53px);
         flex-direction: column;
         
+        h2{
+            font-family: $font_head;
+        }
         a{
             color: black;
             text-decoration: none;
@@ -30,6 +32,7 @@
     }
     &__table{
         @include flex_main(grid, null, null);
+        @include indents(0 0 0 20px, null);
         white-space: nowrap;
 
         &-hat{
@@ -40,21 +43,24 @@
         &-row{
             @include flex_main(grid, null, null);   
             @include border_table-row;             
-            grid-template-columns: repeat(2, auto);
+            grid-template-columns: minmax(150px, 1fr) minmax(150px, 1fr);
         }
         &-header{
-            @include indents(null, 0 50px);
             @include border_table-data;
+            @include flex_main(block, center, null);
         }
         &-body{
             font-family: $font_text;
         }
         &-data{
-            @include flex_main(flex, center, null);
-            @include indents(null, 20px);
-            @include border_table-data;
+            @include flex_main(flex, center, center);
+            @include indents(null, 10px 0);
+            @include border_table-data;  
+            overflow: hidden;  
+            flex-wrap: wrap;     
 
             a{
+                @include indents(null, 0 10px);
                 font-weight: 900;
             }
         }
@@ -63,4 +69,10 @@
 
 #empty-table{
     grid-template-columns: repeat(1, auto);
+}
+
+@media screen and (max-width: 1086px) and (max-height: 100vh) {
+    .content__main{
+        @include calc_width(450px);
+    }
 }

@@ -107,7 +107,7 @@ namespace MainApp.Controllers
 
             switch (cookieService.GetUserInfo().Role) 
             {
-                case "admin" or "editor": return RedirectToAction("ViewParts","Part");
+                case "admin" or "editor": return RedirectToAction("ViewParts","Part", new { parentId=0, parentName="Секции", table="onload" });
                 case "user": return RedirectToAction("Study", "Page");
                 case "null": return View();
             }
@@ -125,7 +125,7 @@ namespace MainApp.Controllers
                 if (await authService.AdmAuthenticationAsync(admin.Login, admin.Password) 
                 || await authService.EdAuthenticationAsync(admin.Login, admin.Password))
                 {
-                    return RedirectToAction("ViewParts","Part");
+                    return RedirectToAction("ViewParts","Part", new { parentId=0, parentName="Секции", table="onload" });
                 }
 
                 ViewBag.Error = "Логин или пароль неверны!";

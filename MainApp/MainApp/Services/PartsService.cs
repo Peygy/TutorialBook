@@ -91,12 +91,15 @@ namespace MainApp.Services
             return null;
         }
 
-        public async Task<GeneralPart> GetPartAsync(int partId, string table)
+        public async Task<GeneralPart> GetPartAsync(int? partId, string table)
         {
             try
             {
                 switch (table)
                 {
+                    case "onload":
+                        return new GeneralPart{ Title = "Секции" };
+                    
                     case "section":
                         if (data.Sections.Any(s => s.Id == partId))
                         {
@@ -141,6 +144,20 @@ namespace MainApp.Services
             return null;
         }
 
+        public async Task<string> GetContentAsync(int? contentId)
+        {
+            try
+            {
+                return (await data.Contents.FirstOrDefaultAsync(c => c.Id == contentId)).Content;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.Message);
+            }
+
+            return null;
+        }
+
 
 
         //Add
@@ -153,7 +170,10 @@ namespace MainApp.Services
                     case "onload":
                         if (!data.Sections.Any(s => s.Title == addName))
                         {
-                            var section = new Section { Title = addName, CreatedDate = DateTime.UtcNow, Table = "section" };
+                            var section = new Section { 
+                                Title = addName, CreatedDate = DateTime.UtcNow, Table = "section",
+                                ParentId = parentId, ParentTable = "onload"};
+
                             await data.Sections.AddAsync(section);
                             await data.SaveChangesAsync();
                             return true;
@@ -163,7 +183,10 @@ namespace MainApp.Services
                     case "section":
                         if (!data.Subsections.Any(s => s.Title == addName))
                         {
-                            var subsection = new Subsection { Title = addName, CreatedDate = DateTime.UtcNow, ParentId = parentId, Table = "subsection" };
+                            var subsection = new Subsection { 
+                                Title = addName, CreatedDate = DateTime.UtcNow, Table = "subsection", 
+                                ParentId = parentId, ParentTable = "section"};
+
                             await data.Subsections.AddAsync(subsection);
                             await data.SaveChangesAsync();
                             return true;
@@ -173,7 +196,10 @@ namespace MainApp.Services
                     case "subsection":
                         if (!data.Chapters.Any(s => s.Title == addName))
                         {
-                            var chapter = new Chapter { Title = addName, CreatedDate = DateTime.UtcNow, ParentId = parentId, Table = "chapter" };
+                            var chapter = new Chapter { 
+                                Title = addName, CreatedDate = DateTime.UtcNow, Table = "chapter",
+                                ParentId = parentId, ParentTable = "subsection"};
+
                             await data.Chapters.AddAsync(chapter);
                             await data.SaveChangesAsync();
                             return true;
@@ -183,7 +209,10 @@ namespace MainApp.Services
                     case "chapter":
                         if (!data.Subchapters.Any(s => s.Title == addName))
                         {
-                            var subchapter = new Subchapter { Title = addName, CreatedDate = DateTime.UtcNow, ParentId = parentId, Table = "subchapter" };
+                            var subchapter = new Subchapter { 
+                                Title = addName, CreatedDate = DateTime.UtcNow, Table = "subchapter",
+                                ParentId = parentId, ParentTable = "chapter"};
+
                             await data.Subchapters.AddAsync(subchapter);
                             await data.SaveChangesAsync();
                             return true;
@@ -193,7 +222,12 @@ namespace MainApp.Services
                     case "subchapter":
                         if (!data.Posts.Any(s => s.Title == addName))
                         {
-                            var post = new Post { Title = addName, Content = content, CreatedDate = DateTime.UtcNow, ParentId = parentId, Table = "post" };
+                            var contentId = await AddContentAsync(content);
+
+                            var post = new Post { 
+                                Title = addName, ContentId = contentId, CreatedDate = DateTime.UtcNow, Table = "post",
+                                ParentId = parentId, ParentTable = "subchapter"};
+
                             await data.Posts.AddAsync(post);
                             await data.SaveChangesAsync();
                             return true;
@@ -209,10 +243,27 @@ namespace MainApp.Services
             return false;
         }
 
+        public async Task<int?> AddContentAsync(string? content)
+        {
+            try
+            {
+                var newContent = new ContentModel { Content = content };
+                await data.Contents.AddAsync(newContent);
+                await data.SaveChangesAsync();
+                return newContent.Id;
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.Message);
+            }
+
+            return null;
+        }
+
 
 
         //Update
-        public async Task<bool> UpdatePartAsync(int partId, int parentId, string newName, string content, string table)
+        public async Task<bool> UpdatePartAsync(int partId, int parentId, string newName, string newContent, string table)
         {
             try 
             {
@@ -224,6 +275,7 @@ namespace MainApp.Services
                             var section = await data.Sections.FirstOrDefaultAsync(s => s.Id == partId);
                             section.Title = newName;
                             section.CreatedDate = DateTime.UtcNow;
+
                             data.Sections.Update(section);
                             await data.SaveChangesAsync();
                             return true;
@@ -235,13 +287,13 @@ namespace MainApp.Services
                         {
                             var subsection = await data.Subsections.FirstOrDefaultAsync(s => s.Id == partId);
                             subsection.Title = newName;
+                            subsection.CreatedDate = DateTime.UtcNow;
 
                             if (data.Sections.Any(s => s.Id == parentId))
                             {
                                 subsection.ParentId = parentId;
                             }
 
-                            subsection.CreatedDate = DateTime.UtcNow;
                             data.Subsections.Update(subsection);
                             await data.SaveChangesAsync();
                             return true;
@@ -253,13 +305,13 @@ namespace MainApp.Services
                         {
                             var chapter = await data.Chapters.FirstOrDefaultAsync(s => s.Id == partId);
                             chapter.Title = newName;
+                            chapter.CreatedDate = DateTime.UtcNow;
 
                             if (data.Subsections.Any(s => s.Id == parentId))
                             {
                                 chapter.ParentId = parentId;
                             }
 
-                            chapter.CreatedDate = DateTime.UtcNow;
                             data.Chapters.Update(chapter);
                             await data.SaveChangesAsync();
                             return true;
@@ -271,13 +323,13 @@ namespace MainApp.Services
                         {
                             var subchapter = await data.Subchapters.FirstOrDefaultAsync(s => s.Id == partId);
                             subchapter.Title = newName;
+                            subchapter.CreatedDate = DateTime.UtcNow;
 
                             if (data.Chapters.Any(s => s.Id == parentId))
                             {
                                 subchapter.ParentId = parentId;
                             }
 
-                            subchapter.CreatedDate = DateTime.UtcNow;
                             data.Subchapters.Update(subchapter);
                             await data.SaveChangesAsync();
                             return true;
@@ -288,8 +340,8 @@ namespace MainApp.Services
                         if (!data.Posts.Any(s => s.Title == newName))
                         {
                             var post = await data.Posts.FirstOrDefaultAsync(s => s.Id == partId);
+                            await UpdateContentAsync(post.ContentId, newContent);
                             post.Title = newName;
-                            post.Content = content;
 
                             if (data.Subchapters.Any(s => s.Id == parentId))
                             {
@@ -312,10 +364,26 @@ namespace MainApp.Services
             return false;
         }
 
+        public async Task UpdateContentAsync(int? contentId, string? newContent)
+        {
+            try
+            {
+                var content = await data.Contents.FirstOrDefaultAsync(c => c.Id == contentId);
+                content.Content = newContent;
+
+                data.Contents.Update(content);
+                await data.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex.Message);
+            }
+        }
+
 
 
         //Delete part or post
-        public async Task<GeneralPart> RemovePartAsync(int partId, string table)
+        public async Task<int?> RemovePartAsync(int partId, string table)
         {
             try
             {
@@ -333,7 +401,7 @@ namespace MainApp.Services
 
                             data.Sections.Remove(section);
                             await data.SaveChangesAsync();
-                            return section;
+                            return section.Id;
                         }
                         break;
 
@@ -349,7 +417,7 @@ namespace MainApp.Services
 
                             data.Subsections.Remove(subsection);
                             await data.SaveChangesAsync();
-                            return subsection;
+                            return subsection.Id;
                         }
                         break;
 
@@ -365,7 +433,7 @@ namespace MainApp.Services
 
                             data.Chapters.Remove(chapter);
                             await data.SaveChangesAsync();
-                            return chapter;
+                            return chapter.Id;
                         }
                         break;
 
@@ -381,7 +449,7 @@ namespace MainApp.Services
 
                             data.Subchapters.Remove(subchapter);
                             await data.SaveChangesAsync();
-                            return subchapter;
+                            return subchapter.Id;
                         }
                         break;
 
@@ -391,7 +459,7 @@ namespace MainApp.Services
                             var post = await data.Posts.FirstOrDefaultAsync(s => s.Id == partId);
                             data.Posts.Remove(post);
                             await data.SaveChangesAsync();
-                            return post;
+                            return post.Id;
                         }
                         break;
                 }

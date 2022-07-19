@@ -82,3 +82,9 @@
 @mixin border_table-data{
     border-right: $main-border; 
 }
+
+//error
+@mixin body_params($width, $height){
+    width: $width;
+    height: $height;
+}

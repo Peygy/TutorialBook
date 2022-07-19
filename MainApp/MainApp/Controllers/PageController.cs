@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using MainApp.Services;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace MainApp.Controllers
 {
@@ -20,6 +18,12 @@ namespace MainApp.Controllers
         public IActionResult ViewProfile()
         {
             return View();
+        }
+
+        [Route("/error/{statusCode}")]
+        public IActionResult Error(int statusCode)
+        {
+            return View(statusCode);
         }
     }
 }

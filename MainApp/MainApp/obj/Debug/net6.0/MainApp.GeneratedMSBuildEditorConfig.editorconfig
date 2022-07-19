@@ -27,6 +27,18 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRW50cnlcVXNlclJlZ2lzdHJhdGlvbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[H:/Programming/ASP/Repos/TutorialBook/MainApp/MainApp/Views/Layout/EntryLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGF5b3V0XEVudHJ5TGF5b3V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[H:/Programming/ASP/Repos/TutorialBook/MainApp/MainApp/Views/Layout/MainLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTGF5b3V0XE1haW5MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[H:/Programming/ASP/Repos/TutorialBook/MainApp/MainApp/Views/Page/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFnZVxFcnJvci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [H:/Programming/ASP/Repos/TutorialBook/MainApp/MainApp/Views/Page/Study.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFnZVxTdHVkeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -47,16 +59,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFydFxBZGRQYXJ0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[H:/Programming/ASP/Repos/TutorialBook/MainApp/MainApp/Views/Part/UpdatePart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFydFxVcGRhdGVQYXJ0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
 [H:/Programming/ASP/Repos/TutorialBook/MainApp/MainApp/Views/Part/ViewParts.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGFydFxWaWV3UGFydHMuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[H:/Programming/ASP/Repos/TutorialBook/MainApp/MainApp/Views/Shared/EntryLayout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVudHJ5TGF5b3V0LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[H:/Programming/ASP/Repos/TutorialBook/MainApp/MainApp/Views/Shared/MainLayout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXE1haW5MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [H:/Programming/ASP/Repos/TutorialBook/MainApp/MainApp/Views/_ViewImports.cshtml]

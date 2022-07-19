@@ -1,7 +1,7 @@
 ﻿@model MainApp.Models.User
 @{
-    ViewBag.Title = "Login";
-    Layout = "/Views/Shared/EntryLayout.cshtml";
+    ViewBag.Title = "Вход";
+    Layout = "/Views/Layout/EntryLayout.cshtml";
 }
 
 <link rel="stylesheet" href=~/css/entrylayout.min.css/>
@@ -16,12 +16,12 @@
         </div>
         <div class="form__input">
             <label asp-for="Login">Login</label><br />
-            <input type="text" asp-for="Login" /><br />
+            <input type="text" asp-for="Login"/><br />
             <span asp-validation-for="Login"  />
         </div>
         <div class="form__input">
             <label asp-for="Password">Password</label><br />
-            <input type="password" asp-for="Password" /><br />
+            <input type="password" asp-for="Password"/><br />
             <span asp-validation-for="Password"  />
         </div>
         <div>           

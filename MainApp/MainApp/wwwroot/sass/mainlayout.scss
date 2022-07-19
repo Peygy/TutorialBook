@@ -67,6 +67,9 @@ body{
     }
 }
 
+main{
+    @include calc_height(254px);
+}
 
 .bottom {
     @include flex_main(flex, center, null);
@@ -120,11 +123,19 @@ body{
         }
     }
 }
-
-@media screen and (max-width: 1120px) and (max-height: 100vh) {
+@media screen and (max-width: 1226px) and (max-height: 100vh) {
     .bottom{
         &-main{
-            @include indents(60px 0 0 0, 20px 0);
+            @include indents(60px 0 0 0, 20px 0);           
+        }
+    }
+}
+
+@media screen and (max-width: 810px) and (max-height: 100vh) {
+    .bottom{
+        &-main{
+            @include indents(60px 0 0 0, 20px 0); 
+            flex-wrap: wrap;          
         }
     }
 }

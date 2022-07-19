@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "+JU10RmpJypPDSiYQggZK49DWHfh+4YTh+uEh4sAdpM=",
+  "Hash": "biC3b+pJ/I3ADAwjjwQ6T41++1ituLnUhJ/Ga9BEhkc=",
   "Source": "MainApp",
   "BasePath": "_content/MainApp",
   "Mode": "Default",
@@ -16,23 +16,6 @@
     }
   ],
   "Assets": [
-    {
-      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\css\\entrylayout.css",
-      "SourceId": "MainApp",
-      "SourceType": "Discovered",
-      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
-      "BasePath": "_content/MainApp",
-      "RelativePath": "css/entrylayout.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\entrylayout.css"
-    },
     {
       "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\css\\entrylayout.min.css",
       "SourceId": "MainApp",
@@ -51,12 +34,12 @@
       "OriginalItemSpec": "wwwroot\\css\\entrylayout.min.css"
     },
     {
-      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\css\\mainlayout.css",
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\css\\error.min.css",
       "SourceId": "MainApp",
       "SourceType": "Discovered",
       "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
       "BasePath": "_content/MainApp",
-      "RelativePath": "css/mainlayout.css",
+      "RelativePath": "css/error.min.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -65,7 +48,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\mainlayout.css"
+      "OriginalItemSpec": "wwwroot\\css\\error.min.css"
     },
     {
       "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\css\\mainlayout.min.css",
@@ -85,23 +68,6 @@
       "OriginalItemSpec": "wwwroot\\css\\mainlayout.min.css"
     },
     {
-      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\css\\panel.css",
-      "SourceId": "MainApp",
-      "SourceType": "Discovered",
-      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
-      "BasePath": "_content/MainApp",
-      "RelativePath": "css/panel.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\panel.css"
-    },
-    {
       "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\css\\panel.min.css",
       "SourceId": "MainApp",
       "SourceType": "Discovered",
@@ -119,12 +85,12 @@
       "OriginalItemSpec": "wwwroot\\css\\panel.min.css"
     },
     {
-      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\css\\viewparts.css",
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\css\\update-addpart.min.css",
       "SourceId": "MainApp",
       "SourceType": "Discovered",
       "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
       "BasePath": "_content/MainApp",
-      "RelativePath": "css/viewparts.css",
+      "RelativePath": "css/update-addpart.min.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -133,7 +99,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\viewparts.css"
+      "OriginalItemSpec": "wwwroot\\css\\update-addpart.min.css"
     },
     {
       "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\css\\viewparts.min.css",
@@ -151,23 +117,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\viewparts.min.css"
-    },
-    {
-      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\css\\welcome.css",
-      "SourceId": "MainApp",
-      "SourceType": "Discovered",
-      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
-      "BasePath": "_content/MainApp",
-      "RelativePath": "css/welcome.css",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\css\\welcome.css"
     },
     {
       "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\css\\welcome.min.css",
@@ -272,6 +221,23 @@
       "OriginalItemSpec": "wwwroot\\img\\error.png"
     },
     {
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\img\\favicon.ico",
+      "SourceId": "MainApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "BasePath": "_content/MainApp",
+      "RelativePath": "img/favicon.ico",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\favicon.ico"
+    },
+    {
       "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\img\\favicon.png",
       "SourceId": "MainApp",
       "SourceType": "Discovered",
@@ -287,6 +253,74 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\favicon.png"
+    },
+    {
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\js\\api.js",
+      "SourceId": "MainApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "BasePath": "_content/MainApp",
+      "RelativePath": "js/api.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\api.js"
+    },
+    {
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\js\\min\\api.min.js",
+      "SourceId": "MainApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "BasePath": "_content/MainApp",
+      "RelativePath": "js/min/api.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\min\\api.min.js"
+    },
+    {
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\js\\min\\panel.min.js",
+      "SourceId": "MainApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "BasePath": "_content/MainApp",
+      "RelativePath": "js/min/panel.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\min\\panel.min.js"
+    },
+    {
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\js\\min\\textstorage.min.js",
+      "SourceId": "MainApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "BasePath": "_content/MainApp",
+      "RelativePath": "js/min/textstorage.min.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\min\\textstorage.min.js"
     },
     {
       "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\js\\panel.js",
@@ -306,12 +340,12 @@
       "OriginalItemSpec": "wwwroot\\js\\panel.js"
     },
     {
-      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\lib\\favicon.ico",
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\js\\textstorage.js",
       "SourceId": "MainApp",
       "SourceType": "Discovered",
       "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
       "BasePath": "_content/MainApp",
-      "RelativePath": "lib/favicon.ico",
+      "RelativePath": "js/textstorage.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -320,7 +354,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\lib\\favicon.ico"
+      "OriginalItemSpec": "wwwroot\\js\\textstorage.js"
     },
     {
       "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\sass\\entrylayout.scss",
@@ -338,6 +372,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\sass\\entrylayout.scss"
+    },
+    {
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\sass\\error.scss",
+      "SourceId": "MainApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "BasePath": "_content/MainApp",
+      "RelativePath": "sass/error.scss",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\sass\\error.scss"
     },
     {
       "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\sass\\mainlayout.scss",
@@ -406,6 +457,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\sass\\panel.scss"
+    },
+    {
+      "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\sass\\update-addpart.scss",
+      "SourceId": "MainApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\",
+      "BasePath": "_content/MainApp",
+      "RelativePath": "sass/update-addpart.scss",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\sass\\update-addpart.scss"
     },
     {
       "Identity": "H:\\Programming\\ASP\\Repos\\TutorialBook\\MainApp\\MainApp\\wwwroot\\sass\\viewparts.scss",

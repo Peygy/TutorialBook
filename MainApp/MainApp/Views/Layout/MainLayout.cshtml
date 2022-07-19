@@ -26,7 +26,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    <link rel="shortcut icon" href=~/lib/favicon.ico/>
+    <link rel="shortcut icon" href=~/img/favicon.ico/>
     <link rel="stylesheet" href=~/css/mainlayout.min.css/> 
 </head>
 <body>
@@ -36,8 +36,7 @@
                 <ul class="head__menu">
                     @if (@GetUserRole() == "admin" || @GetUserRole() == "editor")
                     {    
-                        <li class="head__item"><a asp-controller="Part" asp-action="ViewParts"
-                        asp-route-parentId="0" asp-route-parentName="Секции" asp-route-table="onload">Управление</a></li>
+                        <li class="head__item"><a asp-controller="Part" asp-action="ViewParts">Управление</a></li>
                         <li class="head__item"><a asp-controller="#" asp-action="#">Учебник</a></li>
                     }
                     else
@@ -73,7 +72,7 @@
         </div>
     </header>
 
-    <main>
+    <main class="">
         @RenderBody()
     </main>
 

@@ -1,35 +1,45 @@
 ﻿@model List<MainApp.Models.GeneralPart>
 
 @{
-    ViewBag.Title = "Control";
-    Layout = "/Views/Shared/MainLayout.cshtml";
+    ViewBag.Title = "Управление";
+    Layout = "/Views/Layout/MainLayout.cshtml";
 }
 
 @functions{
-    public string TableName(string table)
+    public string TableName(string table, string parentName)
     {
         switch (table)
         {
+            case "onload":
+                return "Секции";
             case "section":
-                return "Секция";
+                return $"Подсекции в секции «{parentName}»";
             case "subsection":
-                return "Подсекция";
+                return $"Разделы в подсекции «{parentName}»";
             case "chapter":
-                return "Раздел";
+                return $"Подразделы в разделе «{parentName}»";
             case "subchapter":
-                return "Подраздел";
+                return $"Посты в подразделе «{parentName}»";
         }
         return null;
     }
 }
 
 <link rel="stylesheet" href="~/css/viewparts.min.css">
+<script src="~/js/min/api.min.js"></script>
 
 <div class="content__wrapper">
     @await Html.PartialAsync("~/Views/Partial/CrewPanel.cshtml")
     <div class="content__main">
-        <h2>@TableName(@ViewBag.Table)</h2>
-        <h3 class="main__title">@ViewBag.Name</h3>
+        <h2>@TableName(@ViewBag.Table, @ViewBag.ParentName)</h2>
+        @if(@ViewBag.Table != "onload")
+        {
+            <h3 class="main__title">
+                <a asp-controller="Part" asp-action="ViewParts"
+                asp-route-parentId="@ViewBag.Parent.Id" asp-route-parentName="@ViewBag.Parent.Title" 
+                asp-route-table="@ViewBag.Parent.Table">Вернуться назад</a> 
+            </h3>
+        }
 
         <table class="main__table">
             <thead class="main__table-hat">
@@ -38,7 +48,7 @@
                     <th class="main__table-header">
                         <h3>
                             <a asp-controller="Part" asp-action="AddPart" 
-                            asp-route-parentId="@ViewBag.ParentId" asp-route-parentName="@ViewBag.ParentName" asp-route-table="@ViewBag.Table">Добавить</a>                      
+                            asp-route-parentId="@ViewBag.ParentId" asp-route-table="@ViewBag.Table">Добавить</a>                      
                         </h3>
                     </th>
                 </tr>
@@ -46,25 +56,28 @@
             <tbody class="main__table-body">
                 @if(Model.Count!=0)
                 {
-                    @foreach (var part in Model)
+                    @foreach (var part in Model.OrderBy(p => p.Id))
                     {
-                        <tr class="main__table-row">
+                        <tr class="main__table-row" id="@part.Id">
                             <td class="main__table-data">@part.Title</td>
-                            @if(@ViewBag.Table == "onload")
-                            {
-                                <td class="main__table-data">
-                                    <a>Просмотр</a>
-                                    <a>Удалить</a>
-                                </td>
-                            }
-                            else
-                            {
-                                <td class="main__table-data">
-                                    <a>Просмотр</a>
-                                    <a>Изменить</a>
-                                    <a>Удалить</a>
-                                </td>
-                            }
+                            <td class="main__table-data">
+                                @if(@ViewBag.Table == "subchapter")
+                                {
+                                    <a asp-controller="Part" asp-action="ViewPost" 
+                                    asp-route-postId="@part.Id">Подробнее</a> 
+                                }
+                                else
+                                {
+                                    <a asp-controller="Part" asp-action="ViewParts" 
+                                    asp-route-parentId="@part.Id" asp-route-parentName="@part.Title" 
+                                    asp-route-table="@part.Table">Подробнее</a> 
+                                }
+
+                                <a asp-controller="Part" asp-action="UpdatePart" 
+                                asp-route-partId="@part.Id"asp-route-table="@part.Table">Изменить</a> 
+
+                                <a onclick="deletePart(@part.Id, '@ViewBag.Table')">Удалить</a>   
+                            </td>
                         </tr>
                     }
                 }
