@@ -29,6 +29,12 @@
                 box-shadow: $box-shadow;
             }
         }
+        &-select{
+            @include indents(5px 0 20px 0, 0.2em 0.7em);
+            font-family: $font_text;
+            border-radius: 5px;
+            border-color: $back_border;
+        }
         &-textarea{
             @include indents(5px 0 20px 0, 0.6em 0.7em);
             font-family: $font_text;
@@ -72,8 +78,7 @@
         }
         &-error{ 
             display: none;             
-            color: $valid_false;
-            
+            color: $valid_false;    
         }
     }
 }

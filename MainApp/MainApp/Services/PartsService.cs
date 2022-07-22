@@ -270,7 +270,7 @@ namespace MainApp.Services
                 switch (table)
                 {
                     case "section":
-                        if (!data.Sections.Any(s => s.Title == newName))
+                        if (!data.Sections.Any(s => s.Id != partId && s.Title == newName))
                         {
                             var section = await data.Sections.FirstOrDefaultAsync(s => s.Id == partId);
                             section.Title = newName;
@@ -283,7 +283,7 @@ namespace MainApp.Services
                         break;
 
                     case "subsection":
-                        if (!data.Subsections.Any(s => s.Title == newName))
+                        if (!data.Subsections.Any(s => s.Id != partId && s.Title == newName))
                         {
                             var subsection = await data.Subsections.FirstOrDefaultAsync(s => s.Id == partId);
                             subsection.Title = newName;
@@ -301,7 +301,7 @@ namespace MainApp.Services
                         break;
 
                     case "chapter":
-                        if (!data.Chapters.Any(s => s.Title == newName))
+                        if (!data.Chapters.Any(s => s.Id != partId && s.Title == newName))
                         {
                             var chapter = await data.Chapters.FirstOrDefaultAsync(s => s.Id == partId);
                             chapter.Title = newName;
@@ -319,7 +319,7 @@ namespace MainApp.Services
                         break;
 
                     case "subchapter":
-                        if (!data.Subchapters.Any(s => s.Title == newName))
+                        if (!data.Subchapters.Any(s => s.Id != partId && s.Title == newName))
                         {
                             var subchapter = await data.Subchapters.FirstOrDefaultAsync(s => s.Id == partId);
                             subchapter.Title = newName;
@@ -337,7 +337,7 @@ namespace MainApp.Services
                         break;
 
                     case "post":
-                        if (!data.Posts.Any(s => s.Title == newName))
+                        if (!data.Posts.Any(s => s.Id != partId && s.Title == newName))
                         {
                             var post = await data.Posts.FirstOrDefaultAsync(s => s.Id == partId);
                             await UpdateContentAsync(post.ContentId, newContent);

@@ -8,29 +8,31 @@
 <link rel="stylesheet" href="~/css/update-addpart.min.css">
 
 <div class="content__wrapper">
-    <h2>Изменение компонента <br>"@Model.Title"</h2>
+    <h2>Изменение компонента<br>"@Model.Title"</h2>
+    <span class="addform__main-error" id="validerror">Такое название уже существует!</span>
     <form asp-controller="Part" asp-action="UpdatePart" method="post" class="addform">
         <div class="addform__main">
-            <label>Новое название:</label><br>
+            <label>Новое название: </label><br>
             <input class="addform__main-input" type="text" name="newName" id="newName" value="@Model.Title" 
             oninput="ValidCheckChange()">
             <span class="addform__main-error" id="validerror">Введите название!</span><br>
 
-            @if(ViewBag.Parents != null)
+            @if(ViewBag.Parents != null && ViewBag.Parents.Count != 0)
             {
-                <select>
+                <select class="addform__main-select" name="newParentId">
+                    <option value="@Model.ParentId">По умолчанию</option>
                     @foreach (var parent in ViewBag.Parents)
                     {
-                        <option name="newParentId" value="@parent.Id">@parent.Title</option>
+                        <option value="@parent.Id">@parent.Title</option>
                     }
-                </select>
+                </select><br>
             }
 
-            @if(@ViewBag.ParentTable == "subchapter")
+            @if(@Model.Table == "post")
             {
                 <label>Новое cодержимое поста:</label><br>
                 <textarea class="addform__main-textarea" wrap="hard" type="text"
-                name="newContent" id="newContent" value="@ViewBag.Content"></textarea><br>
+                name="newContent" id="newContent">@ViewBag.Content</textarea><br>
             }
 
             <input name="partId" value="@Model.Id" style="display: none;">

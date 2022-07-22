@@ -13,3 +13,7 @@ async function deletePart(id, table) {
     }
 }
 
+async function checkExist() {
+
+}
+

@@ -96,7 +96,7 @@ namespace MainApp.Controllers
                 return RedirectToAction("ViewParts", new { parentId, table });
             }
 
-            return BadRequest();
+             return RedirectToAction("AddPart", new { parentId, table });
         }
 
 
@@ -114,11 +114,11 @@ namespace MainApp.Controllers
 
             if (table != "section")
             {
-                ViewBag.Parents = await partService.GetPartsParentsAsync(partId, table);              
-            }
-            else if(table == "post")
-            {
-                ViewBag.Content = await partService.GetContentAsync(((Post)part).ContentId);
+                ViewBag.Parents = await partService.GetPartsParentsAsync(partId, table);  
+                if(table == "post")
+                {
+                    ViewBag.Content = await partService.GetContentAsync(((Post)part).ContentId);
+                }            
             }
 
             return View(part);
@@ -139,10 +139,10 @@ namespace MainApp.Controllers
 
             if (await partService.UpdatePartAsync(partId, newParentId, newName, newContent, table))
             {           
-                return RedirectToAction("ViewParts", new { parentId, parentTable });
+                return RedirectToAction("ViewParts", new { parentId, table = parentTable });
             }
 
-            return BadRequest();
+            return RedirectToAction("UpdatePart", new { partId, table });
         }
 
 
